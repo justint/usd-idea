@@ -1,0 +1,9 @@
+.idea/
+out/
+#gen/
+build/
+.gradle/
+jflex/
+src/main/gen/*
+.DS_Store
+Thumbs.db

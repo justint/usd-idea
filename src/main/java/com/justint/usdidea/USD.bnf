@@ -1,0 +1,244 @@
+{
+    parserClass="com.justint.usdidea.USDParser"
+
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    psiClassPrefix="usd"
+    psiImplClassSuffix="Impl"
+    psiPackage="com.justint.usdidea.psi"
+    psiImplPackage="com.justint.usdidea.psi.impl"
+
+    elementTypeHolderClass="com.justint.usdidea.psi.USDTypes"
+    elementTypeClass="com.justint.usdidea.psi.USDElementType"
+    tokenTypeClass="com.justint.usdidea.psi.USDTokenType"
+
+    tokens = [
+        //
+        //
+        usdDeclaration = "regexp:#[^\r\n]*"
+
+        //
+        // keywords
+        add = "add"
+        append = "append"
+        attributes = "attributes"
+        class = "class"
+        config = "config"
+        connect = "connect"
+        custom = "custom"
+        customData = "customData"
+        default = "default"
+        def = "def"
+        delete = "delete"
+        dictionary = "dictionary"
+        displayUnit = "displayUnit"
+        doc = "doc"
+        inherits = "inherits"
+        kind = "kind"
+        mapper = "mapper"
+        nameChildren = "nameChildren"
+        None = "None"
+        offset = "offset"
+        over = "over"
+        payload = "payload"
+        permission = "permission"
+        prefixSubstitutions = "prefixSubstitutions"
+        prepend = "prepend"
+        properties = "properties"
+        references = "references"
+        relocates = "relocates"
+        rel = "rel"
+        reorder = "reorder"
+        rootPrims = "rootPrims"
+        // TODO: re-enable scale as a token whenever the lexer can
+        //  handle non-keyword instances (ie. transform.scale, transform.timeSamples, etc)
+        //scale = "scale"
+        subLayers = "subLayers"
+        suffixSubstitutions = "suffixSubstitutions"
+        specializes = "specializes"
+        symmetryArguments = "symmetryArguments"
+        symmetryFunction = "symmetryFunction"
+        // TODO: re-enable timeSamples as a token whenever the lexer can
+        //  handle non-keyword instances (ie. transform.scale, transform.timeSamples, etc)
+        //timeSamples = "timeSamples"
+        uniform = "uniform"
+        variantSet = "variantSet"
+        variantSets = "variantSets"
+        variants = "variants"
+        varying = "varying"
+
+        interpolation = "interpolation"
+
+        // Includes the three-quotation docstrings
+        string = "regexp:\"\"\"[^\"]*\"\"\"|\"[^\"]*\"|'[^']*'"
+        number = "regexp:(\+|\-)?\p{Digit}+"
+        floatnumber = "regexp:(\+|\-)?\p{Digit}*\.(\p{Digit}+)?([eE][+\-]\p{Digit}+)?"
+        alpha = "regexp:\w+"
+
+        //
+        // basic symbols
+        period = '.'
+        comma = ','
+        colon = ':'
+        equals = '='
+        leftbracket = '['
+        rightbracket = ']'
+        leftparens = '('
+        rightparens = ')'
+        leftbrace = '{'
+        rightbrace = '}'
+
+        //
+        // types
+        // basic
+        booltype = 'bool'
+        uchartype = 'uchar'
+        inttype = 'int'
+        uinttype = 'uint'
+        int64type = 'int64'
+        uint64type = 'uint64'
+        halftype = 'half'
+        floattype = 'float'
+        doubletype = 'double'
+        stringtype = 'string'
+        tokentype = 'token'
+        assettype = 'asset'
+        matrix2dtype = 'matrix2d'
+        matrix3dtype = 'matrix3d'
+        matrix4dtype = 'matrix4d'
+        quatdtype = 'quatd'
+        quatftype = 'quatf'
+        quathtype = 'quath'
+        double2type = 'double2'
+        float2type = 'float2'
+        half2type = 'half2'
+        int2type = 'int2'
+        double3type = 'double3'
+        float3type = 'float3'
+        half3type = 'half3'
+        int3type = 'int3'
+        double4type = 'double4'
+        float4type = 'float4'
+        half4type = 'half4'
+        int4type = 'int4'
+        // role
+        point3dtype = 'point3d'
+        point3ftype = 'point3f'
+        point3htype = 'point3h'
+        normal3dtype = 'normal3d'
+        normal3ftype = 'normal3f'
+        normal3htype = 'normal3h'
+        vector3dtype = 'vector3d'
+        vector3ftype = 'vector3f'
+        vector3htype = 'vector3h'
+        color3dtype = 'color3d'
+        color3ftype = 'color3f'
+        color3htype = 'color3h'
+        color4dtype = 'color4d'
+        color4ftype = 'color4f'
+        color4htype = 'color4h'
+        frame4dtype = 'frame4d'
+        texCoord2htype = 'texCoord2h'
+        texCoord2dtype = 'texCoord2d'
+        texCoord2ftype = 'texCoord2f'
+        texCoord3htype = 'texCoord3h'
+        texCoord3dtype = 'texCoord3d'
+        texCoord3f = 'texCoord3f'
+        Transformtype = 'Transform'
+        PointIndextype = 'PointIndex'
+        EdgeIndextype = 'EdgeIndex'
+        FaceIndextype = 'FaceIndex'
+
+        comment = "regexp://.*"
+        blockcomment = "regexp:/\*([^\*]|(\*+[^\*/]))*(\*+/)?"
+
+
+        assetReference = "regexp:@([^@]+)?@|@@@(([^@]|@{1,2}[^@]|\\@@@)+)?(@{0,2})@@@"
+        pathReference = "regexp:\<[^\<\>\r\n]*\>"
+    ]
+}
+
+
+// TODO: implement pin, etc for error recovery
+
+
+usdFile ::= usdDeclaration Metadata? PrimSpec*
+
+
+CompositionArc ::= subLayers | inherits | variantSets | references | payload | specializes
+
+
+Identifier ::= alpha (alpha | number)*
+
+NamespacedIdentifier ::= Identifier (colon Identifier)+
+
+
+PrimSpec ::= Specifier Metadata? Body
+
+Specifier ::= def [Typename] PrimName | over PrimName | class [Typename] PrimName
+
+Typename ::= Identifier
+
+PrimName ::= string
+
+Body ::= leftbrace [!rightbrace (Property | PrimSpec)* ] rightbrace
+
+
+Property ::= AttributeProperty | RelationshipProperty
+
+AttributeProperty ::= (uniform | custom)? (AttributeType AttributeName | CompositionArc) equals AttributeValue
+
+
+RelationshipProperty ::= variantSet string equals VariantSetBody
+
+VariantSetBody ::= leftbrace [!rightbrace VariantSetKey VariantSetItemBody (VariantSetKey VariantSetItemBody)*] rightbrace | leftbrace rightbrace
+
+VariantSetKey ::= string
+
+VariantSetItemBody ::= Metadata? (leftbrace [!rightbrace PrimSpec (PrimSpec)*] rightbrace | leftbrace rightbrace)
+
+
+AttributeType ::= ArrayAttributeType | SingleAttributeType | rel
+
+SingleAttributeType ::= BasicDataType | RoleDataType
+
+ArrayAttributeType ::= SingleAttributeType [leftbracket rightbracket]
+
+BasicDataType ::= booltype | uchartype | inttype | uinttype | int64type | uint64type | halftype | floattype | doubletype | stringtype | tokentype | assettype | matrix2dtype | matrix3dtype | matrix4dtype | quatdtype | quatftype | quathtype | double2type | float2type | half2type | int2type | double3type | float3type | half3type | int3type | double4type | float4type | half4type | int4type
+
+RoleDataType ::= point3dtype | point3ftype | point3htype | normal3dtype | normal3ftype | normal3htype | vector3dtype | vector3ftype | vector3htype | color3dtype | color3ftype | color3htype | color4dtype | color4ftype | color4htype | frame4dtype | texCoord2htype | texCoord2dtype | texCoord2ftype | texCoord3htype | texCoord3dtype | texCoord3ftype | Transformtype | PointIndextype | EdgeIndextype | FaceIndextype
+
+AttributeName ::= (NamespacedIdentifier | Identifier) (period Identifier)*
+
+AttributeValue ::= Item
+
+
+Metadata ::= leftparens (!rightparens ( MetadataComment | [ListEditAction? MetadataKey equals MetadataValue]) )* rightparens
+
+ListEditAction ::= add | append | prepend | delete
+
+
+MetadataKey ::= Identifier | CompositionArc | doc | variantSet | kind | variants
+
+MetadataValue ::= Item
+
+MetadataComment ::= string
+
+
+Array ::= leftbracket [!rightbracket Item (comma Item)*] rightbracket | leftbracket rightbracket
+
+InterpolatedArray ::= Array (leftparens interpolation equals string rightparens)?
+
+Vector ::= leftparens [!rightparens Item? (comma Item)*] rightparens | leftparens rightparens
+
+Item ::= InterpolatedArray | Array | Vector | string | number | floatnumber | assetReference pathReference | assetReference | pathReference | Dict | TimeSample
+
+Dict ::= leftbrace [!rightbrace DictKey equals DictValue (DictKey equals DictValue)*] rightbrace | leftbrace rightbrace
+
+DictKey ::= AttributeType Identifier
+
+DictValue ::= Item
+
+TimeSample ::= leftbrace [!rightbrace FrameNumber colon Array (comma FrameNumber colon Array)* comma?] rightbrace | leftbrace rightbrace
+
+FrameNumber ::= number

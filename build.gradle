@@ -1,0 +1,21 @@
+plugins {
+    id 'org.jetbrains.intellij' version '0.4.8'
+}
+
+group 'com.justint'
+version '0.1.1'
+
+sourceSets.main.java.srcDirs = ['src/main/gen','src/main/java']
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version '2017.3.3'
+    //alternativeIdePath '/Applications/PyCharm.app'
+}
+
+// Simple function to load change-notes.html and description.html into valid text for plugin.xml
+def htmlFixer = {htmlFile -> file(htmlFile).text.replace('<html>', '').replace('</html>', '')}
+
+patchPluginXml {
+    changeNotes = htmlFixer('src/main/resources/META-INF/change-notes.html')
+}

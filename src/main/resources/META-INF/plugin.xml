@@ -1,0 +1,42 @@
+<idea-plugin>
+    <id>com.justint.usd-idea</id>
+    <name>USD</name>
+    <vendor email="me@justintennant.me" url="http://www.justintennant.me">Justin Tennant</vendor>
+
+    <description><![CDATA[
+    <strong>Universal Scene Description (USD) support for JetBrains products.</strong>
+<br><br>
+<i>Note</i>: This plugin is in active development and features are still being implemented. If you're interested in contributing to this project, check out the <a href="https://github.com/justint/usd-idea">GitHub page</a> for details.
+<br><br>
+<strong>Currently implemented features:</strong>
+<ul>
+    <li>Syntax highlighting</li>
+    <li>Parser</li>
+</ul>
+<strong>Planned features:</strong>
+<ul>
+    <li>Reference Contributor implementation (Go to declaration feature)</li>
+    <li>Structure View</li>
+    <li>Brace matching</li>
+    <li>Line markers for <i>overrides</i>, <i>inherits</i>, and more</li>
+</ul>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.lang</depends>
+    <depends optional="true">com.intellij.modules.python</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <fileTypeFactory implementation="com.justint.usdidea.USDFileTypeFactory"/>
+        <lang.parserDefinition language="USD" implementationClass="com.justint.usdidea.USDParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="USD" implementationClass="com.justint.usdidea.USDSyntaxHighlighterFactory"/>
+        <!-- TODO: re-add the color settings page once syntax highlighting is more complete -->
+        <!--<colorSettingsPage implementation="com.justint.usdidea.USDColorSettingsPage"/>-->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
