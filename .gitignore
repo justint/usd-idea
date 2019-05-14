@@ -4,6 +4,6 @@ out/
 build/
 .gradle/
 jflex/
-src/main/gen/*
 .DS_Store
 Thumbs.db
+src/test/
