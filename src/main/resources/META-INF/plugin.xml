@@ -29,11 +29,11 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <fileTypeFactory implementation="com.justint.usdidea.USDFileTypeFactory"/>
-        <lang.parserDefinition language="USD" implementationClass="com.justint.usdidea.USDParserDefinition"/>
-        <lang.syntaxHighlighterFactory language="USD" implementationClass="com.justint.usdidea.USDSyntaxHighlighterFactory"/>
+        <fileTypeFactory implementation="com.justint.usdidea.file.USDFileTypeFactory"/>
+        <lang.parserDefinition language="USD" implementationClass="com.justint.usdidea.lang.parser.USDParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="USD" implementationClass="com.justint.usdidea.codeinsight.highlighting.USDSyntaxHighlighterFactory"/>
         <!-- TODO: re-add the color settings page once syntax highlighting is more complete -->
-        <!--<colorSettingsPage implementation="com.justint.usdidea.USDColorSettingsPage"/>-->
+        <!--<colorSettingsPage implementation="com.justint.usdidea.codeinsight.highlighting.USDColorSettingsPage"/>-->
     </extensions>
 
     <actions>
