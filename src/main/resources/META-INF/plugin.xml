@@ -27,6 +27,8 @@
     <depends>com.intellij.modules.lang</depends>
     <depends optional="true">com.intellij.modules.python</depends>
 
+    <idea-version since-build="145"/>
+
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <fileTypeFactory implementation="com.justint.usdidea.file.USDFileTypeFactory"/>
@@ -34,6 +36,8 @@
         <lang.syntaxHighlighterFactory language="USD" implementationClass="com.justint.usdidea.codeinsight.highlighting.USDSyntaxHighlighterFactory"/>
         <!-- TODO: re-add the color settings page once syntax highlighting is more complete -->
         <!--<colorSettingsPage implementation="com.justint.usdidea.codeinsight.highlighting.USDColorSettingsPage"/>-->
+
+        <lang.psiStructureViewFactory language="USD" implementationClass="com.justint.usdidea.codeinsight.structureview.USDStructureViewFactory"/>
     </extensions>
 
     <actions>
