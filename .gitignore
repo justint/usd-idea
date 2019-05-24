@@ -1,10 +1,7 @@
 .idea/
 out/
-#gen/
 build/
 .gradle/
 jflex/
 .DS_Store
 Thumbs.db
-src/test/
-testData/

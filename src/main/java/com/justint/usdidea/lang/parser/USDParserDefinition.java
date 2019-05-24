@@ -6,7 +6,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.justint.usdidea.lang.parser.USDParser;
 import com.justint.usdidea.lang.USDLanguage;
 import com.justint.usdidea.lang.lexer.USDLexerAdapter;
 import com.justint.usdidea.lang.psi.*;
@@ -40,6 +39,22 @@ public class USDParserDefinition implements ParserDefinition {
 
     public static final TokenSet IDENTIFIERS = TokenSet.create(USDTypes.IDENTIFIER);
 
+    public static final TokenSet PRIM_NAMES = TokenSet.create(USDTypes.PRIM_NAME);
+
+    public static final TokenSet SPECIAL_KEYWORDS = TokenSet.create(
+            USDTypes.DOC,
+            USDTypes.INHERITS,
+            USDTypes.KIND,
+            USDTypes.PAYLOAD,
+            USDTypes.REFERENCES,
+            USDTypes.SUBLAYERS,
+            USDTypes.SPECIALIZES,
+            USDTypes.VARIANTSETS,
+            USDTypes.VARIANTS
+    );
+
+    public static final TokenSet METADATA_KEYS = TokenSet.create(USDTypes.METADATA_KEY);
+
     public static final TokenSet KEYWORDS = TokenSet.create(
             USDTypes.ADD,
             USDTypes.APPEND,
@@ -54,33 +69,24 @@ public class USDParserDefinition implements ParserDefinition {
             USDTypes.DELETE,
             USDTypes.DICTIONARY,
             USDTypes.DISPLAYUNIT,
-            USDTypes.DOC,
-            USDTypes.INHERITS,
-            USDTypes.KIND,
             USDTypes.MAPPER,
             USDTypes.NAMECHILDREN,
             USDTypes.NONE,
             USDTypes.OFFSET,
             USDTypes.OVER,
-            USDTypes.PAYLOAD,
             USDTypes.PERMISSION,
             USDTypes.PREFIXSUBSTITUTIONS,
             USDTypes.PREPEND,
             USDTypes.PROPERTIES,
-            USDTypes.REFERENCES,
             USDTypes.RELOCATES,
             USDTypes.REL,
             USDTypes.REORDER,
             USDTypes.ROOTPRIMS,
-            USDTypes.SUBLAYERS,
             USDTypes.SUFFIXSUBSTITUTIONS,
-            USDTypes.SPECIALIZES,
             USDTypes.SYMMETRYARGUMENTS,
             USDTypes.SYMMETRYFUNCTION,
             USDTypes.UNIFORM,
             USDTypes.VARIANTSET,
-            USDTypes.VARIANTSETS,
-            USDTypes.VARIANTS,
             USDTypes.VARYING
     );
 

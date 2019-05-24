@@ -36,6 +36,7 @@ public interface USDTypes {
   IElementType RELATIONSHIP_PROPERTY = new USDElementType("RELATIONSHIP_PROPERTY");
   IElementType ROLE_DATA_TYPE = new USDElementType("ROLE_DATA_TYPE");
   IElementType SINGLE_ATTRIBUTE_TYPE = new USDElementType("SINGLE_ATTRIBUTE_TYPE");
+  IElementType SPECIAL_METADATA_KEY = new USDElementType("SPECIAL_METADATA_KEY");
   IElementType SPECIFIER = new USDElementType("SPECIFIER");
   IElementType TIME_SAMPLE = new USDElementType("TIME_SAMPLE");
   IElementType TYPENAME = new USDElementType("TYPENAME");
@@ -249,6 +250,9 @@ public interface USDTypes {
       }
       else if (type == SINGLE_ATTRIBUTE_TYPE) {
         return new usdSingleAttributeTypeImpl(node);
+      }
+      else if (type == SPECIAL_METADATA_KEY) {
+        return new usdSpecialMetadataKeyImpl(node);
       }
       else if (type == SPECIFIER) {
         return new usdSpecifierImpl(node);

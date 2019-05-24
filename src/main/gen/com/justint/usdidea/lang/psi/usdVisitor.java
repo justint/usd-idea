@@ -119,6 +119,10 @@ public class usdVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitSpecialMetadataKey(@NotNull usdSpecialMetadataKey o) {
+    visitPsiElement(o);
+  }
+
   public void visitSpecifier(@NotNull usdSpecifier o) {
     visitPsiElement(o);
   }

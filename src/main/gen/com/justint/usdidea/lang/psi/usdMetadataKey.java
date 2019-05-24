@@ -13,4 +13,7 @@ public interface usdMetadataKey extends PsiElement {
   @Nullable
   usdIdentifier getIdentifier();
 
+  @Nullable
+  usdSpecialMetadataKey getSpecialMetadataKey();
+
 }

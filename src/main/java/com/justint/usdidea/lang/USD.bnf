@@ -7,6 +7,7 @@
     psiImplClassSuffix="Impl"
     psiPackage="com.justint.usdidea.lang.psi"
     psiImplPackage="com.justint.usdidea.lang.psi.impl"
+    psiImplUtilClass="com.justint.usdidea.lang.psi.impl.USDPsiImplUtil"
 
     elementTypeHolderClass="com.justint.usdidea.lang.psi.USDTypes"
     elementTypeClass="com.justint.usdidea.lang.psi.USDElementType"
@@ -173,7 +174,7 @@ Identifier ::= alpha (alpha | number)*
 NamespacedIdentifier ::= Identifier (colon Identifier)+
 
 
-PrimSpec ::= Specifier Metadata? Body
+PrimSpec ::= Specifier Metadata? Body {methods=[getPrimName getPrimType getName getPresentation]}
 
 Specifier ::= def [Typename] PrimName | over PrimName | class [Typename] PrimName
 
@@ -218,7 +219,9 @@ Metadata ::= leftparens (!rightparens ( MetadataComment | [ListEditAction? Metad
 ListEditAction ::= add | append | prepend | delete
 
 
-MetadataKey ::= Identifier | CompositionArc | doc | variantSet | kind | variants
+MetadataKey ::= Identifier | CompositionArc | SpecialMetadataKey
+
+SpecialMetadataKey ::= doc | variantSet | kind | variants
 
 MetadataValue ::= Item
 

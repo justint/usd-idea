@@ -679,17 +679,14 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // Identifier | CompositionArc | doc | variantSet | kind | variants
+  // Identifier | CompositionArc | SpecialMetadataKey
   public static boolean MetadataKey(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "MetadataKey")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, METADATA_KEY, "<metadata key>");
     r = Identifier(b, l + 1);
     if (!r) r = CompositionArc(b, l + 1);
-    if (!r) r = consumeToken(b, DOC);
-    if (!r) r = consumeToken(b, VARIANTSET);
-    if (!r) r = consumeToken(b, KIND);
-    if (!r) r = consumeToken(b, VARIANTS);
+    if (!r) r = SpecialMetadataKey(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -845,6 +842,20 @@ public class USDParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, SINGLE_ATTRIBUTE_TYPE, "<single attribute type>");
     r = BasicDataType(b, l + 1);
     if (!r) r = RoleDataType(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // doc | variantSet | kind | variants
+  public static boolean SpecialMetadataKey(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "SpecialMetadataKey")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, SPECIAL_METADATA_KEY, "<special metadata key>");
+    r = consumeToken(b, DOC);
+    if (!r) r = consumeToken(b, VARIANTSET);
+    if (!r) r = consumeToken(b, KIND);
+    if (!r) r = consumeToken(b, VARIANTS);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

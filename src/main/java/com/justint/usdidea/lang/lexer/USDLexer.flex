@@ -40,27 +40,11 @@ NAMESPACED_IDENTIFIER={IDENTIFIER}(\:{IDENTIFIER}*)+
 ASSETREFERENCE=@([^@]+)?@|@@@(([^@]|@{1,2}[^@]|\\@@@)+)?(@{0,2})@@@
 PATHREFERENCE=\<[^\<\>\r\n]*\>
 
-//%state SLASHTERIX_COMMENT
-%state METADATA
-
 %%
 
-// Multi-line comments
-//<YYINITIAL> "/*" {
-//          yybegin(SLASHTERIX_COMMENT);
-//          return COMMENT;
-//      }
-//<SLASHTERIX_COMMENT> [^]|\n|\r { return COMMENT; }
-//<SLASHTERIX_COMMENT> "*/" {
-//          yybegin(YYINITIAL);
-//          return COMMENT;
-//      }
-
-// TODO: Implement metadata blocks
 
 <YYINITIAL> {
-  {EOL}                     { return WHITE_SPACE; }
-  {WHITE_SPACE}             { return WHITE_SPACE; }
+  {EOL}|{WHITE_SPACE}        { return WHITE_SPACE; }
 
   "add"                      { return ADD; }
   "append"                   { return APPEND; }
@@ -179,8 +163,7 @@ PATHREFERENCE=\<[^\<\>\r\n]*\>
 
   {STRING}                  { return STRING; }
 
-  "-inf"                    { return NUMBER; }
-  {NUMBER}                  { return NUMBER; }
+  "-inf"|{NUMBER}           { return NUMBER; }
   {FLOATNUMBER}             { return FLOATNUMBER; }
 
   {ALPHA}                   { return ALPHA; }
