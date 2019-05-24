@@ -1,4 +1,4 @@
-<idea-plugin>
+<idea-plugin url="https://github.com/justint/usd-idea">
     <id>com.justint.usd-idea</id>
     <name>USD</name>
     <vendor email="me@justintennant.me" url="http://www.justintennant.me">Justin Tennant</vendor>
@@ -22,15 +22,13 @@
 </ul>
     ]]></description>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
     <depends>com.intellij.modules.lang</depends>
     <depends optional="true">com.intellij.modules.python</depends>
 
-    <idea-version since-build="145"/>
+    <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html -->
+    <idea-version since-build="145" until-build="191.*"/>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
         <fileTypeFactory implementation="com.justint.usdidea.file.USDFileTypeFactory"/>
         <lang.parserDefinition language="USD" implementationClass="com.justint.usdidea.lang.parser.USDParserDefinition"/>
         <lang.syntaxHighlighterFactory language="USD" implementationClass="com.justint.usdidea.codeinsight.highlighting.USDSyntaxHighlighterFactory"/>

@@ -7,3 +7,4 @@ jflex/
 .DS_Store
 Thumbs.db
 src/test/
+testData/

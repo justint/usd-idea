@@ -1,5 +1,5 @@
-![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/v/12407-usd.svg?style=popout)
-![JetBrains IntelliJ plugins](https://img.shields.io/jetbrains/plugin/d/12407-usd.svg?style=popout)
+[![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/v/12407-usd.svg?style=popout)](https://plugins.jetbrains.com/plugin/12407-usd)
+[![JetBrains IntelliJ plugins](https://img.shields.io/jetbrains/plugin/d/12407-usd.svg?style=popout)](https://plugins.jetbrains.com/plugin/12407-usd)
 
 # usd-idea
 
