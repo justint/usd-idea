@@ -20,6 +20,8 @@ _NOTE_: This plugin is in active development and features are still being implem
 ## Features
 
 - `.usd`/`.usda` filetype syntax highlighting & validation
+
+- Brace matching/folding
     
 TODO:
 
@@ -30,8 +32,6 @@ TODO:
 - Structure View
 
 - Line markers for overrides, inheritance, etc
-
-- Brace matching
 
 - Python autocompletions for the `pxr.Usd` library
 

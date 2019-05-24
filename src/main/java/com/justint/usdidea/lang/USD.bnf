@@ -174,7 +174,7 @@ Identifier ::= alpha (alpha | number)*
 NamespacedIdentifier ::= Identifier (colon Identifier)+
 
 
-PrimSpec ::= Specifier Metadata? Body {methods=[getPrimName getPrimType getName getPresentation]}
+PrimSpec ::= Specifier Metadata? Body
 
 Specifier ::= def [Typename] PrimName | over PrimName | class [Typename] PrimName
 

@@ -12,12 +12,12 @@
 <ul>
     <li>Syntax highlighting</li>
     <li>Parser</li>
+    <li>Brace matching & block folding</li>
 </ul>
 <strong>Planned features:</strong>
 <ul>
     <li>Reference Contributor implementation (Go to declaration feature)</li>
     <li>Structure View</li>
-    <li>Brace matching</li>
     <li>Line markers for <i>overrides</i>, <i>inherits</i>, and more</li>
 </ul>
     ]]></description>
@@ -35,7 +35,9 @@
         <!-- TODO: re-add the color settings page once syntax highlighting is more complete -->
         <!--<colorSettingsPage implementation="com.justint.usdidea.codeinsight.highlighting.USDColorSettingsPage"/>-->
 
-        <lang.psiStructureViewFactory language="USD" implementationClass="com.justint.usdidea.codeinsight.structureview.USDStructureViewFactory"/>
+        <lang.foldingBuilder language="USD" implementationClass="com.justint.usdidea.codeinsight.folding.USDFoldingBuilder"/>
+        <lang.braceMatcher language="USD" implementationClass="com.justint.usdidea.codeinsight.highlighting.USDBraceMatcher"/>
+
     </extensions>
 
     <actions>
