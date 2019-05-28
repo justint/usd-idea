@@ -847,7 +847,7 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // doc | variantSet | kind | variants
+  // doc | variantSet | kind | variants | customData
   public static boolean SpecialMetadataKey(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "SpecialMetadataKey")) return false;
     boolean r;
@@ -856,6 +856,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, VARIANTSET);
     if (!r) r = consumeToken(b, KIND);
     if (!r) r = consumeToken(b, VARIANTS);
+    if (!r) r = consumeToken(b, CUSTOMDATA);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

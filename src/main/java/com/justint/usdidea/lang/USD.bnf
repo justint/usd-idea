@@ -221,7 +221,7 @@ ListEditAction ::= add | append | prepend | delete
 
 MetadataKey ::= Identifier | CompositionArc | SpecialMetadataKey
 
-SpecialMetadataKey ::= doc | variantSet | kind | variants
+SpecialMetadataKey ::= doc | variantSet | kind | variants | customData
 
 MetadataValue ::= Item
 

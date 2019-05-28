@@ -7,7 +7,6 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.ContainerUtil;
 import com.justint.usdidea.lang.lexer.USDHighlighterLexerAdapter;
-import com.justint.usdidea.lang.lexer.USDLexerAdapter;
 import com.justint.usdidea.lang.parser.USDParserDefinition;
 import org.jetbrains.annotations.NotNull;
 

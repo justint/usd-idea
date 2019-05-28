@@ -42,6 +42,7 @@ public class USDParserDefinition implements ParserDefinition {
     public static final TokenSet PRIM_NAMES = TokenSet.create(USDTypes.PRIM_NAME);
 
     public static final TokenSet SPECIAL_KEYWORDS = TokenSet.create(
+            USDTypes.CUSTOMDATA,
             USDTypes.DOC,
             USDTypes.INHERITS,
             USDTypes.KIND,
