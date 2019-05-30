@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface usdProperty extends PsiElement {
+public interface usdPropertySpec extends PsiElement {
 
   @Nullable
   usdAttributeProperty getAttributeProperty();

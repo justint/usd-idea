@@ -33,7 +33,6 @@ public class USDSyntaxHighlighter extends SyntaxHighlighterBase {
         SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.USDDECLARATION, DefaultLanguageHighlighterColors.CONSTANT);
         SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.BRACKETS, DefaultLanguageHighlighterColors.BRACKETS);
         SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.KEYWORDS, DefaultLanguageHighlighterColors.KEYWORD);
-        SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.SPECIAL_KEYWORDS, DefaultLanguageHighlighterColors.STATIC_FIELD);
         SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.STRINGS, DefaultLanguageHighlighterColors.STRING);
         SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.NUMBERS, DefaultLanguageHighlighterColors.NUMBER);
         SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.LINE_COMMENTS, DefaultLanguageHighlighterColors.LINE_COMMENT);
@@ -42,7 +41,7 @@ public class USDSyntaxHighlighter extends SyntaxHighlighterBase {
         SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.PRIM_NAMES, DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
         SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.ASSETREFERENCES, USDHighlighterColors.ASSETREFERENCE_KEY);
         SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.PATHREFERENCES, USDHighlighterColors.PATHREFERENCE_KEY);
-        SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.METADATA_KEYS, DefaultLanguageHighlighterColors.INSTANCE_FIELD);
+        SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.TYPES, DefaultLanguageHighlighterColors.INSTANCE_FIELD);
     }
 
     @NotNull

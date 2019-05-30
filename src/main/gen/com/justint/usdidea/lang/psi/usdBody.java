@@ -11,6 +11,6 @@ public interface usdBody extends PsiElement {
   List<usdPrimSpec> getPrimSpecList();
 
   @NotNull
-  List<usdProperty> getPropertyList();
+  List<usdPropertySpec> getPropertySpecList();
 
 }

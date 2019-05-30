@@ -27,9 +27,9 @@ public class usdRelationshipPropertyImpl extends ASTWrapperPsiElement implements
   }
 
   @Override
-  @NotNull
+  @Nullable
   public usdVariantSetBody getVariantSetBody() {
-    return findNotNullChildByClass(usdVariantSetBody.class);
+    return findChildByClass(usdVariantSetBody.class);
   }
 
   @Override

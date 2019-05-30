@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface usdRelationshipProperty extends PsiElement {
 
-  @NotNull
+  @Nullable
   usdVariantSetBody getVariantSetBody();
 
   @NotNull

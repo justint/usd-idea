@@ -33,7 +33,7 @@ public interface USDTypes {
   IElementType NAMESPACED_IDENTIFIER = new USDElementType("NAMESPACED_IDENTIFIER");
   IElementType PRIM_NAME = new USDElementType("PRIM_NAME");
   IElementType PRIM_SPEC = new USDElementType("PRIM_SPEC");
-  IElementType PROPERTY = new USDElementType("PROPERTY");
+  IElementType PROPERTY_SPEC = new USDElementType("PROPERTY_SPEC");
   IElementType REFERENCE_ITEM = new USDElementType("REFERENCE_ITEM");
   IElementType RELATIONSHIP_PROPERTY = new USDElementType("RELATIONSHIP_PROPERTY");
   IElementType ROLE_DATA_TYPE = new USDElementType("ROLE_DATA_TYPE");
@@ -149,8 +149,7 @@ public interface USDTypes {
   IElementType TEXCOORD2FTYPE = new USDTokenType("texCoord2f");
   IElementType TEXCOORD2HTYPE = new USDTokenType("texCoord2h");
   IElementType TEXCOORD3DTYPE = new USDTokenType("texCoord3d");
-  IElementType TEXCOORD3F = new USDTokenType("texCoord3f");
-  IElementType TEXCOORD3FTYPE = new USDTokenType("texCoord3ftype");
+  IElementType TEXCOORD3FTYPE = new USDTokenType("texCoord3f");
   IElementType TEXCOORD3HTYPE = new USDTokenType("texCoord3h");
   IElementType TOKENTYPE = new USDTokenType("token");
   IElementType TRANSFORMTYPE = new USDTokenType("Transform");
@@ -246,8 +245,8 @@ public interface USDTypes {
       else if (type == PRIM_SPEC) {
         return new usdPrimSpecImpl(node);
       }
-      else if (type == PROPERTY) {
-        return new usdPropertyImpl(node);
+      else if (type == PROPERTY_SPEC) {
+        return new usdPropertySpecImpl(node);
       }
       else if (type == REFERENCE_ITEM) {
         return new usdReferenceItemImpl(node);

@@ -11,14 +11,14 @@ import static com.justint.usdidea.lang.psi.USDTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.justint.usdidea.lang.psi.*;
 
-public class usdPropertyImpl extends ASTWrapperPsiElement implements usdProperty {
+public class usdPropertySpecImpl extends ASTWrapperPsiElement implements usdPropertySpec {
 
-  public usdPropertyImpl(@NotNull ASTNode node) {
+  public usdPropertySpecImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull usdVisitor visitor) {
-    visitor.visitProperty(this);
+    visitor.visitPropertySpec(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {

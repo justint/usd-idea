@@ -107,7 +107,7 @@ public class usdVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitProperty(@NotNull usdProperty o) {
+  public void visitPropertySpec(@NotNull usdPropertySpec o) {
     visitPsiElement(o);
   }
 

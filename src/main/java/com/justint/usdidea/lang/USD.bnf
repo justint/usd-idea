@@ -149,7 +149,7 @@
         texCoord2ftype = 'texCoord2f'
         texCoord3htype = 'texCoord3h'
         texCoord3dtype = 'texCoord3d'
-        texCoord3f = 'texCoord3f'
+        texCoord3ftype = 'texCoord3f'
         Transformtype = 'Transform'
         PointIndextype = 'PointIndex'
         EdgeIndextype = 'EdgeIndex'
@@ -187,15 +187,15 @@ Typename ::= Identifier
 
 PrimName ::= string
 
-Body ::= leftbrace [!rightbrace (Property | PrimSpec)* ] rightbrace
+Body ::= leftbrace [!rightbrace (PropertySpec | PrimSpec)* ] rightbrace
 
 
-Property ::= AttributeProperty | RelationshipProperty
+PropertySpec ::= AttributeProperty | RelationshipProperty
 
-AttributeProperty ::= (uniform | custom)? (AttributeType AttributeName | CompositionArc) equals AttributeValue
+AttributeProperty ::= (uniform | custom)? (AttributeType AttributeName | CompositionArc) (equals AttributeValue)?
 
-
-RelationshipProperty ::= variantSet string equals VariantSetBody
+// TODO: decouple variantSet from RelationshipProperty, actually implement RelationshipProperty
+RelationshipProperty ::= variantSet string (equals VariantSetBody)?
 
 VariantSetBody ::= leftbrace [!rightbrace VariantSetKey VariantSetItemBody (VariantSetKey VariantSetItemBody)*] rightbrace | leftbrace rightbrace
 

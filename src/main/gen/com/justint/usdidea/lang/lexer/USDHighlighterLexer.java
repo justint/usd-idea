@@ -108,12 +108,12 @@ public class USDHighlighterLexer implements FlexLexer {
     "\4\5\1\145\1\146\3\5\1\147\12\5\1\150\1\151"+
     "\1\152\1\153\1\5\1\154\1\155\1\156\4\5\1\157"+
     "\1\5\1\160\1\5\1\161\1\162\1\163\1\164\1\165"+
-    "\1\166\1\5\1\167\1\170\1\171\1\172\13\5\1\173"+
-    "\7\5\1\174\4\5\1\175\6\5\1\176\2\5\1\177"+
-    "\3\5\1\200\1\201";
+    "\1\166\1\5\1\167\1\170\1\171\1\172\12\5\1\173"+
+    "\5\5\1\174\12\5\1\175\2\5\1\176\3\5\1\177"+
+    "\1\200";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[560];
+    int [] result = new int[556];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -202,15 +202,15 @@ public class USDHighlighterLexer implements FlexLexer {
     "\0\u671e\0\u6761\0\u67a4\0\u67e7\0\u682a\0\u02e1\0\u02e1\0\u02e1"+
     "\0\u02e1\0\u686d\0\u68b0\0\u02e1\0\u02e1\0\u68f3\0\u6936\0\u6979"+
     "\0\u69bc\0\u02e1\0\u69ff\0\u02e1\0\u6a42\0\u02e1\0\u02e1\0\u02e1"+
-    "\0\u02e1\0\u02e1\0\u6a85\0\u6ac8\0\u02e1\0\u02e1\0\u02e1\0\u02e1"+
-    "\0\u6b0b\0\u6b4e\0\u6b91\0\u6bd4\0\u6c17\0\u6c5a\0\u6c9d\0\u6ce0"+
-    "\0\u6d23\0\u6d66\0\u6da9\0\u02e1\0\u6dec\0\u6e2f\0\u6e72\0\u6eb5"+
-    "\0\u6ef8\0\u6f3b\0\u6f7e\0\u02e1\0\u6fc1\0\u7004\0\u7047\0\u708a"+
-    "\0\u02e1\0\u70cd\0\u7110\0\u7153\0\u7196\0\u71d9\0\u721c\0\u02e1"+
-    "\0\u725f\0\u72a2\0\u02e1\0\u72e5\0\u7328\0\u736b\0\u02e1\0\u02e1";
+    "\0\u02e1\0\u02e1\0\u02e1\0\u6a85\0\u02e1\0\u02e1\0\u02e1\0\u02e1"+
+    "\0\u6ac8\0\u6b0b\0\u6b4e\0\u6b91\0\u6bd4\0\u6c17\0\u6c5a\0\u6c9d"+
+    "\0\u6ce0\0\u6d23\0\u02e1\0\u6d66\0\u6da9\0\u6dec\0\u6e2f\0\u6e72"+
+    "\0\u02e1\0\u6eb5\0\u6ef8\0\u6f3b\0\u6f7e\0\u6fc1\0\u7004\0\u7047"+
+    "\0\u708a\0\u70cd\0\u7110\0\u02e1\0\u7153\0\u7196\0\u02e1\0\u71d9"+
+    "\0\u721c\0\u725f\0\u02e1\0\u02e1";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[560];
+    int [] result = new int[556];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -837,61 +837,55 @@ public class USDHighlighterLexer implements FlexLexer {
     "\3\15\4\0\3\15\4\0\11\15\4\0\2\15\1\u020c"+
     "\21\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
     "\1\15\1\u020d\7\15\4\0\24\15\4\0\7\15\11\0"+
-    "\3\15\4\0\3\15\4\0\11\15\4\0\2\15\1\u020e"+
-    "\21\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
-    "\11\15\4\0\3\15\1\u020f\20\15\4\0\7\15\11\0"+
-    "\3\15\4\0\3\15\4\0\11\15\4\0\3\15\1\u0210"+
+    "\3\15\4\0\3\15\4\0\11\15\4\0\3\15\1\u020e"+
     "\20\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
-    "\11\15\4\0\5\15\1\u0211\16\15\4\0\7\15\11\0"+
-    "\3\15\4\0\3\15\4\0\6\15\1\u0212\2\15\4\0"+
+    "\11\15\4\0\3\15\1\u020f\20\15\4\0\7\15\11\0"+
+    "\3\15\4\0\3\15\4\0\11\15\4\0\5\15\1\u0210"+
+    "\16\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
+    "\6\15\1\u0211\2\15\4\0\24\15\4\0\7\15\11\0"+
+    "\3\15\4\0\3\15\4\0\11\15\4\0\3\15\1\u0212"+
+    "\20\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
+    "\11\15\4\0\1\15\1\u0213\22\15\4\0\7\15\11\0"+
+    "\3\15\4\0\3\15\4\0\3\15\1\u0214\5\15\4\0"+
     "\24\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
-    "\11\15\4\0\3\15\1\u0213\20\15\4\0\7\15\11\0"+
-    "\3\15\4\0\3\15\4\0\11\15\4\0\1\15\1\u0214"+
-    "\22\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
-    "\11\15\4\0\10\15\1\u0215\13\15\4\0\7\15\11\0"+
-    "\3\15\4\0\3\15\4\0\3\15\1\u0216\5\15\4\0"+
+    "\11\15\4\0\2\15\1\u0215\21\15\4\0\7\15\11\0"+
+    "\3\15\4\0\1\15\1\u0216\1\15\4\0\11\15\4\0"+
     "\24\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
     "\11\15\4\0\2\15\1\u0217\21\15\4\0\7\15\11\0"+
-    "\3\15\4\0\1\15\1\u0218\1\15\4\0\11\15\4\0"+
-    "\24\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
-    "\11\15\4\0\2\15\1\u0219\21\15\4\0\7\15\11\0"+
-    "\3\15\4\0\3\15\4\0\11\15\4\0\2\15\1\u021a"+
+    "\3\15\4\0\3\15\4\0\11\15\4\0\2\15\1\u0218"+
     "\21\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
-    "\11\15\4\0\1\u021b\23\15\4\0\7\15\11\0\3\15"+
-    "\4\0\3\15\4\0\11\15\4\0\1\15\1\u021c\22\15"+
+    "\11\15\4\0\1\15\1\u0219\22\15\4\0\7\15\11\0"+
+    "\3\15\4\0\3\15\4\0\11\15\4\0\5\15\1\u021a"+
+    "\16\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
+    "\1\15\1\u021b\7\15\4\0\24\15\4\0\7\15\11\0"+
+    "\3\15\4\0\3\15\4\0\11\15\4\0\3\15\1\u021c"+
+    "\20\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
+    "\11\15\4\0\5\15\1\u021d\16\15\4\0\7\15\11\0"+
+    "\3\15\4\0\3\15\4\0\11\15\4\0\2\15\1\u021e"+
+    "\21\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
+    "\11\15\4\0\1\15\1\u021f\22\15\4\0\7\15\11\0"+
+    "\3\15\4\0\3\15\4\0\3\15\1\u0220\5\15\4\0"+
+    "\24\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
+    "\11\15\4\0\2\15\1\u0221\21\15\4\0\7\15\11\0"+
+    "\3\15\4\0\3\15\4\0\11\15\4\0\3\15\1\u0222"+
+    "\20\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
+    "\11\15\4\0\2\15\1\u0223\21\15\4\0\7\15\11\0"+
+    "\3\15\4\0\3\15\4\0\11\15\4\0\1\15\1\u0224"+
+    "\22\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
+    "\11\15\4\0\3\15\1\u0225\20\15\4\0\7\15\11\0"+
+    "\3\15\4\0\3\15\4\0\3\15\1\u0226\5\15\4\0"+
+    "\24\15\4\0\7\15\11\0\3\15\4\0\3\15\4\0"+
+    "\10\15\1\u0227\4\0\24\15\4\0\7\15\11\0\3\15"+
+    "\4\0\3\15\4\0\3\15\1\u0228\5\15\4\0\24\15"+
     "\4\0\7\15\11\0\3\15\4\0\3\15\4\0\11\15"+
-    "\4\0\5\15\1\u021d\16\15\4\0\7\15\11\0\3\15"+
-    "\4\0\3\15\4\0\1\15\1\u021e\7\15\4\0\24\15"+
-    "\4\0\7\15\11\0\3\15\4\0\3\15\4\0\11\15"+
-    "\4\0\3\15\1\u021f\20\15\4\0\7\15\11\0\3\15"+
-    "\4\0\3\15\4\0\11\15\4\0\5\15\1\u0220\16\15"+
-    "\4\0\7\15\11\0\3\15\4\0\3\15\4\0\1\15"+
-    "\1\u0221\7\15\4\0\24\15\4\0\7\15\11\0\3\15"+
-    "\4\0\3\15\4\0\11\15\4\0\2\15\1\u0222\21\15"+
-    "\4\0\7\15\11\0\3\15\4\0\3\15\4\0\11\15"+
-    "\4\0\1\15\1\u0223\22\15\4\0\7\15\11\0\3\15"+
-    "\4\0\3\15\4\0\3\15\1\u0224\5\15\4\0\24\15"+
-    "\4\0\7\15\11\0\3\15\4\0\3\15\4\0\11\15"+
-    "\4\0\2\15\1\u0225\21\15\4\0\7\15\11\0\3\15"+
-    "\4\0\3\15\4\0\11\15\4\0\3\15\1\u0226\20\15"+
-    "\4\0\7\15\11\0\3\15\4\0\3\15\4\0\11\15"+
-    "\4\0\2\15\1\u0227\21\15\4\0\7\15\11\0\3\15"+
-    "\4\0\3\15\4\0\11\15\4\0\1\15\1\u0228\22\15"+
-    "\4\0\7\15\11\0\3\15\4\0\3\15\4\0\11\15"+
-    "\4\0\3\15\1\u0229\20\15\4\0\7\15\11\0\3\15"+
-    "\4\0\3\15\4\0\3\15\1\u022a\5\15\4\0\24\15"+
+    "\4\0\1\15\1\u0229\22\15\4\0\7\15\11\0\3\15"+
+    "\4\0\3\15\4\0\11\15\4\0\1\15\1\u022a\22\15"+
     "\4\0\7\15\11\0\3\15\4\0\3\15\4\0\10\15"+
     "\1\u022b\4\0\24\15\4\0\7\15\11\0\3\15\4\0"+
-    "\3\15\4\0\3\15\1\u022c\5\15\4\0\24\15\4\0"+
-    "\7\15\11\0\3\15\4\0\3\15\4\0\11\15\4\0"+
-    "\1\15\1\u022d\22\15\4\0\7\15\11\0\3\15\4\0"+
-    "\3\15\4\0\11\15\4\0\1\15\1\u022e\22\15\4\0"+
-    "\7\15\11\0\3\15\4\0\3\15\4\0\10\15\1\u022f"+
-    "\4\0\24\15\4\0\7\15\11\0\3\15\4\0\3\15"+
-    "\4\0\10\15\1\u0230\4\0\24\15\4\0\7\15";
+    "\3\15\4\0\10\15\1\u022c\4\0\24\15\4\0\7\15";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[29614];
+    int [] result = new int[29346];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -935,10 +929,10 @@ public class USDHighlighterLexer implements FlexLexer {
     "\1\1\1\0\1\11\7\1\3\0\1\1\1\0\11\1"+
     "\1\11\1\0\60\1\1\0\3\1\1\0\1\11\2\1"+
     "\1\11\6\1\2\0\66\1\2\0\11\1\2\0\60\1"+
-    "\1\0\6\1\1\0\331\1";
+    "\1\0\6\1\1\0\325\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[560];
+    int [] result = new int[556];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -1247,653 +1241,648 @@ public class USDHighlighterLexer implements FlexLexer {
             { return BAD_CHARACTER;
             } 
             // fall through
-          case 130: break;
+          case 129: break;
           case 2: 
             { return WHITE_SPACE;
             } 
             // fall through
-          case 131: break;
+          case 130: break;
           case 3: 
             { return NUMBER;
             } 
             // fall through
-          case 132: break;
+          case 131: break;
           case 4: 
             { return PERIOD;
             } 
             // fall through
-          case 133: break;
+          case 132: break;
           case 5: 
             { return ALPHA;
             } 
             // fall through
-          case 134: break;
+          case 133: break;
           case 6: 
             { return USDDECLARATION;
             } 
             // fall through
-          case 135: break;
+          case 134: break;
           case 7: 
             { return COLON;
             } 
             // fall through
-          case 136: break;
+          case 135: break;
           case 8: 
             { return LEFTBRACE;
             } 
             // fall through
-          case 137: break;
+          case 136: break;
           case 9: 
             { return RIGHTPARENS;
             } 
             // fall through
-          case 138: break;
+          case 137: break;
           case 10: 
             { return RIGHTBRACE;
             } 
             // fall through
-          case 139: break;
+          case 138: break;
           case 11: 
             { yybegin(METADATA);
                               return LEFTPARENS;
             } 
             // fall through
-          case 140: break;
+          case 139: break;
           case 12: 
             { return COMMA;
             } 
             // fall through
-          case 141: break;
+          case 140: break;
           case 13: 
             { return EQUALS;
             } 
             // fall through
-          case 142: break;
+          case 141: break;
           case 14: 
             { return LEFTBRACKET;
             } 
             // fall through
-          case 143: break;
+          case 142: break;
           case 15: 
             { return RIGHTBRACKET;
             } 
             // fall through
-          case 144: break;
+          case 143: break;
           case 16: 
             { yybegin(YYINITIAL);
                               return LEFTBRACE;
             } 
             // fall through
-          case 145: break;
+          case 144: break;
           case 17: 
             { yybegin(YYINITIAL);
                               return RIGHTPARENS;
             } 
             // fall through
-          case 146: break;
+          case 145: break;
           case 18: 
             { return STRING;
             } 
             // fall through
-          case 147: break;
+          case 146: break;
           case 19: 
             { return FLOATNUMBER;
             } 
             // fall through
-          case 148: break;
+          case 147: break;
           case 20: 
             { return COMMENT;
             } 
             // fall through
-          case 149: break;
+          case 148: break;
           case 21: 
             { return BLOCKCOMMENT;
             } 
             // fall through
-          case 150: break;
+          case 149: break;
           case 22: 
             { return IDENTIFIER;
             } 
             // fall through
-          case 151: break;
+          case 150: break;
           case 23: 
             { return ASSETREFERENCE;
             } 
             // fall through
-          case 152: break;
+          case 151: break;
           case 24: 
             { return PATHREFERENCE;
             } 
             // fall through
-          case 153: break;
+          case 152: break;
           case 25: 
             { return PRIM_NAME;
             } 
             // fall through
-          case 154: break;
+          case 153: break;
           case 26: 
             { return TYPENAME;
             } 
             // fall through
-          case 155: break;
+          case 154: break;
           case 27: 
             { return METADATA_KEY;
             } 
             // fall through
-          case 156: break;
+          case 155: break;
           case 28: 
             { return NAMESPACED_IDENTIFIER;
             } 
             // fall through
-          case 157: break;
+          case 156: break;
           case 29: 
             { return ADD;
             } 
             // fall through
-          case 158: break;
+          case 157: break;
           case 30: 
             { yybegin(SPECIFIER);
                                  return DEF;
             } 
             // fall through
-          case 159: break;
+          case 158: break;
           case 31: 
             { return DOC;
             } 
             // fall through
-          case 160: break;
+          case 159: break;
           case 32: 
             { return REL;
             } 
             // fall through
-          case 161: break;
+          case 160: break;
           case 33: 
             { return INTTYPE;
             } 
             // fall through
-          case 162: break;
+          case 161: break;
           case 34: 
             { return HALFTYPE;
             } 
             // fall through
-          case 163: break;
+          case 162: break;
           case 35: 
             { yybegin(SPECIFIER);
                                  return OVER;
             } 
             // fall through
-          case 164: break;
+          case 163: break;
           case 36: 
             { return TRUE;
             } 
             // fall through
-          case 165: break;
+          case 164: break;
           case 37: 
             { return INT4TYPE;
             } 
             // fall through
-          case 166: break;
+          case 165: break;
           case 38: 
             { return INT2TYPE;
             } 
             // fall through
-          case 167: break;
+          case 166: break;
           case 39: 
             { return INT3TYPE;
             } 
             // fall through
-          case 168: break;
+          case 167: break;
           case 40: 
             { return BOOLTYPE;
             } 
             // fall through
-          case 169: break;
+          case 168: break;
           case 41: 
             { return UINTTYPE;
             } 
             // fall through
-          case 170: break;
+          case 169: break;
           case 42: 
             { return KIND;
             } 
             // fall through
-          case 171: break;
+          case 170: break;
           case 43: 
             { return NONE;
             } 
             // fall through
-          case 172: break;
+          case 171: break;
           case 44: 
             { return HALF4TYPE;
             } 
             // fall through
-          case 173: break;
+          case 172: break;
           case 45: 
             { return HALF2TYPE;
             } 
             // fall through
-          case 174: break;
+          case 173: break;
           case 46: 
             { return HALF3TYPE;
             } 
             // fall through
-          case 175: break;
+          case 174: break;
           case 47: 
             { return ASSETTYPE;
             } 
             // fall through
-          case 176: break;
+          case 175: break;
           case 48: 
             { return FALSE;
             } 
             // fall through
-          case 177: break;
+          case 176: break;
           case 49: 
             { return FLOATTYPE;
             } 
             // fall through
-          case 178: break;
+          case 177: break;
           case 50: 
             { yybegin(SPECIFIER);
                                  return CLASS;
             } 
             // fall through
-          case 179: break;
+          case 178: break;
           case 51: 
             { return TOKENTYPE;
             } 
             // fall through
-          case 180: break;
+          case 179: break;
           case 52: 
             { return INT64TYPE;
             } 
             // fall through
-          case 181: break;
+          case 180: break;
           case 53: 
             { return UCHARTYPE;
             } 
             // fall through
-          case 182: break;
+          case 181: break;
           case 54: 
             { return QUATHTYPE;
             } 
             // fall through
-          case 183: break;
+          case 182: break;
           case 55: 
             { return QUATDTYPE;
             } 
             // fall through
-          case 184: break;
+          case 183: break;
           case 56: 
             { return QUATFTYPE;
             } 
             // fall through
-          case 185: break;
+          case 184: break;
           case 57: 
             { return MAPPER;
             } 
             // fall through
-          case 186: break;
+          case 185: break;
           case 58: 
             { return APPEND;
             } 
             // fall through
-          case 187: break;
+          case 186: break;
           case 59: 
             { return DELETE;
             } 
             // fall through
-          case 188: break;
+          case 187: break;
           case 60: 
             { return DOUBLETYPE;
             } 
             // fall through
-          case 189: break;
+          case 188: break;
           case 61: 
             { return FLOAT4TYPE;
             } 
             // fall through
-          case 190: break;
+          case 189: break;
           case 62: 
             { return FLOAT2TYPE;
             } 
             // fall through
-          case 191: break;
+          case 190: break;
           case 63: 
             { return FLOAT3TYPE;
             } 
             // fall through
-          case 192: break;
+          case 191: break;
           case 64: 
             { return OFFSET;
             } 
             // fall through
-          case 193: break;
+          case 192: break;
           case 65: 
             { return CONFIG;
             } 
             // fall through
-          case 194: break;
+          case 193: break;
           case 66: 
             { return CUSTOM;
             } 
             // fall through
-          case 195: break;
+          case 194: break;
           case 67: 
             { return STRINGTYPE;
             } 
             // fall through
-          case 196: break;
+          case 195: break;
           case 68: 
             { return UINT64TYPE;
             } 
             // fall through
-          case 197: break;
+          case 196: break;
           case 69: 
             { return DEFAULT;
             } 
             // fall through
-          case 198: break;
+          case 197: break;
           case 70: 
             { return DOUBLE4TYPE;
             } 
             // fall through
-          case 199: break;
+          case 198: break;
           case 71: 
             { return DOUBLE2TYPE;
             } 
             // fall through
-          case 200: break;
+          case 199: break;
           case 72: 
             { return DOUBLE3TYPE;
             } 
             // fall through
-          case 201: break;
+          case 200: break;
           case 73: 
             { return FRAME4DTYPE;
             } 
             // fall through
-          case 202: break;
+          case 201: break;
           case 74: 
             { return VARYING;
             } 
             // fall through
-          case 203: break;
+          case 202: break;
           case 75: 
             { return REORDER;
             } 
             // fall through
-          case 204: break;
+          case 203: break;
           case 76: 
             { return COLOR4HTYPE;
             } 
             // fall through
-          case 205: break;
+          case 204: break;
           case 77: 
             { return COLOR4DTYPE;
             } 
             // fall through
-          case 206: break;
+          case 205: break;
           case 78: 
             { return COLOR4FTYPE;
             } 
             // fall through
-          case 207: break;
+          case 206: break;
           case 79: 
             { return COLOR3HTYPE;
             } 
             // fall through
-          case 208: break;
+          case 207: break;
           case 80: 
             { return COLOR3DTYPE;
             } 
             // fall through
-          case 209: break;
+          case 208: break;
           case 81: 
             { return COLOR3FTYPE;
             } 
             // fall through
-          case 210: break;
+          case 209: break;
           case 82: 
             { return CONNECT;
             } 
             // fall through
-          case 211: break;
+          case 210: break;
           case 83: 
             { return PAYLOAD;
             } 
             // fall through
-          case 212: break;
+          case 211: break;
           case 84: 
             { return POINT3HTYPE;
             } 
             // fall through
-          case 213: break;
+          case 212: break;
           case 85: 
             { return POINT3DTYPE;
             } 
             // fall through
-          case 214: break;
+          case 213: break;
           case 86: 
             { return POINT3FTYPE;
             } 
             // fall through
-          case 215: break;
+          case 214: break;
           case 87: 
             { return PREPEND;
             } 
             // fall through
-          case 216: break;
+          case 215: break;
           case 88: 
             { return UNIFORM;
             } 
             // fall through
-          case 217: break;
+          case 216: break;
           case 89: 
             { return MATRIX4DTYPE;
             } 
             // fall through
-          case 218: break;
+          case 217: break;
           case 90: 
             { return MATRIX2DTYPE;
             } 
             // fall through
-          case 219: break;
+          case 218: break;
           case 91: 
             { return MATRIX3DTYPE;
             } 
             // fall through
-          case 220: break;
+          case 219: break;
           case 92: 
             { return VARIANTS;
             } 
             // fall through
-          case 221: break;
+          case 220: break;
           case 93: 
             { return VECTOR3HTYPE;
             } 
             // fall through
-          case 222: break;
+          case 221: break;
           case 94: 
             { return VECTOR3DTYPE;
             } 
             // fall through
-          case 223: break;
+          case 222: break;
           case 95: 
             { return VECTOR3FTYPE;
             } 
             // fall through
-          case 224: break;
+          case 223: break;
           case 96: 
             { return NORMAL3HTYPE;
             } 
             // fall through
-          case 225: break;
+          case 224: break;
           case 97: 
             { return NORMAL3DTYPE;
             } 
             // fall through
-          case 226: break;
+          case 225: break;
           case 98: 
             { return NORMAL3FTYPE;
             } 
             // fall through
-          case 227: break;
+          case 226: break;
           case 99: 
             { return INHERITS;
             } 
             // fall through
-          case 228: break;
+          case 227: break;
           case 100: 
             { return EDGEINDEXTYPE;
             } 
             // fall through
-          case 229: break;
+          case 228: break;
           case 101: 
             { return RELOCATES;
             } 
             // fall through
-          case 230: break;
+          case 229: break;
           case 102: 
             { return ROOTPRIMS;
             } 
             // fall through
-          case 231: break;
+          case 230: break;
           case 103: 
             { return SUBLAYERS;
             } 
             // fall through
-          case 232: break;
+          case 231: break;
           case 104: 
             { return FACEINDEXTYPE;
             } 
             // fall through
-          case 233: break;
+          case 232: break;
           case 105: 
             { return TRANSFORMTYPE;
             } 
             // fall through
-          case 234: break;
+          case 233: break;
           case 106: 
             { return ATTRIBUTES;
             } 
             // fall through
-          case 235: break;
+          case 234: break;
           case 107: 
             { return DICTIONARY;
             } 
             // fall through
-          case 236: break;
+          case 235: break;
           case 108: 
             { return VARIANTSET;
             } 
             // fall through
-          case 237: break;
+          case 236: break;
           case 109: 
             { return REFERENCES;
             } 
             // fall through
-          case 238: break;
+          case 237: break;
           case 110: 
             { return CUSTOMDATA;
             } 
             // fall through
-          case 239: break;
+          case 238: break;
           case 111: 
             { return PERMISSION;
             } 
             // fall through
-          case 240: break;
+          case 239: break;
           case 112: 
             { return PROPERTIES;
             } 
             // fall through
-          case 241: break;
+          case 240: break;
           case 113: 
             { return TEXCOORD2HTYPE;
             } 
             // fall through
-          case 242: break;
+          case 241: break;
           case 114: 
             { return TEXCOORD2DTYPE;
             } 
             // fall through
-          case 243: break;
+          case 242: break;
           case 115: 
             { return TEXCOORD2FTYPE;
             } 
             // fall through
-          case 244: break;
+          case 243: break;
           case 116: 
             { return TEXCOORD3HTYPE;
             } 
             // fall through
-          case 245: break;
+          case 244: break;
           case 117: 
             { return TEXCOORD3DTYPE;
             } 
             // fall through
-          case 246: break;
+          case 245: break;
           case 118: 
-            { return TEXCOORD3F;
+            { return TEXCOORD3FTYPE;
             } 
             // fall through
-          case 247: break;
+          case 246: break;
           case 119: 
             { return POINTINDEXTYPE;
             } 
             // fall through
-          case 248: break;
+          case 247: break;
           case 120: 
             { return DISPLAYUNIT;
             } 
             // fall through
-          case 249: break;
+          case 248: break;
           case 121: 
             { return VARIANTSETS;
             } 
             // fall through
-          case 250: break;
+          case 249: break;
           case 122: 
             { return SPECIALIZES;
             } 
             // fall through
-          case 251: break;
+          case 250: break;
           case 123: 
             { return NAMECHILDREN;
             } 
             // fall through
-          case 252: break;
+          case 251: break;
           case 124: 
             { return INTERPOLATION;
             } 
             // fall through
-          case 253: break;
+          case 252: break;
           case 125: 
-            { return TEXCOORD3FTYPE;
-            } 
-            // fall through
-          case 254: break;
-          case 126: 
             { return SYMMETRYFUNCTION;
             } 
             // fall through
-          case 255: break;
-          case 127: 
+          case 253: break;
+          case 126: 
             { return SYMMETRYARGUMENTS;
             } 
             // fall through
-          case 256: break;
-          case 128: 
+          case 254: break;
+          case 127: 
             { return SUFFIXSUBSTITUTIONS;
             } 
             // fall through
-          case 257: break;
-          case 129: 
+          case 255: break;
+          case 128: 
             { return PREFIXSUBSTITUTIONS;
             } 
             // fall through
-          case 258: break;
+          case 256: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

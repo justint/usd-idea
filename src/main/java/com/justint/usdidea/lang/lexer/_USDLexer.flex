@@ -144,12 +144,11 @@ PATHREFERENCE=\<[^\<\>\r\n]*\>
   "texCoord2f"               { return TEXCOORD2FTYPE; }
   "texCoord3h"               { return TEXCOORD3HTYPE; }
   "texCoord3d"               { return TEXCOORD3DTYPE; }
-  "texCoord3f"               { return TEXCOORD3F; }
+  "texCoord3f"               { return TEXCOORD3FTYPE; }
   "Transform"                { return TRANSFORMTYPE; }
   "PointIndex"               { return POINTINDEXTYPE; }
   "EdgeIndex"                { return EDGEINDEXTYPE; }
   "FaceIndex"                { return FACEINDEXTYPE; }
-  "texCoord3ftype"           { return TEXCOORD3FTYPE; }
 
   {USDDECLARATION}           { return USDDECLARATION; }
   {STRING}                   { return STRING; }

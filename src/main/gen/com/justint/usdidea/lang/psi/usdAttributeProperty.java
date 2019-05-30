@@ -13,7 +13,7 @@ public interface usdAttributeProperty extends PsiElement {
   @Nullable
   usdAttributeType getAttributeType();
 
-  @NotNull
+  @Nullable
   usdAttributeValue getAttributeValue();
 
   @Nullable

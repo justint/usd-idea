@@ -39,9 +39,9 @@ public class usdAttributePropertyImpl extends ASTWrapperPsiElement implements us
   }
 
   @Override
-  @NotNull
+  @Nullable
   public usdAttributeValue getAttributeValue() {
-    return findNotNullChildByClass(usdAttributeValue.class);
+    return findChildByClass(usdAttributeValue.class);
   }
 
   @Override

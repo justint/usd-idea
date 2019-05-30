@@ -177,15 +177,14 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (uniform | custom)? (AttributeType AttributeName | CompositionArc) equals AttributeValue
+  // (uniform | custom)? (AttributeType AttributeName | CompositionArc) (equals AttributeValue)?
   public static boolean AttributeProperty(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AttributeProperty")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ATTRIBUTE_PROPERTY, "<attribute property>");
     r = AttributeProperty_0(b, l + 1);
     r = r && AttributeProperty_1(b, l + 1);
-    r = r && consumeToken(b, EQUALS);
-    r = r && AttributeValue(b, l + 1);
+    r = r && AttributeProperty_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -224,6 +223,24 @@ public class USDParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = AttributeType(b, l + 1);
     r = r && AttributeName(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (equals AttributeValue)?
+  private static boolean AttributeProperty_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AttributeProperty_2")) return false;
+    AttributeProperty_2_0(b, l + 1);
+    return true;
+  }
+
+  // equals AttributeValue
+  private static boolean AttributeProperty_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AttributeProperty_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, EQUALS);
+    r = r && AttributeValue(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -293,7 +310,7 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // leftbrace [!rightbrace (Property | PrimSpec)* ] rightbrace
+  // leftbrace [!rightbrace (PropertySpec | PrimSpec)* ] rightbrace
   public static boolean Body(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Body")) return false;
     if (!nextTokenIs(b, LEFTBRACE)) return false;
@@ -306,14 +323,14 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // [!rightbrace (Property | PrimSpec)* ]
+  // [!rightbrace (PropertySpec | PrimSpec)* ]
   private static boolean Body_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Body_1")) return false;
     Body_1_0(b, l + 1);
     return true;
   }
 
-  // !rightbrace (Property | PrimSpec)*
+  // !rightbrace (PropertySpec | PrimSpec)*
   private static boolean Body_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Body_1_0")) return false;
     boolean r;
@@ -334,7 +351,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (Property | PrimSpec)*
+  // (PropertySpec | PrimSpec)*
   private static boolean Body_1_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Body_1_0_1")) return false;
     while (true) {
@@ -345,11 +362,11 @@ public class USDParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // Property | PrimSpec
+  // PropertySpec | PrimSpec
   private static boolean Body_1_0_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Body_1_0_1_0")) return false;
     boolean r;
-    r = Property(b, l + 1);
+    r = PropertySpec(b, l + 1);
     if (!r) r = PrimSpec(b, l + 1);
     return r;
   }
@@ -787,10 +804,10 @@ public class USDParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // AttributeProperty | RelationshipProperty
-  public static boolean Property(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Property")) return false;
+  public static boolean PropertySpec(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "PropertySpec")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, PROPERTY, "<property>");
+    Marker m = enter_section_(b, l, _NONE_, PROPERTY_SPEC, "<property spec>");
     r = AttributeProperty(b, l + 1);
     if (!r) r = RelationshipProperty(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -812,15 +829,33 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // variantSet string equals VariantSetBody
+  // variantSet string (equals VariantSetBody)?
   public static boolean RelationshipProperty(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "RelationshipProperty")) return false;
     if (!nextTokenIs(b, VARIANTSET)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, VARIANTSET, STRING, EQUALS);
-    r = r && VariantSetBody(b, l + 1);
+    r = consumeTokens(b, 0, VARIANTSET, STRING);
+    r = r && RelationshipProperty_2(b, l + 1);
     exit_section_(b, m, RELATIONSHIP_PROPERTY, r);
+    return r;
+  }
+
+  // (equals VariantSetBody)?
+  private static boolean RelationshipProperty_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "RelationshipProperty_2")) return false;
+    RelationshipProperty_2_0(b, l + 1);
+    return true;
+  }
+
+  // equals VariantSetBody
+  private static boolean RelationshipProperty_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "RelationshipProperty_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, EQUALS);
+    r = r && VariantSetBody(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 

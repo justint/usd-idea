@@ -34,8 +34,8 @@ public class usdBodyImpl extends ASTWrapperPsiElement implements usdBody {
 
   @Override
   @NotNull
-  public List<usdProperty> getPropertyList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdProperty.class);
+  public List<usdPropertySpec> getPropertySpecList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdPropertySpec.class);
   }
 
 }
