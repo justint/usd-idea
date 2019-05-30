@@ -11,10 +11,16 @@ public interface usdItem extends PsiElement {
   usdArray getArray();
 
   @Nullable
+  usdBoolean getBoolean();
+
+  @Nullable
   usdDict getDict();
 
   @Nullable
   usdInterpolatedArray getInterpolatedArray();
+
+  @Nullable
+  usdReferenceItem getReferenceItem();
 
   @Nullable
   usdTimeSample getTimeSample();
@@ -23,16 +29,10 @@ public interface usdItem extends PsiElement {
   usdVector getVector();
 
   @Nullable
-  PsiElement getAssetReference();
-
-  @Nullable
   PsiElement getFloatnumber();
 
   @Nullable
   PsiElement getNumber();
-
-  @Nullable
-  PsiElement getPathReference();
 
   @Nullable
   PsiElement getString();

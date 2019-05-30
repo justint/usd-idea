@@ -355,6 +355,19 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // true | false
+  public static boolean Boolean(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Boolean")) return false;
+    if (!nextTokenIs(b, "<boolean>", FALSE, TRUE)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, BOOLEAN, "<boolean>");
+    r = consumeToken(b, TRUE);
+    if (!r) r = consumeToken(b, FALSE);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // subLayers | inherits | variantSets | references | payload | specializes
   public static boolean CompositionArc(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "CompositionArc")) return false;
@@ -548,7 +561,7 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // InterpolatedArray | Array | Vector | string | number | floatnumber | assetReference pathReference | assetReference | pathReference | Dict | TimeSample
+  // InterpolatedArray | Array | Vector | string | number | floatnumber | ReferenceItem | Dict | TimeSample | Boolean
   public static boolean Item(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Item")) return false;
     boolean r;
@@ -559,11 +572,10 @@ public class USDParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, STRING);
     if (!r) r = consumeToken(b, NUMBER);
     if (!r) r = consumeToken(b, FLOATNUMBER);
-    if (!r) r = parseTokens(b, 0, ASSETREFERENCE, PATHREFERENCE);
-    if (!r) r = consumeToken(b, ASSETREFERENCE);
-    if (!r) r = consumeToken(b, PATHREFERENCE);
+    if (!r) r = ReferenceItem(b, l + 1);
     if (!r) r = Dict(b, l + 1);
     if (!r) r = TimeSample(b, l + 1);
+    if (!r) r = Boolean(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -786,6 +798,20 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // assetReference pathReference | assetReference | pathReference
+  public static boolean ReferenceItem(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ReferenceItem")) return false;
+    if (!nextTokenIs(b, "<reference item>", ASSETREFERENCE, PATHREFERENCE)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, REFERENCE_ITEM, "<reference item>");
+    r = parseTokens(b, 0, ASSETREFERENCE, PATHREFERENCE);
+    if (!r) r = consumeToken(b, ASSETREFERENCE);
+    if (!r) r = consumeToken(b, PATHREFERENCE);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // variantSet string equals VariantSetBody
   public static boolean RelationshipProperty(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "RelationshipProperty")) return false;
@@ -835,13 +861,14 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // BasicDataType | RoleDataType
+  // BasicDataType | RoleDataType | dictionary
   public static boolean SingleAttributeType(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "SingleAttributeType")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, SINGLE_ATTRIBUTE_TYPE, "<single attribute type>");
     r = BasicDataType(b, l + 1);
     if (!r) r = RoleDataType(b, l + 1);
+    if (!r) r = consumeToken(b, DICTIONARY);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

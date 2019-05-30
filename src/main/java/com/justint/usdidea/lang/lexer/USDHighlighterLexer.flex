@@ -114,6 +114,8 @@ PATHREFERENCE=\<[^\<\>\r\n]*\>
     "="                        { return EQUALS; }
     "["                        { return LEFTBRACKET; }
     "]"                        { return RIGHTBRACKET; }
+    "true"                     { return TRUE; }
+    "false"                    { return FALSE; }
     "bool"                     { return BOOLTYPE; }
     "uchar"                    { return UCHARTYPE; }
     "int"                      { return INTTYPE; }

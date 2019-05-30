@@ -70,6 +70,7 @@ public class USDParserDefinition implements ParserDefinition {
             USDTypes.DELETE,
             USDTypes.DICTIONARY,
             USDTypes.DISPLAYUNIT,
+            USDTypes.FALSE,
             USDTypes.MAPPER,
             USDTypes.NAMECHILDREN,
             USDTypes.NONE,
@@ -88,7 +89,8 @@ public class USDParserDefinition implements ParserDefinition {
             USDTypes.SYMMETRYFUNCTION,
             USDTypes.UNIFORM,
             USDTypes.VARIANTSET,
-            USDTypes.VARYING
+            USDTypes.VARYING,
+            USDTypes.TRUE
     );
 
     public static final IFileElementType FILE = new IFileElementType(USDLanguage.INSTANCE);

@@ -16,6 +16,7 @@ public interface USDTypes {
   IElementType ATTRIBUTE_VALUE = new USDElementType("ATTRIBUTE_VALUE");
   IElementType BASIC_DATA_TYPE = new USDElementType("BASIC_DATA_TYPE");
   IElementType BODY = new USDElementType("BODY");
+  IElementType BOOLEAN = new USDElementType("BOOLEAN");
   IElementType COMPOSITION_ARC = new USDElementType("COMPOSITION_ARC");
   IElementType DICT = new USDElementType("DICT");
   IElementType DICT_KEY = new USDElementType("DICT_KEY");
@@ -33,6 +34,7 @@ public interface USDTypes {
   IElementType PRIM_NAME = new USDElementType("PRIM_NAME");
   IElementType PRIM_SPEC = new USDElementType("PRIM_SPEC");
   IElementType PROPERTY = new USDElementType("PROPERTY");
+  IElementType REFERENCE_ITEM = new USDElementType("REFERENCE_ITEM");
   IElementType RELATIONSHIP_PROPERTY = new USDElementType("RELATIONSHIP_PROPERTY");
   IElementType ROLE_DATA_TYPE = new USDElementType("ROLE_DATA_TYPE");
   IElementType SINGLE_ATTRIBUTE_TYPE = new USDElementType("SINGLE_ATTRIBUTE_TYPE");
@@ -80,6 +82,7 @@ public interface USDTypes {
   IElementType EDGEINDEXTYPE = new USDTokenType("EdgeIndex");
   IElementType EQUALS = new USDTokenType("=");
   IElementType FACEINDEXTYPE = new USDTokenType("FaceIndex");
+  IElementType FALSE = new USDTokenType("false");
   IElementType FLOAT2TYPE = new USDTokenType("float2");
   IElementType FLOAT3TYPE = new USDTokenType("float3");
   IElementType FLOAT4TYPE = new USDTokenType("float4");
@@ -151,6 +154,7 @@ public interface USDTypes {
   IElementType TEXCOORD3HTYPE = new USDTokenType("texCoord3h");
   IElementType TOKENTYPE = new USDTokenType("token");
   IElementType TRANSFORMTYPE = new USDTokenType("Transform");
+  IElementType TRUE = new USDTokenType("true");
   IElementType UCHARTYPE = new USDTokenType("uchar");
   IElementType UINT64TYPE = new USDTokenType("uint64");
   IElementType UINTTYPE = new USDTokenType("uint");
@@ -190,6 +194,9 @@ public interface USDTypes {
       }
       else if (type == BODY) {
         return new usdBodyImpl(node);
+      }
+      else if (type == BOOLEAN) {
+        return new usdBooleanImpl(node);
       }
       else if (type == COMPOSITION_ARC) {
         return new usdCompositionArcImpl(node);
@@ -241,6 +248,9 @@ public interface USDTypes {
       }
       else if (type == PROPERTY) {
         return new usdPropertyImpl(node);
+      }
+      else if (type == REFERENCE_ITEM) {
+        return new usdReferenceItemImpl(node);
       }
       else if (type == RELATIONSHIP_PROPERTY) {
         return new usdRelationshipPropertyImpl(node);

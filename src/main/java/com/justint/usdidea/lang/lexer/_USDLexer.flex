@@ -91,6 +91,8 @@ PATHREFERENCE=\<[^\<\>\r\n]*\>
   ")"                        { return RIGHTPARENS; }
   "{"                        { return LEFTBRACE; }
   "}"                        { return RIGHTBRACE; }
+  "true"                     { return TRUE; }
+  "false"                    { return FALSE; }
   "bool"                     { return BOOLTYPE; }
   "uchar"                    { return UCHARTYPE; }
   "int"                      { return INTTYPE; }

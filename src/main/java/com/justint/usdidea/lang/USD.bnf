@@ -90,6 +90,11 @@
         rightbrace = '}'
 
         //
+        // booleans
+        true = 'true'
+        false = 'false'
+
+        //
         // types
         // basic
         booltype = 'bool'
@@ -201,7 +206,7 @@ VariantSetItemBody ::= Metadata? (leftbrace [!rightbrace PrimSpec (PrimSpec)*] r
 
 AttributeType ::= ArrayAttributeType | SingleAttributeType | rel
 
-SingleAttributeType ::= BasicDataType | RoleDataType
+SingleAttributeType ::= BasicDataType | RoleDataType | dictionary
 
 ArrayAttributeType ::= SingleAttributeType [leftbracket rightbracket]
 
@@ -234,7 +239,9 @@ InterpolatedArray ::= Array (leftparens interpolation equals string rightparens)
 
 Vector ::= leftparens [!rightparens Item? (comma Item)*] rightparens | leftparens rightparens
 
-Item ::= InterpolatedArray | Array | Vector | string | number | floatnumber | assetReference pathReference | assetReference | pathReference | Dict | TimeSample
+Item ::= InterpolatedArray | Array | Vector | string | number | floatnumber | ReferenceItem | Dict | TimeSample | Boolean
+
+ReferenceItem ::= assetReference pathReference | assetReference | pathReference
 
 Dict ::= leftbrace [!rightbrace DictKey equals DictValue (DictKey equals DictValue)*] rightbrace | leftbrace rightbrace
 
@@ -245,3 +252,5 @@ DictValue ::= Item
 TimeSample ::= leftbrace [!rightbrace FrameNumber colon Array (comma FrameNumber colon Array)* comma?] rightbrace | leftbrace rightbrace
 
 FrameNumber ::= number
+
+Boolean ::= true | false

@@ -39,6 +39,10 @@ public class usdVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitBoolean(@NotNull usdBoolean o) {
+    visitPsiElement(o);
+  }
+
   public void visitCompositionArc(@NotNull usdCompositionArc o) {
     visitPsiElement(o);
   }
@@ -104,6 +108,10 @@ public class usdVisitor extends PsiElementVisitor {
   }
 
   public void visitProperty(@NotNull usdProperty o) {
+    visitPsiElement(o);
+  }
+
+  public void visitReferenceItem(@NotNull usdReferenceItem o) {
     visitPsiElement(o);
   }
 

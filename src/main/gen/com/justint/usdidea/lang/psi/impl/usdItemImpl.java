@@ -34,6 +34,12 @@ public class usdItemImpl extends ASTWrapperPsiElement implements usdItem {
 
   @Override
   @Nullable
+  public usdBoolean getBoolean() {
+    return findChildByClass(usdBoolean.class);
+  }
+
+  @Override
+  @Nullable
   public usdDict getDict() {
     return findChildByClass(usdDict.class);
   }
@@ -42,6 +48,12 @@ public class usdItemImpl extends ASTWrapperPsiElement implements usdItem {
   @Nullable
   public usdInterpolatedArray getInterpolatedArray() {
     return findChildByClass(usdInterpolatedArray.class);
+  }
+
+  @Override
+  @Nullable
+  public usdReferenceItem getReferenceItem() {
+    return findChildByClass(usdReferenceItem.class);
   }
 
   @Override
@@ -58,12 +70,6 @@ public class usdItemImpl extends ASTWrapperPsiElement implements usdItem {
 
   @Override
   @Nullable
-  public PsiElement getAssetReference() {
-    return findChildByType(ASSETREFERENCE);
-  }
-
-  @Override
-  @Nullable
   public PsiElement getFloatnumber() {
     return findChildByType(FLOATNUMBER);
   }
@@ -72,12 +78,6 @@ public class usdItemImpl extends ASTWrapperPsiElement implements usdItem {
   @Nullable
   public PsiElement getNumber() {
     return findChildByType(NUMBER);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getPathReference() {
-    return findChildByType(PATHREFERENCE);
   }
 
   @Override
