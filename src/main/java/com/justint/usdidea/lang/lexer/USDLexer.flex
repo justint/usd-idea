@@ -48,6 +48,7 @@ PATHREFERENCE=\<[^\<\>\r\n]*\>
 
   "add"                      { return ADD; }
   "append"                   { return APPEND; }
+  "assetInfo"                { return ASSETINFO; }
   "attributes"               { return ATTRIBUTES; }
   "class"                    { return CLASS; }
   "config"                   { return CONFIG; }

@@ -11,6 +11,9 @@ public interface usdPropertySpec extends PsiElement {
   usdAttributeProperty getAttributeProperty();
 
   @Nullable
+  usdMetadata getMetadata();
+
+  @Nullable
   usdRelationshipProperty getRelationshipProperty();
 
 }

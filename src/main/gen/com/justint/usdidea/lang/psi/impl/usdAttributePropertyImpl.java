@@ -50,4 +50,10 @@ public class usdAttributePropertyImpl extends ASTWrapperPsiElement implements us
     return findChildByClass(usdCompositionArc.class);
   }
 
+  @Override
+  @Nullable
+  public usdListEditAction getListEditAction() {
+    return findChildByClass(usdListEditAction.class);
+  }
+
 }

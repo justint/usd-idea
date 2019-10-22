@@ -34,6 +34,12 @@ public class usdPropertySpecImpl extends ASTWrapperPsiElement implements usdProp
 
   @Override
   @Nullable
+  public usdMetadata getMetadata() {
+    return findChildByClass(usdMetadata.class);
+  }
+
+  @Override
+  @Nullable
   public usdRelationshipProperty getRelationshipProperty() {
     return findChildByClass(usdRelationshipProperty.class);
   }

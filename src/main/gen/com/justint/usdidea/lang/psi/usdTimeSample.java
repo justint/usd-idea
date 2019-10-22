@@ -8,9 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface usdTimeSample extends PsiElement {
 
   @NotNull
-  List<usdArray> getArrayList();
+  List<usdFrameNumber> getFrameNumberList();
 
   @NotNull
-  List<usdFrameNumber> getFrameNumberList();
+  List<usdItem> getItemList();
 
 }

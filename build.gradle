@@ -3,13 +3,13 @@ plugins {
 }
 
 group 'com.justint'
-version '0.2.2'
+version '0.2.3'
 
 sourceSets.main.java.srcDirs = ['src/main/gen','src/main/java']
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = System.getenv().getOrDefault("IDEA_VERSION", "IC-145.1617.8")
+    version = System.getenv().getOrDefault("IDEA_VERSION", "IC-192.6817.14")
     //alternativeIdePath '/Applications/PyCharm.app'
 }
 
@@ -19,5 +19,5 @@ def htmlFixer = {htmlFile -> file(htmlFile).text.replace('<html>', '').replace('
 patchPluginXml {
     changeNotes = htmlFixer('src/main/resources/META-INF/change-notes.html')
     sinceBuild '145'
-    untilBuild '191.*'
+    untilBuild '193.*'
 }

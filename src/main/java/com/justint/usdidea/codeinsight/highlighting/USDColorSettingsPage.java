@@ -14,10 +14,18 @@ import java.util.Map;
 
 public class USDColorSettingsPage implements ColorSettingsPage {
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[] {
-            new AttributesDescriptor("Number", USDSyntaxHighlighter.NUMBER),
+            new AttributesDescriptor("USD Declaration", USDSyntaxHighlighter.USDDECLARATION),
+            new AttributesDescriptor("Bracket", USDSyntaxHighlighter.BRACKET),
+            new AttributesDescriptor("Keyword", USDSyntaxHighlighter.KEYWORD),
             new AttributesDescriptor("String", USDSyntaxHighlighter.STRING),
-            new AttributesDescriptor("Comment", USDSyntaxHighlighter.COMMENT),
-            new AttributesDescriptor("USD Declaration", USDSyntaxHighlighter.USDDECLARATION)
+            new AttributesDescriptor("Number", USDSyntaxHighlighter.NUMBER),
+            new AttributesDescriptor("Line Comment", USDSyntaxHighlighter.LINE_COMMENT),
+            new AttributesDescriptor("Block Comment", USDSyntaxHighlighter.BLOCK_COMMENT),
+            new AttributesDescriptor("Identifier", USDSyntaxHighlighter.IDENTIFIER),
+            new AttributesDescriptor("Prim Name", USDSyntaxHighlighter.PRIM_NAME),
+            new AttributesDescriptor("Asset Reference", USDSyntaxHighlighter.ASSET_REFERENCE),
+            new AttributesDescriptor("Path Reference", USDSyntaxHighlighter.PATH_REFERENCE),
+            new AttributesDescriptor("Type", USDSyntaxHighlighter.TYPE)
     };
 
     @Nullable

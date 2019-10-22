@@ -71,6 +71,7 @@ PATHREFERENCE=\<[^\<\>\r\n]*\>
     {EOL}|{WHITE_SPACE}     { return WHITE_SPACE; }
     "add"                      { return ADD; }
     "append"                   { return APPEND; }
+    "assetInfo"                { return ASSETINFO; }
     "attributes"               { return ATTRIBUTES; }
     "config"                   { return CONFIG; }
     "connect"                  { return CONNECT; }

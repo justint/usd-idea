@@ -33,8 +33,6 @@ TODO:
 
 - Line markers for overrides, inheritance, etc
 
-- Python autocompletions for the `pxr.Usd` library
-
 ## License
 
 MIT license

@@ -20,12 +20,28 @@ public class USDSyntaxHighlighter extends SyntaxHighlighterBase {
     // TextAttributesKey instances
     public static final TextAttributesKey USDDECLARATION =
             createTextAttributesKey("USDDECLARATION", DefaultLanguageHighlighterColors.CONSTANT);
+    public static final TextAttributesKey BRACKET =
+            createTextAttributesKey("BRACKET", DefaultLanguageHighlighterColors.BRACKETS);
+    public static final TextAttributesKey KEYWORD =
+            createTextAttributesKey("KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
     public static final TextAttributesKey STRING =
             createTextAttributesKey("STRING", DefaultLanguageHighlighterColors.STRING);
     public static final TextAttributesKey NUMBER =
             createTextAttributesKey("NUMBER", DefaultLanguageHighlighterColors.NUMBER);
-    public static final TextAttributesKey COMMENT =
-            createTextAttributesKey("COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
+    public static final TextAttributesKey LINE_COMMENT =
+            createTextAttributesKey("LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
+    public static final TextAttributesKey BLOCK_COMMENT =
+            createTextAttributesKey("BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
+    public static final TextAttributesKey IDENTIFIER =
+            createTextAttributesKey("IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER);
+    public static final TextAttributesKey PRIM_NAME =
+            createTextAttributesKey("PRIM_NAME", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
+    public static final TextAttributesKey ASSET_REFERENCE =
+            createTextAttributesKey("ASSET_REFERENCE", USDHighlighterColors.ASSETREFERENCE_KEY);
+    public static final TextAttributesKey PATH_REFERENCE =
+            createTextAttributesKey("PATH_REFERENCE", USDHighlighterColors.PATHREFERENCE_KEY);
+    public static final TextAttributesKey TYPE =
+            createTextAttributesKey("TYPE", DefaultLanguageHighlighterColors.INSTANCE_FIELD);
 
     private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = ContainerUtil.newHashMap();
 

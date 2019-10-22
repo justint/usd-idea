@@ -50,6 +50,7 @@ public interface USDTypes {
   IElementType ADD = new USDTokenType("add");
   IElementType ALPHA = new USDTokenType("alpha");
   IElementType APPEND = new USDTokenType("append");
+  IElementType ASSETINFO = new USDTokenType("assetInfo");
   IElementType ASSETREFERENCE = new USDTokenType("assetReference");
   IElementType ASSETTYPE = new USDTokenType("asset");
   IElementType ATTRIBUTES = new USDTokenType("attributes");

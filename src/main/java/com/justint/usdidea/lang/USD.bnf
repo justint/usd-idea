@@ -22,6 +22,7 @@
         // keywords
         add = "add"
         append = "append"
+        assetInfo = "assetInfo"
         attributes = "attributes"
         class = "class"
         config = "config"
@@ -71,7 +72,7 @@
         interpolation = "interpolation"
 
         // Includes the three-quotation docstrings
-        string = "regexp:\"\"\"[^\"]*\"\"\"|\"[^\"]*\"|'[^']*'"
+        string = "regexp:\"\"\"[^(\"\"\")]*\"\"\"|\"[^\"]*\"|'[^']*'"
         number = "regexp:(\+|\-)?\p{Digit}+"
         floatnumber = "regexp:(\+|\-)?\p{Digit}*\.(\p{Digit}+)?([eE][+\-]\p{Digit}+)?"
         alpha = "regexp:\w+"
@@ -171,7 +172,7 @@
 usdFile ::= usdDeclaration Metadata? PrimSpec*
 
 
-CompositionArc ::= subLayers | inherits | variantSets | references | payload | specializes
+CompositionArc ::= subLayers | inherits | variantSets | references | payload | specializes | nameChildren
 
 
 Identifier ::= alpha (alpha | number)*
@@ -190,9 +191,9 @@ PrimName ::= string
 Body ::= leftbrace [!rightbrace (PropertySpec | PrimSpec)* ] rightbrace
 
 
-PropertySpec ::= AttributeProperty | RelationshipProperty
+PropertySpec ::= (AttributeProperty | RelationshipProperty) Metadata?
 
-AttributeProperty ::= (uniform | custom)? (AttributeType AttributeName | CompositionArc) (equals AttributeValue)?
+AttributeProperty ::= [uniform | custom] (ListEditAction? rel AttributeName | AttributeType AttributeName | ListEditAction? CompositionArc) [equals AttributeValue]
 
 // TODO: decouple variantSet from RelationshipProperty, actually implement RelationshipProperty
 RelationshipProperty ::= variantSet string (equals VariantSetBody)?
@@ -204,7 +205,7 @@ VariantSetKey ::= string
 VariantSetItemBody ::= Metadata? (leftbrace [!rightbrace PrimSpec (PrimSpec)*] rightbrace | leftbrace rightbrace)
 
 
-AttributeType ::= ArrayAttributeType | SingleAttributeType | rel
+AttributeType ::= ArrayAttributeType | SingleAttributeType
 
 SingleAttributeType ::= BasicDataType | RoleDataType | dictionary
 
@@ -214,19 +215,19 @@ BasicDataType ::= booltype | uchartype | inttype | uinttype | int64type | uint64
 
 RoleDataType ::= point3dtype | point3ftype | point3htype | normal3dtype | normal3ftype | normal3htype | vector3dtype | vector3ftype | vector3htype | color3dtype | color3ftype | color3htype | color4dtype | color4ftype | color4htype | frame4dtype | texCoord2htype | texCoord2dtype | texCoord2ftype | texCoord3htype | texCoord3dtype | texCoord3ftype | Transformtype | PointIndextype | EdgeIndextype | FaceIndextype
 
-AttributeName ::= (NamespacedIdentifier | Identifier) (period Identifier)*
+AttributeName ::= (NamespacedIdentifier | Identifier) (period (connect | Identifier))*
 
 AttributeValue ::= Item
 
 
 Metadata ::= leftparens (!rightparens ( MetadataComment | [ListEditAction? MetadataKey equals MetadataValue]) )* rightparens
 
-ListEditAction ::= add | append | prepend | delete
+ListEditAction ::= add | append | prepend | delete | reorder
 
 
 MetadataKey ::= Identifier | CompositionArc | SpecialMetadataKey
 
-SpecialMetadataKey ::= doc | variantSet | kind | variants | customData
+SpecialMetadataKey ::= doc | variantSet | kind | variants | customData | assetInfo
 
 MetadataValue ::= Item
 
@@ -249,7 +250,7 @@ DictKey ::= AttributeType Identifier
 
 DictValue ::= Item
 
-TimeSample ::= leftbrace [!rightbrace FrameNumber colon Array (comma FrameNumber colon Array)* comma?] rightbrace | leftbrace rightbrace
+TimeSample ::= leftbrace [!rightbrace FrameNumber colon Item (comma FrameNumber colon Item)* comma?] rightbrace | leftbrace rightbrace
 
 FrameNumber ::= number
 

@@ -19,4 +19,7 @@ public interface usdAttributeProperty extends PsiElement {
   @Nullable
   usdCompositionArc getCompositionArc();
 
+  @Nullable
+  usdListEditAction getListEditAction();
+
 }

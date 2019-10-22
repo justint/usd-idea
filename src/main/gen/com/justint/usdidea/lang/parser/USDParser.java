@@ -133,7 +133,7 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (NamespacedIdentifier | Identifier) (period Identifier)*
+  // (NamespacedIdentifier | Identifier) (period (connect | Identifier))*
   public static boolean AttributeName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AttributeName")) return false;
     if (!nextTokenIs(b, ALPHA)) return false;
@@ -154,7 +154,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (period Identifier)*
+  // (period (connect | Identifier))*
   private static boolean AttributeName_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AttributeName_1")) return false;
     while (true) {
@@ -165,19 +165,28 @@ public class USDParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // period Identifier
+  // period (connect | Identifier)
   private static boolean AttributeName_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AttributeName_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, PERIOD);
-    r = r && Identifier(b, l + 1);
+    r = r && AttributeName_1_0_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
+  // connect | Identifier
+  private static boolean AttributeName_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AttributeName_1_0_1")) return false;
+    boolean r;
+    r = consumeToken(b, CONNECT);
+    if (!r) r = Identifier(b, l + 1);
+    return r;
+  }
+
   /* ********************************************************** */
-  // (uniform | custom)? (AttributeType AttributeName | CompositionArc) (equals AttributeValue)?
+  // [uniform | custom] (ListEditAction? rel AttributeName | AttributeType AttributeName | ListEditAction? CompositionArc) [equals AttributeValue]
   public static boolean AttributeProperty(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AttributeProperty")) return false;
     boolean r;
@@ -189,7 +198,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (uniform | custom)?
+  // [uniform | custom]
   private static boolean AttributeProperty_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AttributeProperty_0")) return false;
     AttributeProperty_0_0(b, l + 1);
@@ -205,20 +214,40 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // AttributeType AttributeName | CompositionArc
+  // ListEditAction? rel AttributeName | AttributeType AttributeName | ListEditAction? CompositionArc
   private static boolean AttributeProperty_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AttributeProperty_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = AttributeProperty_1_0(b, l + 1);
-    if (!r) r = CompositionArc(b, l + 1);
+    if (!r) r = AttributeProperty_1_1(b, l + 1);
+    if (!r) r = AttributeProperty_1_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // AttributeType AttributeName
+  // ListEditAction? rel AttributeName
   private static boolean AttributeProperty_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AttributeProperty_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = AttributeProperty_1_0_0(b, l + 1);
+    r = r && consumeToken(b, REL);
+    r = r && AttributeName(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ListEditAction?
+  private static boolean AttributeProperty_1_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AttributeProperty_1_0_0")) return false;
+    ListEditAction(b, l + 1);
+    return true;
+  }
+
+  // AttributeType AttributeName
+  private static boolean AttributeProperty_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AttributeProperty_1_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = AttributeType(b, l + 1);
@@ -227,7 +256,25 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (equals AttributeValue)?
+  // ListEditAction? CompositionArc
+  private static boolean AttributeProperty_1_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AttributeProperty_1_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = AttributeProperty_1_2_0(b, l + 1);
+    r = r && CompositionArc(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ListEditAction?
+  private static boolean AttributeProperty_1_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AttributeProperty_1_2_0")) return false;
+    ListEditAction(b, l + 1);
+    return true;
+  }
+
+  // [equals AttributeValue]
   private static boolean AttributeProperty_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AttributeProperty_2")) return false;
     AttributeProperty_2_0(b, l + 1);
@@ -246,14 +293,13 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ArrayAttributeType | SingleAttributeType | rel
+  // ArrayAttributeType | SingleAttributeType
   public static boolean AttributeType(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AttributeType")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ATTRIBUTE_TYPE, "<attribute type>");
     r = ArrayAttributeType(b, l + 1);
     if (!r) r = SingleAttributeType(b, l + 1);
-    if (!r) r = consumeToken(b, REL);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -385,7 +431,7 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // subLayers | inherits | variantSets | references | payload | specializes
+  // subLayers | inherits | variantSets | references | payload | specializes | nameChildren
   public static boolean CompositionArc(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "CompositionArc")) return false;
     boolean r;
@@ -396,6 +442,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, REFERENCES);
     if (!r) r = consumeToken(b, PAYLOAD);
     if (!r) r = consumeToken(b, SPECIALIZES);
+    if (!r) r = consumeToken(b, NAMECHILDREN);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -598,7 +645,7 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // add | append | prepend | delete
+  // add | append | prepend | delete | reorder
   public static boolean ListEditAction(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ListEditAction")) return false;
     boolean r;
@@ -607,6 +654,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, APPEND);
     if (!r) r = consumeToken(b, PREPEND);
     if (!r) r = consumeToken(b, DELETE);
+    if (!r) r = consumeToken(b, REORDER);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -803,15 +851,31 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // AttributeProperty | RelationshipProperty
+  // (AttributeProperty | RelationshipProperty) Metadata?
   public static boolean PropertySpec(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "PropertySpec")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, PROPERTY_SPEC, "<property spec>");
-    r = AttributeProperty(b, l + 1);
-    if (!r) r = RelationshipProperty(b, l + 1);
+    r = PropertySpec_0(b, l + 1);
+    r = r && PropertySpec_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  // AttributeProperty | RelationshipProperty
+  private static boolean PropertySpec_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "PropertySpec_0")) return false;
+    boolean r;
+    r = AttributeProperty(b, l + 1);
+    if (!r) r = RelationshipProperty(b, l + 1);
+    return r;
+  }
+
+  // Metadata?
+  private static boolean PropertySpec_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "PropertySpec_1")) return false;
+    Metadata(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -909,7 +973,7 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // doc | variantSet | kind | variants | customData
+  // doc | variantSet | kind | variants | customData | assetInfo
   public static boolean SpecialMetadataKey(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "SpecialMetadataKey")) return false;
     boolean r;
@@ -919,6 +983,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, KIND);
     if (!r) r = consumeToken(b, VARIANTS);
     if (!r) r = consumeToken(b, CUSTOMDATA);
+    if (!r) r = consumeToken(b, ASSETINFO);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -986,7 +1051,7 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // leftbrace [!rightbrace FrameNumber colon Array (comma FrameNumber colon Array)* comma?] rightbrace | leftbrace rightbrace
+  // leftbrace [!rightbrace FrameNumber colon Item (comma FrameNumber colon Item)* comma?] rightbrace | leftbrace rightbrace
   public static boolean TimeSample(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TimeSample")) return false;
     if (!nextTokenIs(b, LEFTBRACE)) return false;
@@ -998,7 +1063,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // leftbrace [!rightbrace FrameNumber colon Array (comma FrameNumber colon Array)* comma?] rightbrace
+  // leftbrace [!rightbrace FrameNumber colon Item (comma FrameNumber colon Item)* comma?] rightbrace
   private static boolean TimeSample_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TimeSample_0")) return false;
     boolean r;
@@ -1010,14 +1075,14 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // [!rightbrace FrameNumber colon Array (comma FrameNumber colon Array)* comma?]
+  // [!rightbrace FrameNumber colon Item (comma FrameNumber colon Item)* comma?]
   private static boolean TimeSample_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TimeSample_0_1")) return false;
     TimeSample_0_1_0(b, l + 1);
     return true;
   }
 
-  // !rightbrace FrameNumber colon Array (comma FrameNumber colon Array)* comma?
+  // !rightbrace FrameNumber colon Item (comma FrameNumber colon Item)* comma?
   private static boolean TimeSample_0_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TimeSample_0_1_0")) return false;
     boolean r;
@@ -1025,7 +1090,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     r = TimeSample_0_1_0_0(b, l + 1);
     r = r && FrameNumber(b, l + 1);
     r = r && consumeToken(b, COLON);
-    r = r && Array(b, l + 1);
+    r = r && Item(b, l + 1);
     r = r && TimeSample_0_1_0_4(b, l + 1);
     r = r && TimeSample_0_1_0_5(b, l + 1);
     exit_section_(b, m, null, r);
@@ -1042,7 +1107,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (comma FrameNumber colon Array)*
+  // (comma FrameNumber colon Item)*
   private static boolean TimeSample_0_1_0_4(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TimeSample_0_1_0_4")) return false;
     while (true) {
@@ -1053,7 +1118,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // comma FrameNumber colon Array
+  // comma FrameNumber colon Item
   private static boolean TimeSample_0_1_0_4_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TimeSample_0_1_0_4_0")) return false;
     boolean r;
@@ -1061,7 +1126,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, COMMA);
     r = r && FrameNumber(b, l + 1);
     r = r && consumeToken(b, COLON);
-    r = r && Array(b, l + 1);
+    r = r && Item(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }

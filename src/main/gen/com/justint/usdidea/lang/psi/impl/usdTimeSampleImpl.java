@@ -28,14 +28,14 @@ public class usdTimeSampleImpl extends ASTWrapperPsiElement implements usdTimeSa
 
   @Override
   @NotNull
-  public List<usdArray> getArrayList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdArray.class);
+  public List<usdFrameNumber> getFrameNumberList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdFrameNumber.class);
   }
 
   @Override
   @NotNull
-  public List<usdFrameNumber> getFrameNumberList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdFrameNumber.class);
+  public List<usdItem> getItemList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdItem.class);
   }
 
 }
