@@ -20,17 +20,13 @@ _NOTE_: This plugin is in active development and features are still being implem
 ## Features
 
 - `.usd`/`.usda` filetype syntax highlighting & validation
-
 - Brace matching/folding
     
 TODO:
 
 - [Language tests](https://www.jetbrains.org/intellij/sdk/docs/tutorials/writing_tests_for_plugins.html)
-
 - "Go to definition/symbol" feature implementation (Reference Contributor)
-
 - Structure View
-
 - Line markers for overrides, inheritance, etc
 
 ## Building
