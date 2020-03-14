@@ -3,7 +3,7 @@
 
 # usd-idea
 
-A plugin for JetBrains IDEs (PyCharm, IntelliJ, etc) that provides support for [Universal Scene Description (USD)](https://github.com/PixarAnimationStudios/USD), a file format system developed by Pixar Animation Studios.
+A plugin for JetBrains IDEs (PyCharm, IntelliJ, etc) that provides support for [Universal Scene Description (USD)](https://github.com/PixarAnimationStudios/USD), a framework for interchange of 3D computer graphics data, developed by Pixar Animation Studios.
 
 _NOTE_: This plugin is in active development and features are still being implemented. If you're interested in contributing to this project, check out the TODO features below or what's currently open in the [Issues](https://github.com/justint/usd-idea/issues).
 
@@ -32,6 +32,19 @@ TODO:
 - Structure View
 
 - Line markers for overrides, inheritance, etc
+
+## Building
+
+1. [Install IntelliJ IDEA](https://www.jetbrains.com/idea/download); install **Gradle** and **Plugin Devkit** plugins (installed by default)
+2. Open this project
+3. Build the project: <kbd>Build</kbd> > <kbd>Build Project</kbd>
+4. Launch the plug-in: <kbd>Gradle</kbd> > <kbd>usd-idea</kbd> > <kbd>Tasks</kbd> > <kbd>intellij</kbd> > <kbd>runIde</kbd>
+   
+   This will launch the plugin in the IntelliJ IDEA version specified in the [build.gradle](https://github.com/justint/usd-idea/blob/master/build.gradle). 
+   
+   If you wish to launch it in a different non-IDEA JetBrains IDE (ie. PyCharm, CLion), you can specify an <kbd>alternativeIdePath</kbd> to your editor's path. See the [grade-intellij-plugin](https://github.com/JetBrains/gradle-intellij-plugin/) documentation for more details. 
+
+For more details on building IntelliJ Platform plugins, see JetBrains's documentation: [IntelliJ Platform SDK DevGuide - Quick Start Guide](https://www.jetbrains.org/intellij/sdk/docs/basics/basics.html)
 
 ## License
 
