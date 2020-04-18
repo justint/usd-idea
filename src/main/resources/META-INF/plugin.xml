@@ -23,13 +23,17 @@
     ]]></description>
 
     <depends>com.intellij.modules.lang</depends>
-    <depends optional="true">com.intellij.modules.python</depends>
+    <depends optional="true" config-file="python.xml">com.intellij.modules.python</depends>
 
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html -->
     <idea-version since-build="145" until-build="193.*"/>
 
     <extensions defaultExtensionNs="com.intellij">
         <fileTypeFactory implementation="com.justint.usdidea.file.USDFileTypeFactory"/>
+        <fileType name="USDA" implementationClass="com.justint.usdidea.file.USDAFileType" fileNames="INSTANCE" language="USD" extensions="simple"/>
+        <fileType name="USD" implementationClass="com.justint.usdidea.file.USDFileType" fieldName="INSTANCE" language="USD" extensions="simple"/>
+        <filetype.decompiler filetype="USD" implementationClass="com.justint.usdidea.file.USDFileDecompiler"/>
+        <fileType.fileViewProviderFactory filetype="USD" implementationClass="com.justint.usdidea.fileEditor.USDFileViewProviderFactory"/>
         <lang.parserDefinition language="USD" implementationClass="com.justint.usdidea.lang.parser.USDParserDefinition"/>
         <lang.syntaxHighlighterFactory language="USD" implementationClass="com.justint.usdidea.codeinsight.highlighting.USDSyntaxHighlighterFactory"/>
         <!-- TODO: re-add the color settings page once I get it working -->

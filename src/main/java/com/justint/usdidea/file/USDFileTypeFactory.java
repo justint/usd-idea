@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public class USDFileTypeFactory extends FileTypeFactory {
     @Override
     public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
-        fileTypeConsumer.consume(USDFileType.INSTANCE, "usd;usda");
+        fileTypeConsumer.consume(USDFileType.INSTANCE, "usd");
+        fileTypeConsumer.consume(USDAFileType.INSTANCE, "usda");
     }
 }

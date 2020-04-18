@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+<!--        <filetype.decompiler filetype="USD" implementationClass="com.justint.usdidea.file.USDFileDecompiler"/>-->
+    </extensions>
+</idea-plugin>

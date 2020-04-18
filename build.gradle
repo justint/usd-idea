@@ -1,6 +1,8 @@
 plugins {
-    id 'org.jetbrains.intellij' version '0.4.8'
+    id 'org.jetbrains.intellij' version '0.4.14'
 }
+
+apply plugin: 'java'
 
 group 'com.justint'
 version '0.2.3'
@@ -9,9 +11,28 @@ sourceSets.main.java.srcDirs = ['src/main/gen','src/main/java']
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = System.getenv().getOrDefault("IDEA_VERSION", "IC-192.6817.14")
+    pluginName 'usd-idea'
+//    version = System.getenv().getOrDefault("IDEA_VERSION", "IC-192.6817.14")
+    version 'PC-2019.3.3'
+    def isPyCharm = ideVersion.contains('PY') || ideVersion.contains('PC')
+
+    plugins = []
+    if (isPyCharm) {
+        plugins += ['python-ce']
+    } else {
+        plugins += [pythonPlugin]
+    }
     //alternativeIdePath '/Applications/PyCharm.app'
+
 }
+
+//repositories {
+//    mavenCentral()
+//}
+//
+//dependencies {
+//    compile('black.ninia:jep:3.9.0')
+//}
 
 // Simple function to load change-notes.html and description.html into valid text for plugin.xml
 def htmlFixer = {htmlFile -> file(htmlFile).text.replace('<html>', '').replace('</html>', '')}
