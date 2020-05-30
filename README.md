@@ -23,13 +23,13 @@ _NOTE_: This plugin is in active development and features are still being implem
 - Brace matching/folding
 - Structure View
     
-TODO:
+### TODO:
 
+- [Binary USD file support](https://github.com/justint/usd-idea/issues/7)
 - [Language tests](https://www.jetbrains.org/intellij/sdk/docs/tutorials/writing_tests_for_plugins.html)
 - Reference Contributor
   - "Go to definition/symbol" feature implementation
   - "Find Usages" provider
-  
 - Line markers for overrides, inheritance, etc
 
 ## Building
