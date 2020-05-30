@@ -33,7 +33,7 @@ public class USDSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey BLOCK_COMMENT =
             createTextAttributesKey("BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
     public static final TextAttributesKey IDENTIFIER =
-            createTextAttributesKey("IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER);
+            createTextAttributesKey("USD.IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER);
     public static final TextAttributesKey PRIM_NAME =
             createTextAttributesKey("PRIM_NAME", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
     public static final TextAttributesKey ASSET_REFERENCE =
