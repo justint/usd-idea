@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.justint.usdidea.lang.psi.USDTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.justint.usdidea.lang.psi.*;
+import com.intellij.navigation.ItemPresentation;
 
 public class usdPrimSpecImpl extends ASTWrapperPsiElement implements usdPrimSpec {
 
@@ -42,6 +43,30 @@ public class usdPrimSpecImpl extends ASTWrapperPsiElement implements usdPrimSpec
   @NotNull
   public usdSpecifier getSpecifier() {
     return findNotNullChildByClass(usdSpecifier.class);
+  }
+
+  @Override
+  @NotNull
+  public String getPrimName() {
+    return USDPsiImplUtil.getPrimName(this);
+  }
+
+  @Override
+  @Nullable
+  public String getPrimType() {
+    return USDPsiImplUtil.getPrimType(this);
+  }
+
+  @Override
+  @NotNull
+  public String getName() {
+    return USDPsiImplUtil.getName(this);
+  }
+
+  @Override
+  @NotNull
+  public ItemPresentation getPresentation() {
+    return USDPsiImplUtil.getPresentation(this);
   }
 
 }

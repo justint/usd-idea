@@ -26,7 +26,7 @@ EOL=\R
 WHITE_SPACE=\s+
 
 USDDECLARATION=#[^\r\n]*
-STRING=\"\"\"[^\"]*\"\"\"|\"[^\"]*\"|'[^']*'
+STRING=\"\"\"[^(\"\"\")]*\"\"\"|\"[^\"]*\"|'[^']*'
 NUMBER=(\+|\-)?[:digit:]+
 FLOATNUMBER=(\+|\-)?[:digit:]*\.([:digit:]+)?([eE][+\-][:digit:]+)?
 ALPHA=[a-zA-Z_0-9]+

@@ -10,6 +10,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.justint.usdidea.lang.psi.USDTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.justint.usdidea.lang.psi.*;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.tree.IElementType;
 
 public class usdPropertySpecImpl extends ASTWrapperPsiElement implements usdPropertySpec {
 
@@ -42,6 +44,30 @@ public class usdPropertySpecImpl extends ASTWrapperPsiElement implements usdProp
   @Nullable
   public usdRelationshipProperty getRelationshipProperty() {
     return findChildByClass(usdRelationshipProperty.class);
+  }
+
+  @Override
+  @NotNull
+  public String getPropertyName() {
+    return USDPsiImplUtil.getPropertyName(this);
+  }
+
+  @Override
+  @Nullable
+  public IElementType getPropertyType() {
+    return USDPsiImplUtil.getPropertyType(this);
+  }
+
+  @Override
+  @NotNull
+  public String getName() {
+    return USDPsiImplUtil.getName(this);
+  }
+
+  @Override
+  @NotNull
+  public ItemPresentation getPresentation() {
+    return USDPsiImplUtil.getPresentation(this);
   }
 
 }

@@ -180,7 +180,7 @@ Identifier ::= alpha (alpha | number)*
 NamespacedIdentifier ::= Identifier (colon Identifier)+
 
 
-PrimSpec ::= Specifier Metadata? Body
+PrimSpec ::= Specifier Metadata? Body {methods=[getPrimName getPrimType getName getPresentation]}
 
 Specifier ::= def [Typename] PrimName | over PrimName | class [Typename] PrimName
 
@@ -191,7 +191,7 @@ PrimName ::= string
 Body ::= leftbrace [!rightbrace (PropertySpec | PrimSpec)* ] rightbrace
 
 
-PropertySpec ::= (AttributeProperty | RelationshipProperty) Metadata?
+PropertySpec ::= (AttributeProperty | RelationshipProperty) Metadata? {methods=[getPropertyName getPropertyType getPropertyValueType getName getPresentation]}
 
 AttributeProperty ::= [uniform | custom] (ListEditAction? rel AttributeName | AttributeType AttributeName | ListEditAction? CompositionArc) [equals AttributeValue]
 
