@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.justint'
-version '0.3'
+version '0.3.1'
 
 sourceSets.main.java.srcDirs = ['src/main/gen','src/main/java']
 

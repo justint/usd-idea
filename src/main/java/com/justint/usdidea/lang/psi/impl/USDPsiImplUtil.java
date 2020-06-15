@@ -109,9 +109,13 @@ public class USDPsiImplUtil {
                     usdAttributeProperty attributeProperty = propertyElement.getAttributeProperty();
                     assert attributeProperty != null;
                     usdAttributeType attributeType = attributeProperty.getAttributeType();
-                    assert attributeType != null;
-                    String propertyType = attributeType.getText();
-                    return String.format("%s: %s", propertyName, propertyType);
+                    if (attributeType == null) {
+                        return propertyName;
+                    }
+                    else {
+                        String propertyType = attributeType.getText();
+                        return String.format("%s: %s", propertyName, propertyType);
+                    }
                 }
                 else if (propertyElement.getPropertyType() == USDTypes.RELATIONSHIP_PROPERTY) {
                     return propertyName;
