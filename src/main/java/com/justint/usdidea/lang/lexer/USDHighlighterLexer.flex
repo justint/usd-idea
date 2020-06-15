@@ -34,7 +34,7 @@ BLOCKCOMMENT="/"\*([^\*]|(\*+[^\*/]))*(\*+"/")?
 
 USDDECLARATION=#[^\r\n]*
 
-IDENTIFIER=[:alpha:][:alnum:]*
+IDENTIFIER=[:alpha:](:alpha:|:number:)*
 NAMESPACED_IDENTIFIER={IDENTIFIER}(\:{IDENTIFIER}*)+
 
 ASSETREFERENCE=@([^@]+)?@|@@@(([^@]|@{1,2}[^@]|\\@@@)+)?(@{0,2})@@@
