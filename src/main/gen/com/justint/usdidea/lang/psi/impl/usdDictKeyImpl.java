@@ -33,9 +33,15 @@ public class usdDictKeyImpl extends ASTWrapperPsiElement implements usdDictKey {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public usdIdentifier getIdentifier() {
-    return findNotNullChildByClass(usdIdentifier.class);
+    return findChildByClass(usdIdentifier.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getString() {
+    return findChildByType(STRING);
   }
 
 }

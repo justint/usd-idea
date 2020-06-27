@@ -10,7 +10,10 @@ public interface usdDictKey extends PsiElement {
   @NotNull
   usdAttributeType getAttributeType();
 
-  @NotNull
+  @Nullable
   usdIdentifier getIdentifier();
+
+  @Nullable
+  PsiElement getString();
 
 }

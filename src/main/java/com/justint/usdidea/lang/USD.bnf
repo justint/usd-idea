@@ -246,7 +246,7 @@ ReferenceItem ::= assetReference pathReference | assetReference | pathReference
 
 Dict ::= leftbrace [!rightbrace DictKey equals DictValue (DictKey equals DictValue)*] rightbrace | leftbrace rightbrace
 
-DictKey ::= AttributeType Identifier
+DictKey ::= AttributeType (Identifier | string)
 
 DictValue ::= Item
 
