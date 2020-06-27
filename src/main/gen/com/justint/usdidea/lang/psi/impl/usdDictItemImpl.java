@@ -12,14 +12,14 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.justint.usdidea.lang.psi.*;
 import com.intellij.navigation.ItemPresentation;
 
-public class usdMetadatumImpl extends ASTWrapperPsiElement implements usdMetadatum {
+public class usdDictItemImpl extends ASTWrapperPsiElement implements usdDictItem {
 
-  public usdMetadatumImpl(@NotNull ASTNode node) {
+  public usdDictItemImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull usdVisitor visitor) {
-    visitor.visitMetadatum(this);
+    visitor.visitDictItem(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -28,27 +28,27 @@ public class usdMetadatumImpl extends ASTWrapperPsiElement implements usdMetadat
   }
 
   @Override
-  @Nullable
-  public usdListEditAction getListEditAction() {
-    return findChildByClass(usdListEditAction.class);
+  @NotNull
+  public usdDictKey getDictKey() {
+    return findNotNullChildByClass(usdDictKey.class);
   }
 
   @Override
   @NotNull
-  public usdMetadataKey getMetadataKey() {
-    return findNotNullChildByClass(usdMetadataKey.class);
-  }
-
-  @Override
-  @Nullable
-  public usdMetadataValue getMetadataValue() {
-    return findChildByClass(usdMetadataValue.class);
+  public usdDictValue getDictValue() {
+    return findNotNullChildByClass(usdDictValue.class);
   }
 
   @Override
   @NotNull
   public String getName() {
     return USDPsiImplUtil.getName(this);
+  }
+
+  @Override
+  @NotNull
+  public usdAttributeType getType() {
+    return USDPsiImplUtil.getType(this);
   }
 
   @Override

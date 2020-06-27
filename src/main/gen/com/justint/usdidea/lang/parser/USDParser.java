@@ -484,7 +484,7 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // leftbrace [!rightbrace DictKey equals DictValue (DictKey equals DictValue)*] rightbrace | leftbrace rightbrace
+  // leftbrace [!rightbrace DictItem (DictItem)*] rightbrace | leftbrace rightbrace
   public static boolean Dict(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Dict")) return false;
     if (!nextTokenIs(b, LEFTBRACE)) return false;
@@ -496,7 +496,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // leftbrace [!rightbrace DictKey equals DictValue (DictKey equals DictValue)*] rightbrace
+  // leftbrace [!rightbrace DictItem (DictItem)*] rightbrace
   private static boolean Dict_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Dict_0")) return false;
     boolean r;
@@ -508,23 +508,21 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // [!rightbrace DictKey equals DictValue (DictKey equals DictValue)*]
+  // [!rightbrace DictItem (DictItem)*]
   private static boolean Dict_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Dict_0_1")) return false;
     Dict_0_1_0(b, l + 1);
     return true;
   }
 
-  // !rightbrace DictKey equals DictValue (DictKey equals DictValue)*
+  // !rightbrace DictItem (DictItem)*
   private static boolean Dict_0_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Dict_0_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = Dict_0_1_0_0(b, l + 1);
-    r = r && DictKey(b, l + 1);
-    r = r && consumeToken(b, EQUALS);
-    r = r && DictValue(b, l + 1);
-    r = r && Dict_0_1_0_4(b, l + 1);
+    r = r && DictItem(b, l + 1);
+    r = r && Dict_0_1_0_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -539,26 +537,37 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (DictKey equals DictValue)*
-  private static boolean Dict_0_1_0_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Dict_0_1_0_4")) return false;
+  // (DictItem)*
+  private static boolean Dict_0_1_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Dict_0_1_0_2")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!Dict_0_1_0_4_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "Dict_0_1_0_4", c)) break;
+      if (!Dict_0_1_0_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "Dict_0_1_0_2", c)) break;
     }
     return true;
   }
 
-  // DictKey equals DictValue
-  private static boolean Dict_0_1_0_4_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Dict_0_1_0_4_0")) return false;
+  // (DictItem)
+  private static boolean Dict_0_1_0_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Dict_0_1_0_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
+    r = DictItem(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // DictKey equals DictValue
+  public static boolean DictItem(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "DictItem")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, DICT_ITEM, "<dict item>");
     r = DictKey(b, l + 1);
     r = r && consumeToken(b, EQUALS);
     r = r && DictValue(b, l + 1);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 

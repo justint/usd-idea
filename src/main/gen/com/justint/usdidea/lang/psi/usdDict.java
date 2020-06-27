@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface usdDict extends PsiElement {
 
   @NotNull
-  List<usdDictKey> getDictKeyList();
-
-  @NotNull
-  List<usdDictValue> getDictValueList();
+  List<usdDictItem> getDictItemList();
 
 }

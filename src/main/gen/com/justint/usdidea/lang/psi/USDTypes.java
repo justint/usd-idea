@@ -19,6 +19,7 @@ public interface USDTypes {
   IElementType BOOLEAN = new USDElementType("BOOLEAN");
   IElementType COMPOSITION_ARC = new USDElementType("COMPOSITION_ARC");
   IElementType DICT = new USDElementType("DICT");
+  IElementType DICT_ITEM = new USDElementType("DICT_ITEM");
   IElementType DICT_KEY = new USDElementType("DICT_KEY");
   IElementType DICT_VALUE = new USDElementType("DICT_VALUE");
   IElementType FRAME_NUMBER = new USDElementType("FRAME_NUMBER");
@@ -204,6 +205,9 @@ public interface USDTypes {
       }
       else if (type == DICT) {
         return new usdDictImpl(node);
+      }
+      else if (type == DICT_ITEM) {
+        return new usdDictItemImpl(node);
       }
       else if (type == DICT_KEY) {
         return new usdDictKeyImpl(node);

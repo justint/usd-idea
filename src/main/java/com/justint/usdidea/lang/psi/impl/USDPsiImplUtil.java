@@ -1,5 +1,6 @@
 package com.justint.usdidea.lang.psi.impl;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.tree.IElementType;
@@ -17,7 +18,7 @@ public class USDPsiImplUtil {
         assert specifierNode != null;
         ASTNode primNameNode = specifierNode.findChildByType(USDTypes.PRIM_NAME).findChildByType(USDTypes.STRING);
         if (primNameNode != null) {
-            return primNameNode.getText().replaceAll("\\\\ ", " ");
+            return primNameNode.getText().replaceAll("\\\\ ", " ").replaceAll("\"", "");
         } else return "";
     }
 
@@ -60,9 +61,98 @@ public class USDPsiImplUtil {
     }
 
     @NotNull
+    public static usdAttributeType getType(usdDictItem dictItemElement) {
+        usdDictKey dictKey = dictItemElement.getDictKey();
+        return dictKey.getAttributeType();
+    }
+
+    @NotNull
+    public static String getName(usdMetadatum metadatumElement) {
+        usdMetadataKey metadataKey = metadatumElement.getMetadataKey();
+        return metadataKey.getText();
+    }
+
+    @NotNull
     public static String getName(usdPrimSpec primElement) { return getPrimName(primElement); }
     @NotNull
     public static String getName(usdPropertySpec propertyElement) { return getPropertyName(propertyElement); }
+
+    @NotNull
+    public static String getName(usdDictItem dictItemElement) {
+        usdDictKey dictKey = dictItemElement.getDictKey();
+        usdIdentifier dictIdentifier = dictKey.getIdentifier();
+        if (dictIdentifier != null) {
+            return dictIdentifier.getText();
+        }
+        else {
+            // The dictionary may have a string name instead, let's check for that
+            ASTNode stringName = dictKey.getNode().findChildByType(USDTypes.STRING);
+            if (stringName != null) {
+                return stringName.getText();
+            }
+        }
+        return "";
+    }
+
+    @NotNull
+    public static ItemPresentation getPresentation(final usdDictItem dictItemElement) {
+        return new ItemPresentation() {
+            @Nullable
+            @Override
+            public String getPresentableText() {
+                String itemName = dictItemElement.getName();
+                usdAttributeType itemType = dictItemElement.getType();
+                return String.format("%s: %s", itemName, itemType.getText());
+            }
+
+            @Nullable
+            @Override
+            public String getLocationString() {
+                if (dictItemElement.isDictionary()) {
+                    return null;
+                } else return dictItemElement.getDictValue().getText();
+            }
+
+            @Nullable
+            @Override
+            public Icon getIcon(boolean b) {
+                if (dictItemElement.isDictionary()) {
+                    return AllIcons.Json.Object;
+                }
+                return PlatformIcons.PROPERTY_ICON;
+            }
+        };
+    }
+
+    @NotNull
+    public static ItemPresentation getPresentation(final usdMetadatum metadatumElement) {
+        return new ItemPresentation() {
+            @Nullable
+            @Override
+            public String getPresentableText() {
+                return metadatumElement.getName();
+            }
+
+            @Nullable
+            @Override
+            public String getLocationString() {
+                if (metadatumElement.isDictionary()) {
+                    return null;
+                }
+                if (metadatumElement.getMetadataValue() != null) {
+                    return metadatumElement.getMetadataValue().getText();
+                } else return null;
+            }
+
+            @Nullable
+            @Override
+            public Icon getIcon(boolean b) {
+                if (metadatumElement.isDictionary()) {
+                    return AllIcons.Json.Object;
+                } else return PlatformIcons.METHOD_ICON;
+            }
+        };
+    }
 
     @NotNull
     public static ItemPresentation getPresentation(final usdPrimSpec primElement) {
@@ -84,9 +174,6 @@ public class USDPsiImplUtil {
             @Nullable
             @Override
             public String getLocationString() {
-//                PsiFile containingFile = primElement.getContainingFile();
-//                return containingFile == null ? null : containingFile.getName();
-                // It looks cleaner without the containing file, for now
                 return null;
             }
 
@@ -118,7 +205,7 @@ public class USDPsiImplUtil {
                     }
                 }
                 else if (propertyElement.getPropertyType() == USDTypes.RELATIONSHIP_PROPERTY) {
-                    return propertyName;
+                    return String.format("%s: variantSet", propertyName);
                 }
                 else return "";
             }
@@ -126,9 +213,6 @@ public class USDPsiImplUtil {
             @Nullable
             @Override
             public String getLocationString() {
-//                PsiFile containingFile = propertyElement.getContainingFile();
-//                return containingFile == null ? null : containingFile.getName();
-                // It looks cleaner without the containing file, for now
                 return null;
             }
 
@@ -138,5 +222,17 @@ public class USDPsiImplUtil {
                 return PlatformIcons.PROPERTY_ICON;
             }
         };
+    }
+
+    public static boolean isDictionary(usdDictItem dictItemElement) {
+        return dictItemElement.getDictValue().getItem().getDict() != null;
+    }
+
+    public static boolean isDictionary(usdMetadatum metadatumElement) {
+        usdMetadataValue metadataValue = metadatumElement.getMetadataValue();
+        if (metadataValue != null) {
+            return metadataValue.getItem().getDict() != null;
+        }
+        return false;
     }
 }

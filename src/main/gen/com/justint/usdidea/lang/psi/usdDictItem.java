@@ -6,19 +6,19 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.navigation.ItemPresentation;
 
-public interface usdMetadatum extends PsiElement {
-
-  @Nullable
-  usdListEditAction getListEditAction();
+public interface usdDictItem extends USDBreadcrumbItem {
 
   @NotNull
-  usdMetadataKey getMetadataKey();
+  usdDictKey getDictKey();
 
-  @Nullable
-  usdMetadataValue getMetadataValue();
+  @NotNull
+  usdDictValue getDictValue();
 
   @NotNull
   String getName();
+
+  @NotNull
+  usdAttributeType getType();
 
   boolean isDictionary();
 

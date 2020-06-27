@@ -37,6 +37,30 @@ public class USDStructureViewModel extends StructureViewModelBase
         }
     };
 
+    Filter MetadataFilter = new Filter() {
+        @Override
+        public boolean isVisible(TreeElement treeElement) {
+            return treeElement.getPresentation().getIcon(true) != PlatformIcons.METHOD_ICON;
+        }
+
+        @Override
+        public boolean isReverted() {
+            return true;
+        }
+
+        @NotNull
+        @Override
+        public ActionPresentation getPresentation() {
+            return new ActionPresentationData("Show Metadata", "Show Metadata", PlatformIcons.METHOD_ICON);
+        }
+
+        @NotNull
+        @Override
+        public String getName() {
+            return "USD_METADATA_FILTER";
+        }
+    };
+
     public USDStructureViewModel(PsiFile psiFile) {
         super(psiFile, new USDStructureViewElement(psiFile));
     }
@@ -49,7 +73,7 @@ public class USDStructureViewModel extends StructureViewModelBase
     @NotNull
     @Override
     public Filter[] getFilters() {
-        return new Filter[]{PropertyFilter};
+        return new Filter[]{PropertyFilter, MetadataFilter};
     }
 
     @Override

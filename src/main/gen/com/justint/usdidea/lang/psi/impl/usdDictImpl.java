@@ -28,14 +28,8 @@ public class usdDictImpl extends ASTWrapperPsiElement implements usdDict {
 
   @Override
   @NotNull
-  public List<usdDictKey> getDictKeyList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdDictKey.class);
-  }
-
-  @Override
-  @NotNull
-  public List<usdDictValue> getDictValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdDictValue.class);
+  public List<usdDictItem> getDictItemList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdDictItem.class);
   }
 
 }

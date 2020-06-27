@@ -6,7 +6,7 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.navigation.ItemPresentation;
 
-public interface usdPrimSpec extends PsiElement {
+public interface usdPrimSpec extends USDBreadcrumbItem {
 
   @Nullable
   usdBody getBody();

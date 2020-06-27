@@ -51,6 +51,10 @@ public class usdVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitDictItem(@NotNull usdDictItem o) {
+    visitUSDBreadcrumbItem(o);
+  }
+
   public void visitDictKey(@NotNull usdDictKey o) {
     visitPsiElement(o);
   }
@@ -108,7 +112,7 @@ public class usdVisitor extends PsiElementVisitor {
   }
 
   public void visitPrimSpec(@NotNull usdPrimSpec o) {
-    visitPsiElement(o);
+    visitUSDBreadcrumbItem(o);
   }
 
   public void visitPropertySpec(@NotNull usdPropertySpec o) {
@@ -161,6 +165,10 @@ public class usdVisitor extends PsiElementVisitor {
 
   public void visitVector(@NotNull usdVector o) {
     visitPsiElement(o);
+  }
+
+  public void visitUSDBreadcrumbItem(@NotNull USDBreadcrumbItem o) {
+    visitElement(o);
   }
 
   public void visitPsiElement(@NotNull PsiElement o) {

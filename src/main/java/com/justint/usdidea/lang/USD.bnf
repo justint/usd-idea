@@ -2,6 +2,7 @@
     parserClass="com.justint.usdidea.lang.parser.USDParser"
 
     extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+    implements("DictItem|PrimSpec")="com.justint.usdidea.lang.psi.USDBreadcrumbItem"
 
     psiClassPrefix="usd"
     psiImplClassSuffix="Impl"
@@ -224,7 +225,7 @@ AttributeValue ::= Item
 
 Metadata ::= leftparens (!rightparens [MetadataComment | Metadatum])* rightparens
 
-Metadatum ::= ListEditAction? MetadataKey equals MetadataValue {pin=2 recoverWhile=Metadatum_recover}
+Metadatum ::= ListEditAction? MetadataKey equals MetadataValue {methods=[getName isDictionary getPresentation] pin=2 recoverWhile=Metadatum_recover}
 private Metadatum_recover ::= !(rightparens | ListEditAction | MetadataKey )
 
 ListEditAction ::= add | append | prepend | delete | reorder
@@ -249,7 +250,9 @@ Item ::= InterpolatedArray | Array | Vector | string | number | floatnumber | Re
 
 ReferenceItem ::= assetReference pathReference | assetReference | pathReference
 
-Dict ::= leftbrace [!rightbrace DictKey equals DictValue (DictKey equals DictValue)*] rightbrace | leftbrace rightbrace
+Dict ::= leftbrace [!rightbrace DictItem (DictItem)*] rightbrace | leftbrace rightbrace
+
+DictItem ::= DictKey equals DictValue {methods=[getName getType isDictionary getPresentation]}
 
 DictKey ::= AttributeType (Identifier | string)
 
