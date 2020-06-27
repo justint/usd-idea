@@ -187,13 +187,14 @@ public class USDParser implements PsiParser, LightPsiParser {
   // [uniform | custom] (ListEditAction? rel AttributeName | AttributeType AttributeName | ListEditAction? CompositionArc) [equals AttributeValue]
   public static boolean AttributeProperty(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AttributeProperty")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, ATTRIBUTE_PROPERTY, "<attribute property>");
     r = AttributeProperty_0(b, l + 1);
     r = r && AttributeProperty_1(b, l + 1);
+    p = r; // pin = 2
     r = r && AttributeProperty_2(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // [uniform | custom]
@@ -357,14 +358,14 @@ public class USDParser implements PsiParser, LightPsiParser {
   // leftbrace [!rightbrace (PropertySpec | PrimSpec)* ] rightbrace
   public static boolean Body(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Body")) return false;
-    if (!nextTokenIs(b, LEFTBRACE)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, BODY, "<body>");
     r = consumeToken(b, LEFTBRACE);
-    r = r && Body_1(b, l + 1);
-    r = r && consumeToken(b, RIGHTBRACE);
-    exit_section_(b, m, BODY, r);
-    return r;
+    p = r; // pin = 1
+    r = r && report_error_(b, Body_1(b, l + 1));
+    r = p && consumeToken(b, RIGHTBRACE) && r;
+    exit_section_(b, l, m, r, p, Body_recover_parser_);
+    return r || p;
   }
 
   // [!rightbrace (PropertySpec | PrimSpec)* ]
@@ -410,8 +411,45 @@ public class USDParser implements PsiParser, LightPsiParser {
   private static boolean Body_1_0_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Body_1_0_1_0")) return false;
     boolean r;
+    Marker m = enter_section_(b);
     r = PropertySpec(b, l + 1);
     if (!r) r = PrimSpec(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // !(rightbrace | def | over | class | !PropertySpec_recover)
+  static boolean Body_recover(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Body_recover")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !Body_recover_0(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // rightbrace | def | over | class | !PropertySpec_recover
+  private static boolean Body_recover_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Body_recover_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, RIGHTBRACE);
+    if (!r) r = consumeToken(b, DEF);
+    if (!r) r = consumeToken(b, OVER);
+    if (!r) r = consumeToken(b, CLASS);
+    if (!r) r = Body_recover_0_4(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // !PropertySpec_recover
+  private static boolean Body_recover_0_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Body_recover_0_4")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !PropertySpec_recover(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -525,14 +563,23 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // AttributeType Identifier
+  // AttributeType (Identifier | string)
   public static boolean DictKey(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "DictKey")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, DICT_KEY, "<dict key>");
     r = AttributeType(b, l + 1);
-    r = r && Identifier(b, l + 1);
+    r = r && DictKey_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // Identifier | string
+  private static boolean DictKey_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "DictKey_1")) return false;
+    boolean r;
+    r = Identifier(b, l + 1);
+    if (!r) r = consumeToken(b, STRING);
     return r;
   }
 
@@ -658,7 +705,7 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // leftparens (!rightparens ( MetadataComment | [ListEditAction? MetadataKey equals MetadataValue]) )* rightparens
+  // leftparens (!rightparens [MetadataComment | Metadatum])* rightparens
   public static boolean Metadata(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Metadata")) return false;
     if (!nextTokenIs(b, LEFTPARENS)) return false;
@@ -671,7 +718,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (!rightparens ( MetadataComment | [ListEditAction? MetadataKey equals MetadataValue]) )*
+  // (!rightparens [MetadataComment | Metadatum])*
   private static boolean Metadata_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Metadata_1")) return false;
     while (true) {
@@ -682,7 +729,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // !rightparens ( MetadataComment | [ListEditAction? MetadataKey equals MetadataValue])
+  // !rightparens [MetadataComment | Metadatum]
   private static boolean Metadata_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Metadata_1_0")) return false;
     boolean r;
@@ -703,42 +750,22 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // MetadataComment | [ListEditAction? MetadataKey equals MetadataValue]
+  // [MetadataComment | Metadatum]
   private static boolean Metadata_1_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Metadata_1_0_1")) return false;
+    Metadata_1_0_1_0(b, l + 1);
+    return true;
+  }
+
+  // MetadataComment | Metadatum
+  private static boolean Metadata_1_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Metadata_1_0_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = MetadataComment(b, l + 1);
-    if (!r) r = Metadata_1_0_1_1(b, l + 1);
+    if (!r) r = Metadatum(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
-  }
-
-  // [ListEditAction? MetadataKey equals MetadataValue]
-  private static boolean Metadata_1_0_1_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Metadata_1_0_1_1")) return false;
-    Metadata_1_0_1_1_0(b, l + 1);
-    return true;
-  }
-
-  // ListEditAction? MetadataKey equals MetadataValue
-  private static boolean Metadata_1_0_1_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Metadata_1_0_1_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = Metadata_1_0_1_1_0_0(b, l + 1);
-    r = r && MetadataKey(b, l + 1);
-    r = r && consumeToken(b, EQUALS);
-    r = r && MetadataValue(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // ListEditAction?
-  private static boolean Metadata_1_0_1_1_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Metadata_1_0_1_1_0_0")) return false;
-    ListEditAction(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -774,6 +801,49 @@ public class USDParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, METADATA_VALUE, "<metadata value>");
     r = Item(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ListEditAction? MetadataKey equals MetadataValue
+  public static boolean Metadatum(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Metadatum")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, METADATUM, "<metadatum>");
+    r = Metadatum_0(b, l + 1);
+    r = r && MetadataKey(b, l + 1);
+    p = r; // pin = 2
+    r = r && report_error_(b, consumeToken(b, EQUALS));
+    r = p && MetadataValue(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, Metadatum_recover_parser_);
+    return r || p;
+  }
+
+  // ListEditAction?
+  private static boolean Metadatum_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Metadatum_0")) return false;
+    ListEditAction(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // !(rightparens | ListEditAction | MetadataKey )
+  static boolean Metadatum_recover(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Metadatum_recover")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !Metadatum_recover_0(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // rightparens | ListEditAction | MetadataKey
+  private static boolean Metadatum_recover_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Metadatum_recover_0")) return false;
+    boolean r;
+    r = consumeToken(b, RIGHTPARENS);
+    if (!r) r = ListEditAction(b, l + 1);
+    if (!r) r = MetadataKey(b, l + 1);
     return r;
   }
 
@@ -832,13 +902,14 @@ public class USDParser implements PsiParser, LightPsiParser {
   // Specifier Metadata? Body
   public static boolean PrimSpec(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "PrimSpec")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, PRIM_SPEC, "<prim spec>");
     r = Specifier(b, l + 1);
-    r = r && PrimSpec_1(b, l + 1);
-    r = r && Body(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    p = r; // pin = 1
+    r = r && report_error_(b, PrimSpec_1(b, l + 1));
+    r = p && Body(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // Metadata?
@@ -856,7 +927,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, PROPERTY_SPEC, "<property spec>");
     r = PropertySpec_0(b, l + 1);
     r = r && PropertySpec_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, l, m, r, false, PropertySpec_recover_parser_);
     return r;
   }
 
@@ -874,6 +945,34 @@ public class USDParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "PropertySpec_1")) return false;
     Metadata(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // !(uniform | custom | ListEditAction | rel | AttributeType | variantSet | rightbrace | def | over | class)
+  static boolean PropertySpec_recover(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "PropertySpec_recover")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_);
+    r = !PropertySpec_recover_0(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // uniform | custom | ListEditAction | rel | AttributeType | variantSet | rightbrace | def | over | class
+  private static boolean PropertySpec_recover_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "PropertySpec_recover_0")) return false;
+    boolean r;
+    r = consumeToken(b, UNIFORM);
+    if (!r) r = consumeToken(b, CUSTOM);
+    if (!r) r = ListEditAction(b, l + 1);
+    if (!r) r = consumeToken(b, REL);
+    if (!r) r = AttributeType(b, l + 1);
+    if (!r) r = consumeToken(b, VARIANTSET);
+    if (!r) r = consumeToken(b, RIGHTBRACE);
+    if (!r) r = consumeToken(b, DEF);
+    if (!r) r = consumeToken(b, OVER);
+    if (!r) r = consumeToken(b, CLASS);
+    return r;
   }
 
   /* ********************************************************** */
@@ -895,12 +994,13 @@ public class USDParser implements PsiParser, LightPsiParser {
   public static boolean RelationshipProperty(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "RelationshipProperty")) return false;
     if (!nextTokenIs(b, VARIANTSET)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, VARIANTSET, STRING);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, RELATIONSHIP_PROPERTY, null);
+    r = consumeTokens(b, 1, VARIANTSET, STRING);
+    p = r; // pin = 1
     r = r && RelationshipProperty_2(b, l + 1);
-    exit_section_(b, m, RELATIONSHIP_PROPERTY, r);
-    return r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // (equals VariantSetBody)?
@@ -1445,4 +1545,19 @@ public class USDParser implements PsiParser, LightPsiParser {
     return true;
   }
 
+  static final Parser Body_recover_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return Body_recover(b, l + 1);
+    }
+  };
+  static final Parser Metadatum_recover_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return Metadatum_recover(b, l + 1);
+    }
+  };
+  static final Parser PropertySpec_recover_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return PropertySpec_recover(b, l + 1);
+    }
+  };
 }

@@ -5,12 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface usdRelationshipProperty extends PsiElement {
+public interface usdMetadatum extends PsiElement {
 
   @Nullable
-  usdVariantSetBody getVariantSetBody();
+  usdListEditAction getListEditAction();
+
+  @NotNull
+  usdMetadataKey getMetadataKey();
 
   @Nullable
-  PsiElement getString();
+  usdMetadataValue getMetadataValue();
 
 }

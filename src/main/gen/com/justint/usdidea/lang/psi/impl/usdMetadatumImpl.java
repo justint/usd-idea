@@ -11,14 +11,14 @@ import static com.justint.usdidea.lang.psi.USDTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.justint.usdidea.lang.psi.*;
 
-public class usdRelationshipPropertyImpl extends ASTWrapperPsiElement implements usdRelationshipProperty {
+public class usdMetadatumImpl extends ASTWrapperPsiElement implements usdMetadatum {
 
-  public usdRelationshipPropertyImpl(@NotNull ASTNode node) {
+  public usdMetadatumImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull usdVisitor visitor) {
-    visitor.visitRelationshipProperty(this);
+    visitor.visitMetadatum(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -28,14 +28,20 @@ public class usdRelationshipPropertyImpl extends ASTWrapperPsiElement implements
 
   @Override
   @Nullable
-  public usdVariantSetBody getVariantSetBody() {
-    return findChildByClass(usdVariantSetBody.class);
+  public usdListEditAction getListEditAction() {
+    return findChildByClass(usdListEditAction.class);
+  }
+
+  @Override
+  @NotNull
+  public usdMetadataKey getMetadataKey() {
+    return findNotNullChildByClass(usdMetadataKey.class);
   }
 
   @Override
   @Nullable
-  public PsiElement getString() {
-    return findChildByType(STRING);
+  public usdMetadataValue getMetadataValue() {
+    return findChildByClass(usdMetadataValue.class);
   }
 
 }

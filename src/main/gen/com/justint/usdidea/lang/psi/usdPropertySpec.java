@@ -24,6 +24,10 @@ public interface usdPropertySpec extends PsiElement {
   @Nullable
   IElementType getPropertyType();
 
+  //WARNING: getPropertyValueType(...) is skipped
+  //matching getPropertyValueType(usdPropertySpec, ...)
+  //methods are not found in USDPsiImplUtil
+
   @NotNull
   String getName();
 

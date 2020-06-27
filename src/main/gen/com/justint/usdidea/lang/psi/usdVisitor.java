@@ -95,6 +95,10 @@ public class usdVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitMetadatum(@NotNull usdMetadatum o) {
+    visitPsiElement(o);
+  }
+
   public void visitNamespacedIdentifier(@NotNull usdNamespacedIdentifier o) {
     visitPsiElement(o);
   }

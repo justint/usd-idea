@@ -8,15 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface usdMetadata extends PsiElement {
 
   @NotNull
-  List<usdListEditAction> getListEditActionList();
-
-  @NotNull
   List<usdMetadataComment> getMetadataCommentList();
 
   @NotNull
-  List<usdMetadataKey> getMetadataKeyList();
-
-  @NotNull
-  List<usdMetadataValue> getMetadataValueList();
+  List<usdMetadatum> getMetadatumList();
 
 }

@@ -28,26 +28,14 @@ public class usdMetadataImpl extends ASTWrapperPsiElement implements usdMetadata
 
   @Override
   @NotNull
-  public List<usdListEditAction> getListEditActionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdListEditAction.class);
-  }
-
-  @Override
-  @NotNull
   public List<usdMetadataComment> getMetadataCommentList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, usdMetadataComment.class);
   }
 
   @Override
   @NotNull
-  public List<usdMetadataKey> getMetadataKeyList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdMetadataKey.class);
-  }
-
-  @Override
-  @NotNull
-  public List<usdMetadataValue> getMetadataValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdMetadataValue.class);
+  public List<usdMetadatum> getMetadatumList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, usdMetadatum.class);
   }
 
 }

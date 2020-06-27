@@ -8,7 +8,7 @@ import com.intellij.navigation.ItemPresentation;
 
 public interface usdPrimSpec extends PsiElement {
 
-  @NotNull
+  @Nullable
   usdBody getBody();
 
   @Nullable

@@ -180,23 +180,25 @@ Identifier ::= alpha (alpha | number)*
 NamespacedIdentifier ::= Identifier (colon Identifier)+
 
 
-PrimSpec ::= Specifier Metadata? Body {methods=[getPrimName getPrimType getName getPresentation]}
+PrimSpec ::= Specifier Metadata? Body {methods=[getPrimName getPrimType getName getPresentation] pin=1}
 
-Specifier ::= def [Typename] PrimName | over PrimName | class [Typename] PrimName
+Specifier ::= def [Typename] PrimName | over PrimName | class [Typename] PrimName {pin=1}
 
 Typename ::= Identifier
 
 PrimName ::= string
 
-Body ::= leftbrace [!rightbrace (PropertySpec | PrimSpec)* ] rightbrace
+Body ::= leftbrace [!rightbrace (PropertySpec | PrimSpec)* ] rightbrace {pin=1 recoverWhile=Body_recover}
+private Body_recover ::= !(rightbrace | def | over | class | !PropertySpec_recover)
 
 
-PropertySpec ::= (AttributeProperty | RelationshipProperty) Metadata? {methods=[getPropertyName getPropertyType getPropertyValueType getName getPresentation]}
+PropertySpec ::= (AttributeProperty | RelationshipProperty) Metadata? {methods=[getPropertyName getPropertyType getPropertyValueType getName getPresentation] recoverWhile=PropertySpec_recover}
+private PropertySpec_recover ::= !(uniform | custom | ListEditAction | rel | AttributeType | variantSet | rightbrace | def | over | class)
 
-AttributeProperty ::= [uniform | custom] (ListEditAction? rel AttributeName | AttributeType AttributeName | ListEditAction? CompositionArc) [equals AttributeValue]
+AttributeProperty ::= [uniform | custom] (ListEditAction? rel AttributeName | AttributeType AttributeName | ListEditAction? CompositionArc) [equals AttributeValue] {pin=2}
 
 // TODO: decouple variantSet from RelationshipProperty, actually implement RelationshipProperty
-RelationshipProperty ::= variantSet string (equals VariantSetBody)?
+RelationshipProperty ::= variantSet string (equals VariantSetBody)? {pin=1}
 
 VariantSetBody ::= leftbrace [!rightbrace VariantSetKey VariantSetItemBody (VariantSetKey VariantSetItemBody)*] rightbrace | leftbrace rightbrace
 
@@ -220,7 +222,10 @@ AttributeName ::= (NamespacedIdentifier | Identifier) (period (connect | Identif
 AttributeValue ::= Item
 
 
-Metadata ::= leftparens (!rightparens ( MetadataComment | [ListEditAction? MetadataKey equals MetadataValue]) )* rightparens
+Metadata ::= leftparens (!rightparens [MetadataComment | Metadatum])* rightparens
+
+Metadatum ::= ListEditAction? MetadataKey equals MetadataValue {pin=2 recoverWhile=Metadatum_recover}
+private Metadatum_recover ::= !(rightparens | ListEditAction | MetadataKey )
 
 ListEditAction ::= add | append | prepend | delete | reorder
 

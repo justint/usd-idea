@@ -28,9 +28,9 @@ public class usdPrimSpecImpl extends ASTWrapperPsiElement implements usdPrimSpec
   }
 
   @Override
-  @NotNull
+  @Nullable
   public usdBody getBody() {
-    return findNotNullChildByClass(usdBody.class);
+    return findChildByClass(usdBody.class);
   }
 
   @Override

@@ -30,6 +30,7 @@ public interface USDTypes {
   IElementType METADATA_COMMENT = new USDElementType("METADATA_COMMENT");
   IElementType METADATA_KEY = new USDElementType("METADATA_KEY");
   IElementType METADATA_VALUE = new USDElementType("METADATA_VALUE");
+  IElementType METADATUM = new USDElementType("METADATUM");
   IElementType NAMESPACED_IDENTIFIER = new USDElementType("NAMESPACED_IDENTIFIER");
   IElementType PRIM_NAME = new USDElementType("PRIM_NAME");
   IElementType PRIM_SPEC = new USDElementType("PRIM_SPEC");
@@ -236,6 +237,9 @@ public interface USDTypes {
       }
       else if (type == METADATA_VALUE) {
         return new usdMetadataValueImpl(node);
+      }
+      else if (type == METADATUM) {
+        return new usdMetadatumImpl(node);
       }
       else if (type == NAMESPACED_IDENTIFIER) {
         return new usdNamespacedIdentifierImpl(node);
