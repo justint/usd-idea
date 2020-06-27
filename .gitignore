@@ -5,3 +5,4 @@ build/
 jflex/
 .DS_Store
 Thumbs.db
+*~
