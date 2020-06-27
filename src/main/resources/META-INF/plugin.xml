@@ -38,6 +38,8 @@
         <lang.foldingBuilder language="USD" implementationClass="com.justint.usdidea.codeinsight.folding.USDFoldingBuilder"/>
         <lang.braceMatcher language="USD" implementationClass="com.justint.usdidea.codeinsight.highlighting.USDBraceMatcher"/>
 
+        <breadcrumbsInfoProvider implementation="com.justint.usdidea.codeinsight.USDBreadcrumbsProvider"/>
+
     </extensions>
 
     <actions>
