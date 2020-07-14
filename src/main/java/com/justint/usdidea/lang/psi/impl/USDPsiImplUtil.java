@@ -4,6 +4,7 @@ import com.intellij.icons.AllIcons;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.ui.IconManager;
 import com.intellij.util.PlatformIcons;
 import com.justint.usdidea.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
@@ -117,9 +118,9 @@ public class USDPsiImplUtil {
             @Override
             public Icon getIcon(boolean b) {
                 if (dictItemElement.isDictionary()) {
-                    return AllIcons.Json.Object;
+                    return IconManager.getInstance().createLayered(AllIcons.Json.Object, AllIcons.Nodes.StaticMark);
                 }
-                return PlatformIcons.PROPERTY_ICON;
+                return IconManager.getInstance().createLayered(PlatformIcons.PROPERTY_ICON, AllIcons.Nodes.StaticMark);
             }
         };
     }
@@ -127,6 +128,14 @@ public class USDPsiImplUtil {
     @NotNull
     public static ItemPresentation getPresentation(final usdMetadatum metadatumElement) {
         return new ItemPresentation() {
+
+            // This works, but isn't neccessary - I think we can stick with layered/row icons for now
+//            public TextAttributesKey getTextAttributesKey() {
+//                TextAttributes attributes = DefaultLanguageHighlighterColors.IDENTIFIER.getDefaultAttributes().clone();
+//                attributes.setFontType(Font.ITALIC);
+//                return TextAttributesKey.createTextAttributesKey("USD_METADATA_KEY", attributes);
+//            }
+
             @Nullable
             @Override
             public String getPresentableText() {
@@ -148,8 +157,8 @@ public class USDPsiImplUtil {
             @Override
             public Icon getIcon(boolean b) {
                 if (metadatumElement.isDictionary()) {
-                    return AllIcons.Json.Object;
-                } else return PlatformIcons.METHOD_ICON;
+                    return IconManager.getInstance().createLayered(AllIcons.Json.Object, AllIcons.Nodes.StaticMark);
+                } else return IconManager.getInstance().createLayered(PlatformIcons.METHOD_ICON, AllIcons.Nodes.StaticMark);
             }
         };
     }

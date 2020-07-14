@@ -1,25 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-<strong>Version 0.3.1:</strong>
+<strong>Version 0.3.2:</strong>
 <ul>
-    <li>Fixed bug with Structure View where untyped properties were triggering an assertion error.</li>
-    <li>Fixed #4: Some namespaced attribute names break the parser</li>
-</ul>
-<strong>Version 0.3:</strong>
-<ul>
-    <li>Added initial support for <b>structure view</b>!<br>
-        This allows you to view the outline/structure of USD files and navigate quickly to objects using the
-        Structure tool view.<br>
-        The current list of supported objects in Structure view are:
-        <ul>
-            <li>Prims</li>
-            <li>Attribute properties</li>
-            <li>(Some) relationship properties</li>
-        </ul>
-        The objects' name & type (if available) will be displayed in the Structure.
-    </li>
-    <li>New build for newer 2020.* version of IDEA IDEs</li>
+    <li>Added breadcrumbs feature: see where your text cursor is in the prim hierarchy at the bottom of your editor window.</li>
+    <li>Fixed #10: Added recovery functions to core language structures. This makes the plugin a lot more stable for malformed USD files or grammar issues.</li>
+    <li>Fixed #11: Allow dictionaries to have string names.</li>
+    <li>Added support for the following objects in Structure View:</li>
+    <ul>
+        <li>Metadata</li>
+        <li>Dictionaries</li>
+    </ul>
 </ul>
 </body>
 </html>
