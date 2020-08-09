@@ -27,7 +27,7 @@ WHITE_SPACE=\s+
 
 STRING=\"\"\"[^\"]*\"\"\"|\"[^\"]*\"|'[^']*'
 NUMBER=(\+|\-)?[:digit:]+
-FLOATNUMBER=(\+|\-)?[:digit:]*\.([:digit:]+)?([eE][+\-][:digit:]+)?
+FLOATNUMBER=(\+|\-)?[:digit:]+(\.[:digit:]+)?([eE][+\-][:digit:]+)?
 ALPHA=[a-zA-Z_0-9]+
 COMMENT="//"[^\r\n]*
 BLOCKCOMMENT="/"\*([^\*]|(\*+[^\*/]))*(\*+"/")?

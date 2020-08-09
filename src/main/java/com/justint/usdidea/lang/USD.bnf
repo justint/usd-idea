@@ -75,7 +75,7 @@
         // Includes the three-quotation docstrings
         string = "regexp:\"\"\"[^(\"\"\")]*\"\"\"|\"[^\"]*\"|'[^']*'"
         number = "regexp:(\+|\-)?\p{Digit}+"
-        floatnumber = "regexp:(\+|\-)?\p{Digit}*\.(\p{Digit}+)?([eE][+\-]\p{Digit}+)?"
+        floatnumber = "regexp:(\+|\-)?\p{Digit}+(\.\p{Digit}+)?([eE][+\-]\p{Digit}+)?"
         alpha = "regexp:\w+"
 
         //
@@ -233,14 +233,14 @@ ListEditAction ::= add | append | prepend | delete | reorder
 
 MetadataKey ::= Identifier | CompositionArc | SpecialMetadataKey
 
-SpecialMetadataKey ::= doc | variantSet | kind | variants | customData | assetInfo
+SpecialMetadataKey ::= doc | variantSet | kind | variants | customData | assetInfo | interpolation
 
 MetadataValue ::= Item
 
 MetadataComment ::= string
 
 
-Array ::= leftbracket [!rightbracket Item (comma Item)*] rightbracket | leftbracket rightbracket
+Array ::= leftbracket [!rightbracket Item (comma Item)*] comma? rightbracket | leftbracket rightbracket
 
 InterpolatedArray ::= Array (leftparens interpolation equals string rightparens)?
 

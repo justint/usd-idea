@@ -36,7 +36,7 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // leftbracket [!rightbracket Item (comma Item)*] rightbracket | leftbracket rightbracket
+  // leftbracket [!rightbracket Item (comma Item)*] comma? rightbracket | leftbracket rightbracket
   public static boolean Array(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Array")) return false;
     if (!nextTokenIs(b, LEFTBRACKET)) return false;
@@ -48,13 +48,14 @@ public class USDParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // leftbracket [!rightbracket Item (comma Item)*] rightbracket
+  // leftbracket [!rightbracket Item (comma Item)*] comma? rightbracket
   private static boolean Array_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Array_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, LEFTBRACKET);
     r = r && Array_0_1(b, l + 1);
+    r = r && Array_0_2(b, l + 1);
     r = r && consumeToken(b, RIGHTBRACKET);
     exit_section_(b, m, null, r);
     return r;
@@ -109,6 +110,13 @@ public class USDParser implements PsiParser, LightPsiParser {
     r = r && Item(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  // comma?
+  private static boolean Array_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Array_0_2")) return false;
+    consumeToken(b, COMMA);
+    return true;
   }
 
   /* ********************************************************** */
@@ -1080,7 +1088,7 @@ public class USDParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // doc | variantSet | kind | variants | customData | assetInfo
+  // doc | variantSet | kind | variants | customData | assetInfo | interpolation
   public static boolean SpecialMetadataKey(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "SpecialMetadataKey")) return false;
     boolean r;
@@ -1091,6 +1099,7 @@ public class USDParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, VARIANTS);
     if (!r) r = consumeToken(b, CUSTOMDATA);
     if (!r) r = consumeToken(b, ASSETINFO);
+    if (!r) r = consumeToken(b, INTERPOLATION);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

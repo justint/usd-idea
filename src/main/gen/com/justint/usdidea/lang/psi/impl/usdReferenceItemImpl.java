@@ -8,10 +8,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.justint.usdidea.lang.psi.USDTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.justint.usdidea.lang.psi.*;
 
-public class usdReferenceItemImpl extends ASTWrapperPsiElement implements usdReferenceItem {
+public class usdReferenceItemImpl extends ReferenceItemNamedElementImpl implements usdReferenceItem {
 
   public usdReferenceItemImpl(@NotNull ASTNode node) {
     super(node);
@@ -36,6 +35,16 @@ public class usdReferenceItemImpl extends ASTWrapperPsiElement implements usdRef
   @Nullable
   public PsiElement getPathReference() {
     return findChildByType(PATHREFERENCE);
+  }
+
+  @Override
+  public String getName() {
+    return USDPsiImplUtil.getName(this);
+  }
+
+  @Override
+  public PsiElement getNameIdentifier() {
+    return USDPsiImplUtil.getNameIdentifier(this);
   }
 
 }

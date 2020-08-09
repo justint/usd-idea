@@ -3,8 +3,9 @@ package com.justint.usdidea.lang.psi.impl;
 import com.intellij.icons.AllIcons;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.ui.IconManager;
+import com.intellij.ui.LayeredIcon;
 import com.intellij.util.PlatformIcons;
 import com.justint.usdidea.lang.psi.*;
 import org.jetbrains.annotations.NotNull;
@@ -40,6 +41,12 @@ public class USDPsiImplUtil {
             ASTNode attributeName = attributeProperty.findChildByType(USDTypes.ATTRIBUTE_NAME);
             if (attributeName != null) {
                 return attributeName.getText();
+            } else {
+                // The attribute property might be a composition arc; let's try finding it
+                ASTNode compositionArcName = attributeProperty.findChildByType(USDTypes.COMPOSITION_ARC);
+                if (compositionArcName != null) {
+                    return compositionArcName.getText();
+                }
             }
         } else if (propertyType == USDTypes.RELATIONSHIP_PROPERTY) {
             ASTNode relationshipProperty = propertyElement.getNode().findChildByType(USDTypes.RELATIONSHIP_PROPERTY);
@@ -118,9 +125,9 @@ public class USDPsiImplUtil {
             @Override
             public Icon getIcon(boolean b) {
                 if (dictItemElement.isDictionary()) {
-                    return IconManager.getInstance().createLayered(AllIcons.Json.Object, AllIcons.Nodes.StaticMark);
+                    return LayeredIcon.create(AllIcons.Json.Object, AllIcons.Nodes.StaticMark);
                 }
-                return IconManager.getInstance().createLayered(PlatformIcons.PROPERTY_ICON, AllIcons.Nodes.StaticMark);
+                return LayeredIcon.create(PlatformIcons.PROPERTY_ICON, AllIcons.Nodes.StaticMark);
             }
         };
     }
@@ -157,8 +164,8 @@ public class USDPsiImplUtil {
             @Override
             public Icon getIcon(boolean b) {
                 if (metadatumElement.isDictionary()) {
-                    return IconManager.getInstance().createLayered(AllIcons.Json.Object, AllIcons.Nodes.StaticMark);
-                } else return IconManager.getInstance().createLayered(PlatformIcons.METHOD_ICON, AllIcons.Nodes.StaticMark);
+                    return LayeredIcon.create(AllIcons.Json.Object, AllIcons.Nodes.StaticMark);
+                } else return LayeredIcon.create(PlatformIcons.METHOD_ICON, AllIcons.Nodes.StaticMark);
             }
         };
     }
