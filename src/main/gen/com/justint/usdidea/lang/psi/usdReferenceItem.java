@@ -5,17 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface usdReferenceItem extends ReferenceItemNamedElement {
+public interface usdReferenceItem extends PsiElement {
 
   @Nullable
   PsiElement getAssetReference();
 
   @Nullable
   PsiElement getPathReference();
-
-  String getName();
-
-  @Nullable
-  PsiElement getNameIdentifier();
 
 }

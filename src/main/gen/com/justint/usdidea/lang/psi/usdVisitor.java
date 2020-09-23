@@ -120,7 +120,7 @@ public class usdVisitor extends PsiElementVisitor {
   }
 
   public void visitReferenceItem(@NotNull usdReferenceItem o) {
-    visitReferenceItemNamedElement(o);
+    visitPsiElement(o);
   }
 
   public void visitRelationshipProperty(@NotNull usdRelationshipProperty o) {
@@ -165,10 +165,6 @@ public class usdVisitor extends PsiElementVisitor {
 
   public void visitVector(@NotNull usdVector o) {
     visitPsiElement(o);
-  }
-
-  public void visitReferenceItemNamedElement(@NotNull ReferenceItemNamedElement o) {
-    visitElement(o);
   }
 
   public void visitUSDBreadcrumbItem(@NotNull USDBreadcrumbItem o) {
