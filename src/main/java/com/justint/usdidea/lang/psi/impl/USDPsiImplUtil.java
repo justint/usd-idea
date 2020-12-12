@@ -14,13 +14,18 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 public class USDPsiImplUtil {
+
+    private static String trimStringNames(String name) {
+        return name.replaceAll("\\\\ ", " ").replaceAll("\"", "");
+    }
+
     @NotNull
     public static String getPrimName(@NotNull usdPrimSpec primElement) {
         ASTNode specifierNode = primElement.getNode().findChildByType(USDTypes.SPECIFIER);
         assert specifierNode != null;
         ASTNode primNameNode = specifierNode.findChildByType(USDTypes.PRIM_NAME).findChildByType(USDTypes.STRING);
         if (primNameNode != null) {
-            return primNameNode.getText().replaceAll("\\\\ ", " ").replaceAll("\"", "");
+            return trimStringNames(primNameNode.getText());
         } else return "";
     }
 
@@ -53,7 +58,7 @@ public class USDPsiImplUtil {
             assert relationshipProperty != null;
             ASTNode relationshipName = relationshipProperty.findChildByType(USDTypes.STRING);
             if (relationshipName != null) {
-                return relationshipName.getText();
+                return trimStringNames(relationshipName.getText());
             }
         }
         return "";
@@ -107,7 +112,7 @@ public class USDPsiImplUtil {
     }
 
     public static String getName(usdVariantSetKey variantSetKey) {
-        return variantSetKey.getString().getText();
+        return trimStringNames(variantSetKey.getString().getText());
     }
 
     @NotNull
@@ -116,9 +121,7 @@ public class USDPsiImplUtil {
             @Nullable
             @Override
             public String getPresentableText() {
-                String itemName = dictItemElement.getName();
-                usdAttributeType itemType = dictItemElement.getType();
-                return String.format("%s: %s", itemName, itemType.getText());
+                return dictItemElement.getName();
             }
 
             @Nullable
@@ -126,7 +129,9 @@ public class USDPsiImplUtil {
             public String getLocationString() {
                 if (dictItemElement.isDictionary()) {
                     return null;
-                } else return dictItemElement.getDictValue().getText();
+                } else {
+                    return dictItemElement.getType().getText();
+                }
             }
 
             @Nullable
@@ -160,12 +165,7 @@ public class USDPsiImplUtil {
             @Nullable
             @Override
             public String getLocationString() {
-                if (metadatumElement.isDictionary()) {
-                    return null;
-                }
-                if (metadatumElement.getMetadataValue() != null) {
-                    return metadatumElement.getMetadataValue().getText();
-                } else return null;
+                return null;
             }
 
             @Nullable
@@ -187,21 +187,17 @@ public class USDPsiImplUtil {
             @Nullable
             @Override
             public String getPresentableText() {
-                String primName = primElement.getName();
-
-                usdSpecifier specifier = primElement.getSpecifier();
-                usdTypename typename = specifier.getTypename();
-                if (typename != null) {
-                    return String.format("%s: %s", primName, typename.getText());
-                } else {
-                    return primName;
-                }
+                return primElement.getName();
             }
 
             @Nullable
             @Override
             public String getLocationString() {
-                return null;
+                usdSpecifier specifier = primElement.getSpecifier();
+                usdTypename typename = specifier.getTypename();
+                if (typename != null) {
+                    return String.format("prim : %s", typename.getText());
+                } else return "prim";
             }
 
             @Nullable
@@ -222,29 +218,23 @@ public class USDPsiImplUtil {
             @Nullable
             @Override
             public String getPresentableText() {
-                String propertyName = propertyElement.getName();
-
-                if (propertyElement.getPropertyType() == USDTypes.ATTRIBUTE_PROPERTY) {
-                    usdAttributeProperty attributeProperty = propertyElement.getAttributeProperty();
-                    assert attributeProperty != null;
-                    usdAttributeType attributeType = attributeProperty.getAttributeType();
-                    if (attributeType == null) {
-                        return propertyName;
-                    }
-                    else {
-                        String propertyType = attributeType.getText();
-                        return String.format("%s: %s", propertyName, propertyType);
-                    }
-                }
-                else if (propertyElement.getPropertyType() == USDTypes.RELATIONSHIP_PROPERTY) {
-                    return String.format("%s: variantSet", propertyName);
-                }
-                else return "";
+                return propertyElement.getName();
             }
 
             @Nullable
             @Override
             public String getLocationString() {
+                if (propertyElement.getPropertyType() == USDTypes.ATTRIBUTE_PROPERTY) {
+                    usdAttributeProperty attributeProperty = propertyElement.getAttributeProperty();
+                    assert attributeProperty != null;
+                    usdAttributeType attributeType = attributeProperty.getAttributeType();
+                    if (attributeType != null) {
+                        return attributeType.getText();
+                    }
+                }
+                else if (propertyElement.getPropertyType() == USDTypes.RELATIONSHIP_PROPERTY) {
+                    return "variantSet";
+                }
                 return null;
             }
 
@@ -274,7 +264,7 @@ public class USDPsiImplUtil {
             @Nullable
             @Override
             public String getLocationString() {
-                return null;
+                return "variant";
             }
 
             @Nullable
