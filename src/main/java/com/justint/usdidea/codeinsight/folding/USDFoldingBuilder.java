@@ -36,14 +36,14 @@ public class USDFoldingBuilder implements FoldingBuilder {
         final IElementType elementType = astNode.getElementType();
 
         if (elementType == USDTypes.METADATA) {
-            descriptors.add(new NamedFoldingDescriptor(
+            descriptors.add(new FoldingDescriptor(
                     astNode,
                     astNode.getTextRange(),
                     null,
                     "(...)"
             ));
         } else if (Arrays.asList(BRACKET_TYPES).contains(elementType)) {
-            descriptors.add(new NamedFoldingDescriptor(
+            descriptors.add(new FoldingDescriptor(
                     astNode,
                     astNode.getTextRange(),
                     null,

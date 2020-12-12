@@ -10,6 +10,7 @@ import com.justint.usdidea.lang.lexer.USDHighlighterLexerAdapter;
 import com.justint.usdidea.lang.parser.USDParserDefinition;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
@@ -43,7 +44,7 @@ public class USDSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey TYPE =
             createTextAttributesKey("TYPE", DefaultLanguageHighlighterColors.INSTANCE_FIELD);
 
-    private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = ContainerUtil.newHashMap();
+    private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<>();
 
     static {
         SyntaxHighlighterBase.fillMap(ATTRIBUTES, USDParserDefinition.USDDECLARATION, DefaultLanguageHighlighterColors.CONSTANT);
