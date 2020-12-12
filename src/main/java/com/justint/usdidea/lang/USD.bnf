@@ -203,7 +203,7 @@ RelationshipProperty ::= variantSet string (equals VariantSetBody)? {pin=1}
 
 VariantSetBody ::= leftbrace [!rightbrace VariantSetKey VariantSetItemBody (VariantSetKey VariantSetItemBody)*] rightbrace | leftbrace rightbrace
 
-VariantSetKey ::= string
+VariantSetKey ::= string {methods=[getBody getName getPresentation]}
 
 VariantSetItemBody ::= Metadata? (leftbrace [!rightbrace PrimSpec (PrimSpec)*] rightbrace | leftbrace rightbrace)
 

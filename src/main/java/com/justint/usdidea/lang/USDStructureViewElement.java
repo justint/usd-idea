@@ -9,17 +9,25 @@ import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.justint.usdidea.lang.psi.*;
-import com.justint.usdidea.lang.psi.impl.usdDictItemImpl;
-import com.justint.usdidea.lang.psi.impl.usdMetadatumImpl;
-import com.justint.usdidea.lang.psi.impl.usdPrimSpecImpl;
-import com.justint.usdidea.lang.psi.impl.usdPropertySpecImpl;
+import com.justint.usdidea.lang.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 
 public class USDStructureViewElement implements StructureViewTreeElement, SortableTreeElement {
     private final NavigatablePsiElement myElement;
+
+    private final Map<Class<? extends PsiElement>, Function<NavigatablePsiElement, TreeElement[]>> psiElementMethodMap = Map.of(
+            USDFile.class, this::getUSDFileChildren,
+            usdPrimSpecImpl.class, this::getPrimSpecChildren,
+            usdMetadatumImpl.class, this::getMetadatumChildren,
+            usdDictItemImpl.class, this::getDictItemChildren,
+            usdPropertySpecImpl.class, this::getPropertySpecChildren,
+            usdRelationshipPropertyImpl.class, this::getRelationshipPropertyChildren,
+            usdVariantSetKeyImpl.class, this::getVariantSetKeyChildren
+    );
+
 
     public USDStructureViewElement(NavigatablePsiElement element) {
         this.myElement = element;
@@ -45,73 +53,115 @@ public class USDStructureViewElement implements StructureViewTreeElement, Sortab
     }
 
     @NotNull
-    @Override
-    public TreeElement[] getChildren() {
-        if (myElement instanceof USDFile) {
-            List<TreeElement> treeElements = new ArrayList<>();
-            // Find any metadata first
-            usdMetadata metadata = PsiTreeUtil.getChildOfType(myElement, usdMetadata.class);
-            if (metadata != null) {
-                for (usdMetadatum metadatum : metadata.getMetadatumList()) {
-                    treeElements.add(new USDStructureViewElement((usdMetadatumImpl) metadatum));
-                }
+    private TreeElement[] getUSDFileChildren(NavigatablePsiElement element) {
+        List<TreeElement> treeElements = new ArrayList<>();
+        // Find any metadata first
+        usdMetadata metadata = PsiTreeUtil.getChildOfType(element, usdMetadata.class);
+        if (metadata != null) {
+            for (usdMetadatum metadatum : metadata.getMetadatumList()) {
+                treeElements.add(new USDStructureViewElement((usdMetadatumImpl) metadatum));
             }
-
-            // Find all prim specs, include them
-            List<usdPrimSpec> prims = PsiTreeUtil.getChildrenOfTypeAsList(myElement, usdPrimSpec.class);
-            for (usdPrimSpec prim : prims) {
-                treeElements.add(new USDStructureViewElement((usdPrimSpecImpl) prim));
-            }
-            return treeElements.toArray(new TreeElement[0]);
         }
-        else if (myElement instanceof usdPrimSpec) {
-            List<TreeElement> treeElements = new ArrayList<>();
-            // Find metadata children first
-            usdMetadata metadata = ((usdPrimSpec)myElement).getMetadata();
-            if (metadata != null) {
-                for (usdMetadatum metadatum : metadata.getMetadatumList()) {
-                    treeElements.add(new USDStructureViewElement((usdMetadatumImpl) metadatum));
-                }
-            }
 
-            // Grab prim body children next
-            usdBody body = ((usdPrimSpec)myElement).getBody();
-            if (body != null) {
-                for (PsiElement child : body.getChildren()) {
-                    if (child instanceof usdPrimSpec) {
-                        treeElements.add(new USDStructureViewElement((usdPrimSpecImpl) child));
-                    } else if (child instanceof usdPropertySpec) {
-                        treeElements.add(new USDStructureViewElement((usdPropertySpecImpl) child));
-                    }
-                }
-            }
-            return treeElements.toArray(new TreeElement[0]);
+        // Find all prim specs, include them
+        List<usdPrimSpec> prims = PsiTreeUtil.getChildrenOfTypeAsList(element, usdPrimSpec.class);
+        for (usdPrimSpec prim : prims) {
+            treeElements.add(new USDStructureViewElement((usdPrimSpecImpl) prim));
         }
-        else if (myElement instanceof usdMetadatum) {
-            List<TreeElement> treeElements = new ArrayList<>();
+        return treeElements.toArray(new TreeElement[0]);
+    }
 
-            usdMetadataValue metadataValue = ((usdMetadatum)myElement).getMetadataValue();
-            if (metadataValue != null) {
-                if (metadataValue.getItem().getDict() != null) {
-                    usdDict dictionary = metadataValue.getItem().getDict();
-                    for (usdDictItem dictItem : dictionary.getDictItemList()) {
-                        treeElements.add(new USDStructureViewElement((usdDictItemImpl) dictItem));
-                    }
+    @NotNull
+    private TreeElement[] getPrimSpecChildren(NavigatablePsiElement element) {
+        List<TreeElement> treeElements = new ArrayList<>();
+        // Find metadata children first
+        usdMetadata metadata = ((usdPrimSpec)element).getMetadata();
+        if (metadata != null) {
+            for (usdMetadatum metadatum : metadata.getMetadatumList()) {
+                treeElements.add(new USDStructureViewElement((usdMetadatumImpl) metadatum));
+            }
+        }
+
+        // Grab prim body children next
+        usdBody body = ((usdPrimSpec)element).getBody();
+        if (body != null) {
+            for (PsiElement child : body.getChildren()) {
+                if (child instanceof usdPrimSpec) {
+                    treeElements.add(new USDStructureViewElement((usdPrimSpecImpl) child));
+                } else if (child instanceof usdPropertySpec) {
+                    treeElements.add(new USDStructureViewElement((usdPropertySpecImpl) child));
                 }
             }
-            return treeElements.toArray(new TreeElement[0]);
         }
-        else if (myElement instanceof usdDictItem) {
-            // The item may have children dictionaries
-            if (((usdDictItem) myElement).isDictionary()) {
-                List<TreeElement> treeElements = new ArrayList<>();
-                usdDict childDictionary = ((usdDictItem) myElement).getDictValue().getItem().getDict();
-                for (usdDictItem dictItem : childDictionary.getDictItemList()) {
+        return treeElements.toArray(new TreeElement[0]);
+    }
+
+    @NotNull
+    private TreeElement[] getMetadatumChildren(NavigatablePsiElement element) {
+        List<TreeElement> treeElements = new ArrayList<>();
+
+        usdMetadataValue metadataValue = ((usdMetadatum)element).getMetadataValue();
+        if (metadataValue != null) {
+            if (metadataValue.getItem().getDict() != null) {
+                usdDict dictionary = metadataValue.getItem().getDict();
+                for (usdDictItem dictItem : dictionary.getDictItemList()) {
                     treeElements.add(new USDStructureViewElement((usdDictItemImpl) dictItem));
                 }
-                return treeElements.toArray(new TreeElement[0]);
-            } else return EMPTY_ARRAY;
+            }
         }
+        return treeElements.toArray(new TreeElement[0]);
+    }
+
+    @NotNull
+    private TreeElement[] getDictItemChildren(NavigatablePsiElement element) {
+        // The item may have children dictionaries
+        if (((usdDictItem) element).isDictionary()) {
+            List<TreeElement> treeElements = new ArrayList<>();
+            usdDict childDictionary = ((usdDictItem) element).getDictValue().getItem().getDict();
+            assert childDictionary != null;
+            for (usdDictItem dictItem : childDictionary.getDictItemList()) {
+                treeElements.add(new USDStructureViewElement((usdDictItemImpl) dictItem));
+            }
+            return treeElements.toArray(new TreeElement[0]);
+        } else return EMPTY_ARRAY;
+    }
+
+    @NotNull
+    private TreeElement[] getPropertySpecChildren(NavigatablePsiElement element) {
+        usdRelationshipProperty relationshipProperty = PsiTreeUtil.findChildOfType(element, usdRelationshipProperty.class);
+        if (relationshipProperty != null) {
+            return getRelationshipPropertyChildren((NavigatablePsiElement) relationshipProperty);
+        } else return EMPTY_ARRAY;
+    }
+
+    @NotNull
+    private TreeElement[] getRelationshipPropertyChildren(NavigatablePsiElement element) {
+        usdVariantSetBody variantSetBody = ((usdRelationshipProperty) element).getVariantSetBody();
+        if (variantSetBody != null) {
+            List<TreeElement> treeElements = new ArrayList<>();
+            for (usdVariantSetKey variantSetKey : variantSetBody.getVariantSetKeyList()) {
+                treeElements.add(new USDStructureViewElement((usdVariantSetKeyImpl) variantSetKey));
+            }
+            return treeElements.toArray(new TreeElement[0]);
+        } else return EMPTY_ARRAY;
+    }
+
+    @NotNull
+    private TreeElement[] getVariantSetKeyChildren(NavigatablePsiElement element) {
+        usdVariantSetItemBody body = ((usdVariantSetKey)element).getBody();
+
+        // Treat the body of the variant as a new file, and grab all its children as so:
+        return getUSDFileChildren((NavigatablePsiElement) body);
+    }
+
+    @NotNull
+    @Override
+    public TreeElement[] getChildren() {
+        Class<? extends NavigatablePsiElement> elementType = myElement.getClass();
+        if (psiElementMethodMap.containsKey(elementType)) {
+            return psiElementMethodMap.get(elementType).apply(myElement);
+        }
+        else return EMPTY_ARRAY;
         // Debug info:
 //        else {
 //            System.out.println(myElement.getName() + "  --  type: " + myElement.getClass());
@@ -119,7 +169,6 @@ public class USDStructureViewElement implements StructureViewTreeElement, Sortab
 //                System.out.println("\t" + child.getText() + " -- type: " + child.getClass());
 //            }
 //        }
-        return EMPTY_ARRAY;
     }
 
     @Override

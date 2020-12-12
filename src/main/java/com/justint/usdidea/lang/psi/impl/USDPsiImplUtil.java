@@ -4,6 +4,7 @@ import com.intellij.icons.AllIcons;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ui.LayeredIcon;
 import com.intellij.util.PlatformIcons;
 import com.justint.usdidea.lang.psi.*;
@@ -73,6 +74,10 @@ public class USDPsiImplUtil {
         return dictKey.getAttributeType();
     }
 
+    public static usdVariantSetItemBody getBody(usdVariantSetKey variantSetKey) {
+        return PsiTreeUtil.getNextSiblingOfType(variantSetKey, usdVariantSetItemBody.class);
+    }
+
     @NotNull
     public static String getName(usdMetadatum metadatumElement) {
         usdMetadataKey metadataKey = metadatumElement.getMetadataKey();
@@ -99,6 +104,10 @@ public class USDPsiImplUtil {
             }
         }
         return "";
+    }
+
+    public static String getName(usdVariantSetKey variantSetKey) {
+        return variantSetKey.getString().getText();
     }
 
     @NotNull
@@ -242,7 +251,36 @@ public class USDPsiImplUtil {
             @Nullable
             @Override
             public Icon getIcon(boolean b) {
-                return PlatformIcons.PROPERTY_ICON;
+                if (propertyElement.getPropertyType() == USDTypes.ATTRIBUTE_PROPERTY) {
+                    return PlatformIcons.PROPERTY_ICON;
+                }
+                else {
+                    // It's a relationship property (which as of now, we're using to represent variantSets)
+                    // TODO: find/create better icon for variant sets
+                    return PlatformIcons.VARIABLE_ICON;
+                }
+            }
+        };
+    }
+
+    public static ItemPresentation getPresentation(usdVariantSetKey variantSetKey) {
+        return new ItemPresentation() {
+            @Nullable
+            @Override
+            public String getPresentableText() {
+                return variantSetKey.getName();
+            }
+
+            @Nullable
+            @Override
+            public String getLocationString() {
+                return null;
+            }
+
+            @Nullable
+            @Override
+            public Icon getIcon(boolean b) {
+                return PlatformIcons.VARIABLE_ICON;
             }
         };
     }

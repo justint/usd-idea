@@ -7,7 +7,6 @@ import com.intellij.ide.util.treeView.smartTree.*;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.PlatformIcons;
 import com.justint.usdidea.lang.psi.USDFile;
-import gherkin.lexer.Pl;
 import org.jetbrains.annotations.NotNull;
 
 public class USDStructureViewModel extends StructureViewModelBase

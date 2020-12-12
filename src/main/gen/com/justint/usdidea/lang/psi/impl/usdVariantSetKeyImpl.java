@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.justint.usdidea.lang.psi.USDTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.justint.usdidea.lang.psi.*;
+import com.intellij.navigation.ItemPresentation;
 
 public class usdVariantSetKeyImpl extends ASTWrapperPsiElement implements usdVariantSetKey {
 
@@ -30,6 +31,21 @@ public class usdVariantSetKeyImpl extends ASTWrapperPsiElement implements usdVar
   @NotNull
   public PsiElement getString() {
     return findNotNullChildByType(STRING);
+  }
+
+  @Override
+  public usdVariantSetItemBody getBody() {
+    return USDPsiImplUtil.getBody(this);
+  }
+
+  @Override
+  public String getName() {
+    return USDPsiImplUtil.getName(this);
+  }
+
+  @Override
+  public ItemPresentation getPresentation() {
+    return USDPsiImplUtil.getPresentation(this);
   }
 
 }
