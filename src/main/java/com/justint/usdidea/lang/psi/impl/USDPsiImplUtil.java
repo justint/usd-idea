@@ -3,7 +3,6 @@ package com.justint.usdidea.lang.psi.impl;
 import com.intellij.icons.AllIcons;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.ui.LayeredIcon;
 import com.intellij.util.PlatformIcons;
@@ -164,6 +163,9 @@ public class USDPsiImplUtil {
             @Override
             public Icon getIcon(boolean b) {
                 if (metadatumElement.isDictionary()) {
+                    // IconWithToolTip isn't available pre-idea v202 :((((
+                    // see: https://github.com/JetBrains/intellij-community/commits/6d7de87eb240af675327767fb6414cbd1d838a93/platform/core-ui/src/ui/IconWithToolTip.java
+                    // TODO: figure out how to support both tooltips + nontooltips
                     return LayeredIcon.create(AllIcons.Json.Object, AllIcons.Nodes.StaticMark);
                 } else return LayeredIcon.create(PlatformIcons.METHOD_ICON, AllIcons.Nodes.StaticMark);
             }
@@ -196,6 +198,11 @@ public class USDPsiImplUtil {
             @Nullable
             @Override
             public Icon getIcon(boolean b) {
+                usdSpecifier specifier = primElement.getSpecifier();
+                if (specifier.getText().split("\\s+")[0].equals("class")) {
+                    // It's a class, not a prim
+                    return PlatformIcons.CLASS_ICON;
+                }
                 return PlatformIcons.PARAMETER_ICON;
             }
         };
