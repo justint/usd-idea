@@ -6,6 +6,9 @@ import com.intellij.ui.breadcrumbs.BreadcrumbsProvider;
 import com.justint.usdidea.lang.USDLanguage;
 import com.justint.usdidea.lang.psi.USDBreadcrumbItem;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 public class USDBreadcrumbsProvider implements BreadcrumbsProvider {
 
@@ -24,4 +27,17 @@ public class USDBreadcrumbsProvider implements BreadcrumbsProvider {
     public String getElementInfo(@NotNull PsiElement psiElement) {
         return ((USDBreadcrumbItem)psiElement).getName();
     }
+
+    // TODO: implement these
+//    @Nullable
+//    @Override
+//    public Icon getElementIcon(@NotNull PsiElement element) {
+//        return null;
+//    }
+//
+//    @Nullable
+//    @Override
+//    public String getElementTooltip(@NotNull PsiElement element) {
+//        return null;
+//    }
 }
