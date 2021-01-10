@@ -32,13 +32,20 @@
         <lang.parserDefinition language="USD" implementationClass="com.justint.usdidea.lang.parser.USDParserDefinition"/>
         <lang.syntaxHighlighterFactory language="USD" implementationClass="com.justint.usdidea.codeinsight.highlighting.USDSyntaxHighlighterFactory"/>
         <lang.psiStructureViewFactory language="USD" implementationClass="com.justint.usdidea.lang.USDStructureViewFactory"/>
-        <!-- TODO: re-add the color settings page once I get it working -->
-        <!--<colorSettingsPage implementation="com.justint.usdidea.codeinsight.highlighting.USDColorSettingsPage"/>-->
-
         <lang.foldingBuilder language="USD" implementationClass="com.justint.usdidea.codeinsight.folding.USDFoldingBuilder"/>
         <lang.braceMatcher language="USD" implementationClass="com.justint.usdidea.codeinsight.highlighting.USDBraceMatcher"/>
 
+        <psi.referenceContributor language="USD" implementation="com.justint.usdidea.lang.USDReferenceContributor"/>
+
         <breadcrumbsInfoProvider implementation="com.justint.usdidea.codeinsight.USDBreadcrumbsProvider"/>
+
+        <applicationService serviceImplementation="com.justint.usdidea.settings.USDSettingsState"/>
+        <applicationConfigurable parentId="language" instance="com.justint.usdidea.settings.USDSettingsConfigurable" id="com.justint.usdidea.settings.USDSettingsConfigurable" displayName="USD"/>
+
+        <localInspection language="USD" groupName="USD" displayName="Invalid usdresolve path configured" shortName="usdresolvePathInspection" enabledByDefault="true" level="WARNING" implementationClass="com.justint.usdidea.inspections.UsdresolvePathInspection"/>
+
+        <!-- TODO: re-add the color settings page once I get it working -->
+        <!--<colorSettingsPage implementation="com.justint.usdidea.codeinsight.highlighting.USDColorSettingsPage"/>-->
 
     </extensions>
 

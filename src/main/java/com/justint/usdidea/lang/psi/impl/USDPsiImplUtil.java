@@ -3,6 +3,7 @@ package com.justint.usdidea.lang.psi.impl;
 import com.intellij.icons.AllIcons;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ui.LayeredIcon;
@@ -12,6 +13,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class USDPsiImplUtil {
 
@@ -113,6 +117,19 @@ public class USDPsiImplUtil {
 
     public static String getName(usdVariantSetKey variantSetKey) {
         return trimStringNames(variantSetKey.getString().getText());
+    }
+
+    public static String getName(usdReferenceItem referenceItem) {
+        return referenceItem.getText();
+    }
+
+    public static PsiElement setName(usdReferenceItem referenceItem, String newName) {
+        // TODO: figure this out...
+        return referenceItem;
+    }
+
+    public static PsiElement getNameIdentifier(usdReferenceItem referenceItem) {
+        return referenceItem.getNode().getPsi();
     }
 
     @NotNull
@@ -285,5 +302,39 @@ public class USDPsiImplUtil {
             return metadataValue.getItem().getDict() != null;
         }
         return false;
+    }
+
+    @Nullable
+    public static PsiElement findPrimInLayerFromPath(USDFile layer, String path) {
+        ArrayList<String> prims = new ArrayList<>(Arrays.asList(path.split("/")));
+        if (prims.size() == 0) {
+            // The path is pointing to the pseudoroot; return the layer file PsiElement itself
+            return layer;
+        }
+        prims.remove(0); // The pseudoroot ("") is never needed, since local layer reference paths always start with a '/'
+
+        boolean found = false;
+        PsiElement currentPrimPsiElement = layer;
+        for (int i = 0; i < prims.size(); i++) {
+            String currentPrim = prims.get(i);
+
+            List<usdPrimSpec> children;
+            if (currentPrimPsiElement instanceof usdPrimSpec) {
+                children = PsiTreeUtil.getChildrenOfTypeAsList(((usdPrimSpec) currentPrimPsiElement).getBody(), usdPrimSpec.class);
+            } else {
+                children = PsiTreeUtil.getChildrenOfTypeAsList(currentPrimPsiElement, usdPrimSpec.class);
+            }
+            for (usdPrimSpec child : children) {
+                if (child.getPrimName().equals(currentPrim)) {
+                    currentPrimPsiElement = child;
+                    if (i + 1 == prims.size()) {
+                        found = true;
+                    }
+                }
+            }
+        }
+        if (found) {
+            return currentPrimPsiElement;
+        } else return null;
     }
 }

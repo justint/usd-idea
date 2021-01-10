@@ -248,7 +248,11 @@ Vector ::= leftparens [!rightparens Item? (comma Item)*] rightparens | leftparen
 
 Item ::= InterpolatedArray | Array | Vector | string | number | floatnumber | ReferenceItem | Dict | TimeSample | Boolean
 
-ReferenceItem ::= assetReference pathReference | assetReference | pathReference
+ReferenceItem ::= assetReference pathReference | assetReference | pathReference {
+    mixin="com.justint.usdidea.lang.psi.impl.USDNamedElementImpl"
+    implements="com.justint.usdidea.lang.psi.USDNamedElement"
+    methods=[getName setName getNameIdentifier]
+}
 
 Dict ::= leftbrace [!rightbrace DictItem (DictItem)*] rightbrace | leftbrace rightbrace
 
