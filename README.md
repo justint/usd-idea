@@ -18,12 +18,15 @@ _NOTE_: This plugin is in active development and features are still being implem
 - Manually:
     
     Download the [latest release](latest-release) and install it manually using <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Install Plugin from Disk...</kbd>
+    
+`usdresolve` path can be configured in <kbd>Settings</kbd> > <kbd>Languages & Frameworks</kbd> > <kbd>USD</kbd>.
 
 ## Features
 
 - `.usd`/`.usda` filetype syntax highlighting & validation
+- Asset/prim reference navigation (with `usdresolve`)
 - Brace matching/folding
-- Structure View
+- Structure view
     
 ### TODO:
 

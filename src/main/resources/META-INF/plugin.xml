@@ -11,12 +11,14 @@
 <strong>Currently implemented features:</strong>
 <ul>
     <li>Syntax highlighting</li>
+    <li>Asset/prim reference navigation</li>
     <li>Parser</li>
     <li>Brace matching & block folding</li>
-    <li>Structure View</li>
+    <li>Structure/outline views</li>
 </ul>
 <strong>Planned features:</strong>
 <ul>
+    <li>Crate/package file support (usdc/usdz)</li>
     <li>Reference Contributor implementation (Go to declaration feature)</li>
     <li>Line markers for <i>overrides</i>, <i>inherits</i>, and more</li>
 </ul>
