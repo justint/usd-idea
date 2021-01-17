@@ -21,7 +21,6 @@ public class USDDescriptionProvider implements ElementDescriptionProvider {
             }
         }
         else if (elementDescriptionLocation instanceof UsageViewShortNameLocation) {
-            System.out.println("psiElement: " + psiElement.getText());
             if (psiElement instanceof usdReferenceItem) {
                 return psiElement.getText();
             }
