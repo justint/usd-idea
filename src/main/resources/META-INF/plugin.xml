@@ -34,6 +34,9 @@
         <lang.psiStructureViewFactory language="USD" implementationClass="com.justint.usdidea.lang.USDStructureViewFactory"/>
         <lang.foldingBuilder language="USD" implementationClass="com.justint.usdidea.codeinsight.folding.USDFoldingBuilder"/>
         <lang.braceMatcher language="USD" implementationClass="com.justint.usdidea.codeinsight.highlighting.USDBraceMatcher"/>
+        <lang.documentationProvider language="USD" implementationClass="com.justint.usdidea.codeinsight.USDDocumentationProvider"/>
+
+        <elementDescriptionProvider implementation="com.justint.usdidea.codeinsight.USDDescriptionProvider"/>
 
         <psi.referenceContributor language="USD" implementation="com.justint.usdidea.lang.USDReferenceContributor"/>
 

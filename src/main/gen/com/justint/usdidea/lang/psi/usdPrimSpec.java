@@ -24,6 +24,9 @@ public interface usdPrimSpec extends USDBreadcrumbItem {
   String getPrimType();
 
   @NotNull
+  String getPrimPath();
+
+  @NotNull
   String getName();
 
   @NotNull

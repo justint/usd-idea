@@ -52,4 +52,10 @@ public class usdReferenceItemImpl extends USDNamedElementImpl implements usdRefe
     return USDPsiImplUtil.getNameIdentifier(this);
   }
 
+  @Override
+  @NotNull
+  public String getDescriptionName() {
+    return USDPsiImplUtil.getDescriptionName(this);
+  }
+
 }

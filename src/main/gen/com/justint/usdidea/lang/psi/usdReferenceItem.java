@@ -19,4 +19,7 @@ public interface usdReferenceItem extends USDNamedElement {
 
   PsiElement getNameIdentifier();
 
+  @NotNull
+  String getDescriptionName();
+
 }

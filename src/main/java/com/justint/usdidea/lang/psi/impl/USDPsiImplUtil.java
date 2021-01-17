@@ -9,6 +9,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ui.LayeredIcon;
 import com.intellij.util.PlatformIcons;
 import com.justint.usdidea.lang.psi.*;
+import com.justint.usdidea.util.USDPsiTreeUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,10 +37,19 @@ public class USDPsiImplUtil {
 
     @Nullable
     public static String getPrimType(@NotNull usdPrimSpec primElement) {
-        ASTNode primTypeNode = primElement.getNode().findChildByType(USDTypes.ALPHA);
-        if (primTypeNode != null) {
-            return primTypeNode.getText();
+        usdTypename typeName = primElement.getSpecifier().getTypename();
+        if (typeName != null) {
+            return typeName.getText();
         } else return null;
+    }
+
+    @NotNull
+    public static String getPrimPath(@NotNull usdPrimSpec primElement) {
+        List<usdPrimSpec> pathPrims = USDPsiTreeUtil.findAllParentsOfSameType(primElement);
+        pathPrims.add(primElement);
+        List<String> pathPrimNames = new ArrayList<>();
+        pathPrims.forEach((prim) -> pathPrimNames.add(prim.getPrimName()));
+        return "/" + String.join("/", pathPrimNames);
     }
 
     @NotNull
@@ -130,6 +141,12 @@ public class USDPsiImplUtil {
 
     public static PsiElement getNameIdentifier(usdReferenceItem referenceItem) {
         return referenceItem.getNode().getPsi();
+    }
+
+    @NotNull
+    @Contract(pure = true)
+    public static String getDescriptionName(usdReferenceItem referenceItem) {
+        return "reference path";
     }
 
     @NotNull

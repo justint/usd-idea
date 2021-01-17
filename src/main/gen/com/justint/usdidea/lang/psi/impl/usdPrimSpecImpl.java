@@ -59,6 +59,12 @@ public class usdPrimSpecImpl extends ASTWrapperPsiElement implements usdPrimSpec
 
   @Override
   @NotNull
+  public String getPrimPath() {
+    return USDPsiImplUtil.getPrimPath(this);
+  }
+
+  @Override
+  @NotNull
   public String getName() {
     return USDPsiImplUtil.getName(this);
   }
