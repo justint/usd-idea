@@ -22,6 +22,12 @@ public class USDReferenceReference extends PsiReferenceBase<PsiElement> {
         super(element, rangeInElement);
     }
 
+    @NotNull
+    @Override
+    public Object[] getVariants() {
+        return new Object[0];
+    }
+
     @Nullable
     private PsiFile getResolvedReferenceAssetFile(String referenceLayerPath, File sourceElementFile) {
         USDResolve resolver = new USDResolve(referenceLayerPath, sourceElementFile.getParent(), myElement.getProject());

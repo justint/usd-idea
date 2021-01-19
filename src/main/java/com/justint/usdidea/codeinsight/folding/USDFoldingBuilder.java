@@ -36,18 +36,9 @@ public class USDFoldingBuilder implements FoldingBuilder {
         final IElementType elementType = astNode.getElementType();
 
         if (elementType == USDTypes.METADATA) {
-            descriptors.add(new FoldingDescriptor(
-                    astNode,
-                    astNode.getTextRange(),
-                    null,
-                    "(...)"
-            ));
+            descriptors.add(new FoldingDescriptor(astNode, astNode.getTextRange()));
         } else if (Arrays.asList(BRACKET_TYPES).contains(elementType)) {
-            descriptors.add(new FoldingDescriptor(
-                    astNode,
-                    astNode.getTextRange(),
-                    null,
-                    "{...}"));
+            descriptors.add(new FoldingDescriptor(astNode, astNode.getTextRange()));
         }
 
         for (ASTNode child : astNode.getChildren(null)) {
@@ -58,7 +49,15 @@ public class USDFoldingBuilder implements FoldingBuilder {
     @Nullable
     @Override
     public String getPlaceholderText(@NotNull ASTNode astNode) {
-        return "...";
+        final IElementType elementType = astNode.getElementType();
+
+        if (elementType == USDTypes.METADATA) {
+            return "(...)";
+        }
+        else if (Arrays.asList(BRACKET_TYPES).contains(elementType)) {
+            return "{...}";
+        }
+        else return null;
     }
 
     @Override

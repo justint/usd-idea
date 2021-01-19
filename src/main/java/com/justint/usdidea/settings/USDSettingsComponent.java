@@ -1,7 +1,6 @@
 package com.justint.usdidea.settings;
 
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.ui.DialogPanel;
 import com.intellij.openapi.ui.TextBrowseFolderListener;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.ui.JBColor;
@@ -38,7 +37,7 @@ public class USDSettingsComponent {
         ));
         usdresolvePathText.setToolTipText("<html>Path to <code>usdresolve</code> script. Usually resides in USD install bin directory.</html>");
 
-        DialogPanel buttonPanel = new DialogPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         JButton usdToolsFindButton = new JButton("Autodetect Tool Paths");
 
@@ -80,7 +79,7 @@ public class USDSettingsComponent {
 
     private Color getErrorForeground() {
         // Stolen from com.intellij.util.ui.UIUtil, for backwards compatibility
-        return JBColor.namedColor("Label.errorForeground", new JBColor(new Color(0xC7222D), JBColor.RED));
+        return new JBColor(new Color(0xC7222D), JBColor.RED);
     }
 
     public JPanel getPanel() {

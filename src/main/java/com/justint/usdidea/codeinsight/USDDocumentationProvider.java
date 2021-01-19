@@ -2,11 +2,13 @@ package com.justint.usdidea.codeinsight;
 
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiManager;
 import com.justint.usdidea.lang.psi.USDFile;
 import com.justint.usdidea.lang.psi.usdPrimSpec;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class USDDocumentationProvider implements DocumentationProvider {
     @Nullable
@@ -39,6 +41,30 @@ public class USDDocumentationProvider implements DocumentationProvider {
         }
 
         return String.join(" ", result);
+    }
+
+    @Nullable
+    @Override
+    public String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public List<String> getUrlFor(PsiElement element, PsiElement originalElement) {
+        return null;
     }
 
     private static String codedString(String input) {
