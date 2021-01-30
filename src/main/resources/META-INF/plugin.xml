@@ -30,7 +30,7 @@
     <idea-version since-build="191.2" until-build="203.*"/>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileTypeFactory implementation="com.justint.usdidea.file.USDFileTypeFactory"/>
+        <fileType name="USD" language="USD" extensions="usd;usda" implementationClass="com.justint.usdidea.file.USDFileType"/>
         <lang.parserDefinition language="USD" implementationClass="com.justint.usdidea.lang.parser.USDParserDefinition"/>
         <lang.syntaxHighlighterFactory language="USD" implementationClass="com.justint.usdidea.codeinsight.highlighting.USDSyntaxHighlighterFactory"/>
         <lang.psiStructureViewFactory language="USD" implementationClass="com.justint.usdidea.lang.USDStructureViewFactory"/>
