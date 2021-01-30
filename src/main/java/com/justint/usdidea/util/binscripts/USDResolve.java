@@ -4,6 +4,7 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.openapi.project.Project;
 import com.justint.usdidea.settings.USDSettingsState;
+import org.apache.commons.io.IOUtils;
 import org.bouncycastle.util.Arrays;
 
 import java.io.IOException;
@@ -62,7 +63,7 @@ public class USDResolve extends USDBinScript {
         }
         InputStream inputStream = process.getInputStream();
         try {
-            return new String(inputStream.readAllBytes(), StandardCharsets.US_ASCII).trim();
+            return new String(IOUtils.toByteArray(inputStream), StandardCharsets.US_ASCII).trim();
         } catch (IOException e) {
             // Hopefully usdresolve will always give us clean output...
             throw new ExecutionException(String.valueOf(process.exitValue()));

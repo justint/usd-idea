@@ -18,15 +18,20 @@ import java.util.function.Function;
 public class USDStructureViewElement implements StructureViewTreeElement, SortableTreeElement {
     private final NavigatablePsiElement myElement;
 
-    private final Map<Class<? extends PsiElement>, Function<NavigatablePsiElement, TreeElement[]>> psiElementMethodMap = Map.of(
-            USDFile.class, this::getUSDFileChildren,
-            usdPrimSpecImpl.class, this::getPrimSpecChildren,
-            usdMetadatumImpl.class, this::getMetadatumChildren,
-            usdDictItemImpl.class, this::getDictItemChildren,
-            usdPropertySpecImpl.class, this::getPropertySpecChildren,
-            usdRelationshipPropertyImpl.class, this::getRelationshipPropertyChildren,
-            usdVariantSetKeyImpl.class, this::getVariantSetKeyChildren
-    );
+    private final Map<Class<? extends PsiElement>, Function<NavigatablePsiElement, TreeElement[]>> psiElementMethodMap = createPsiElementMethodMap();
+
+    @NotNull
+    private Map<Class<? extends PsiElement>, Function<NavigatablePsiElement, TreeElement[]>> createPsiElementMethodMap() {
+        Map<Class<? extends PsiElement>, Function<NavigatablePsiElement, TreeElement[]>> methodMap = new HashMap<>();
+        methodMap.put(USDFile.class, this::getUSDFileChildren);
+        methodMap.put(usdPrimSpecImpl.class, this::getPrimSpecChildren);
+        methodMap.put(usdMetadatumImpl.class, this::getMetadatumChildren);
+        methodMap.put(usdDictItemImpl.class, this::getDictItemChildren);
+        methodMap.put(usdPropertySpecImpl.class, this::getPropertySpecChildren);
+        methodMap.put(usdRelationshipPropertyImpl.class, this::getRelationshipPropertyChildren);
+        methodMap.put(usdVariantSetKeyImpl.class, this::getVariantSetKeyChildren);
+        return methodMap;
+    }
 
 
     public USDStructureViewElement(NavigatablePsiElement element) {

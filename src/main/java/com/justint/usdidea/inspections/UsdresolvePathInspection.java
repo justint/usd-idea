@@ -34,7 +34,7 @@ public class UsdresolvePathInspection extends LocalInspectionTool {
                             holder.registerProblem(
                                     element,
                                     description,
-                                    ProblemHighlightType.WARNING,
+                                    ProblemHighlightType.WEAK_WARNING,
                                     new OpenUSDSettingsQuickFix());
                         }
                     }

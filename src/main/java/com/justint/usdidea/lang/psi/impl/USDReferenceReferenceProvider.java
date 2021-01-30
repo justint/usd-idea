@@ -21,30 +21,19 @@ public class USDReferenceReferenceProvider extends PsiReferenceProvider {
 
     private static final Pattern referencePattern = Pattern.compile("((@.*@)|(@.*@)?(<.*>))");
 
-
-    private static final UserDataCache<CachedValue<PsiReference[]>, PsiElement, Object> ourRefsCache = new UserDataCache<>("CACHED_USD_REFERENCE_REFS") {
-        @Override
-        protected CachedValue<PsiReference[]> compute(PsiElement psiElement, Object o) {
-            return CachedValuesManager.getManager(psiElement.getProject()).createCachedValue(() -> {
-                List<PsiReference> refs = null;
-                String text = psiElement.getText();
-                Matcher matcher = referencePattern.matcher(text);
-
-                if (matcher.matches()) {
-                    refs = new SmartList<>();
-                    TextRange textRange = new TextRange(0, text.length());
-                    refs.add(new USDReferenceReference(psiElement, textRange));
-                }
-
-                PsiReference[] references = refs != null ? refs.toArray(PsiReference.EMPTY_ARRAY) : PsiReference.EMPTY_ARRAY;
-                return new CachedValueProvider.Result<>(references, psiElement);
-            });
-        }
-    };
-
     @NotNull
     @Override
     public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
-        return ourRefsCache.get(element,null).getValue();
+        List<PsiReference> refs = null;
+        String text = element.getText();
+        Matcher matcher = referencePattern.matcher(text);
+
+        if (matcher.matches()) {
+            refs = new SmartList<>();
+            TextRange textRange = new TextRange(0, text.length());
+            refs.add(new USDReferenceReference(element, textRange));
+        }
+
+        return refs != null ? refs.toArray(PsiReference.EMPTY_ARRAY) : PsiReference.EMPTY_ARRAY;
     }
 }
