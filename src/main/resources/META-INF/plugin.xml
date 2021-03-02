@@ -27,7 +27,7 @@
     <depends>com.intellij.modules.lang</depends>
 
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html -->
-    <idea-version since-build="191.2" until-build="203.*"/>
+    <idea-version since-build="192" until-build="203.*"/>
 
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="USD" language="USD" extensions="usd;usda" implementationClass="com.justint.usdidea.file.USDFileType"/>
