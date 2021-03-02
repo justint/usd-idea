@@ -1,7 +1,7 @@
 [![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/v/12407-usd.svg?style=popout)](https://plugins.jetbrains.com/plugin/12407-usd)
 [![JetBrains IntelliJ plugins](https://img.shields.io/jetbrains/plugin/d/12407-usd.svg?style=popout)](https://plugins.jetbrains.com/plugin/12407-usd)
 
-<img src="https://github.com/justint/usd-idea/blob/master/img/screenshot.PNG?raw=true" width="800px">
+<img src="https://github.com/justint/usd-idea/blob/main/img/screenshot.PNG?raw=true" width="800px">
 
 # usd-idea
 
