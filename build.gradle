@@ -1,5 +1,11 @@
 plugins {
-    id 'org.jetbrains.intellij' version '0.4.8'
+    id 'org.jetbrains.intellij' version '0.7.2'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://www.jetbrains.com/intellij-repository/releases" }
+    maven { url "https://www.jetbrains.com/intellij-repository/snapshots" }
 }
 
 group 'com.justint'
@@ -20,4 +26,8 @@ patchPluginXml {
     changeNotes = htmlFixer('src/main/resources/META-INF/change-notes.html')
     sinceBuild '192'
     untilBuild '203.*'
+}
+
+runPluginVerifier {
+    ideVersions = "$pluginVerifierIdeVersions"
 }
