@@ -1,3 +1,4 @@
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/justint/usd-idea/Build)](https://github.com/justint/usd-idea/actions/workflows/build.yml)
 [![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/v/12407-usd.svg?style=popout)](https://plugins.jetbrains.com/plugin/12407-usd)
 [![JetBrains IntelliJ plugins](https://img.shields.io/jetbrains/plugin/d/12407-usd.svg?style=popout)](https://plugins.jetbrains.com/plugin/12407-usd)
 
