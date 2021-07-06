@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.intellij' version '0.7.2'
+    id 'org.jetbrains.intellij' version '1.1.2'
 }
 
 repositories {
@@ -24,10 +24,10 @@ def htmlFixer = {htmlFile -> file(htmlFile).text.replace('<html>', '').replace('
 
 patchPluginXml {
     changeNotes = htmlFixer('src/main/resources/META-INF/change-notes.html')
-    sinceBuild '192'
-    untilBuild '212.*'
+    sinceBuild = '192'
+    untilBuild = '212.*'
 }
 
 runPluginVerifier {
-    ideVersions = "$pluginVerifierIdeVersions"
+    ideVersions = "$pluginVerifierIdeVersions".split(",").toList()
 }
