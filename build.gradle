@@ -9,7 +9,7 @@ repositories {
 }
 
 group 'com.justint'
-version '0.4'
+version '0.4.1'
 
 sourceSets.main.java.srcDirs = ['src/main/gen','src/main/java']
 
