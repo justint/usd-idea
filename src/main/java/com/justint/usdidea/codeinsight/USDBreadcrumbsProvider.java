@@ -5,10 +5,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.ui.breadcrumbs.BreadcrumbsProvider;
 import com.justint.usdidea.lang.USDLanguage;
 import com.justint.usdidea.lang.psi.USDBreadcrumbItem;
+import com.justint.usdidea.lang.psi.USDFile;
+import com.justint.usdidea.lang.psi.usdPrimSpec;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class USDBreadcrumbsProvider implements BreadcrumbsProvider {
 
@@ -35,9 +38,9 @@ public class USDBreadcrumbsProvider implements BreadcrumbsProvider {
 //        return null;
 //    }
 //
-//    @Nullable
-//    @Override
-//    public String getElementTooltip(@NotNull PsiElement element) {
-//        return null;
-//    }
+    @Nullable
+    @Override
+    public String getElementTooltip(@NotNull PsiElement element) {
+        return String.join(" ", USDDocumentationProvider.getUSDPsiElementDocStringArray(element));
+    }
 }

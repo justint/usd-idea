@@ -9,9 +9,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 
 public class USDDocumentationProvider implements DocumentationProvider {
-    @Nullable
-    @Override
-    public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
+
+    public static ArrayList<String> getUSDPsiElementDocStringArray(PsiElement element) {
         ArrayList<String> result = new ArrayList<>();
 
         // Handle layer files
@@ -20,18 +19,25 @@ public class USDDocumentationProvider implements DocumentationProvider {
             result.add("layer file");
             result.add(codedString(usdFile.getVirtualFile().getPath()));
         }
-        // Handle USD elements
-        else {
-            if (element instanceof usdPrimSpec) {
-                result.add("prim");
+        else if (element instanceof usdPrimSpec) {
+            result.add("prim");
 
-                usdPrimSpec primSpec = (usdPrimSpec)element;
-                String primType = primSpec.getPrimType();
-                if (primType != null) result.add(primType);
+            usdPrimSpec primSpec = (usdPrimSpec)element;
+            String primType = primSpec.getPrimType();
+            if (primType != null) result.add(primType);
 
-                result.add(codedString(primSpec.getPrimPath()));
-            }
+            result.add(codedString(primSpec.getPrimPath()));
+        }
 
+        return result;
+    }
+
+    @Nullable
+    @Override
+    public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
+        ArrayList<String> result = new ArrayList<>(getUSDPsiElementDocStringArray(element));
+
+        if (element instanceof usdPrimSpec) {
             // Include element layer path, if from another layer file
             if (element.getContainingFile() != originalElement.getContainingFile()) {
                 result.add("\nin layer file " + element.getContainingFile().getVirtualFile().getPath());
