@@ -36,6 +36,6 @@ public abstract class USDBinScript {
     }
 
     public boolean isUSDInstallValid() {
-        return USDSettingsState.getInstance().isUsdresolvePathValid();
+        return USDSettingsState.getInstance().isUSDToolPathsValid();
     }
 }

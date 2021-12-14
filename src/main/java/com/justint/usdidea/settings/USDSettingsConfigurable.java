@@ -26,19 +26,23 @@ public class USDSettingsConfigurable implements Configurable {
     @Override
     public boolean isModified() {
         USDSettingsState settings = USDSettingsState.getInstance();
-        return !usdSettingsComponent.getUsdresolvePathText().equals(settings.usdresolveInstallPath);
+        boolean usdresolveIsModified = !usdSettingsComponent.getUsdresolvePathText().equals(settings.usdresolveInstallPath);
+        boolean usdcatIsModified = !usdSettingsComponent.getUsdcatPathText().equals(settings.usdcatInstallPath);
+        return usdresolveIsModified || usdcatIsModified;
     }
 
     @Override
     public void apply() {
         USDSettingsState settings = USDSettingsState.getInstance();
         settings.usdresolveInstallPath = usdSettingsComponent.getUsdresolvePathText();
+        settings.usdcatInstallPath = usdSettingsComponent.getUsdcatPathText();
     }
 
     @Override
     public void reset() {
         USDSettingsState settings = USDSettingsState.getInstance();
         usdSettingsComponent.setUsdresolvePathText(settings.usdresolveInstallPath);
+        usdSettingsComponent.setUsdcatPathText(settings.usdcatInstallPath);
     }
 
     @Override

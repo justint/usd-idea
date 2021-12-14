@@ -12,6 +12,9 @@ public class USDInstallFinder {
     public String findUsdresolveInstallPath() {
         return findInstallPath("usdresolve");
     }
+    public String findUsdcatInstallPath()  {
+        return findInstallPath("usdcat");
+    }
 
     @NotNull
     private String findInstallPath(String binscript) {

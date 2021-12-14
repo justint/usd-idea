@@ -19,6 +19,7 @@ import java.awt.event.MouseEvent;
 public class USDSettingsComponent {
     private final JPanel mainPanel;
     private final TextFieldWithBrowseButton usdresolvePathText;
+    private final TextFieldWithBrowseButton usdcatPathText;
 
     private final USDInstallFinder installFinder;
 
@@ -38,6 +39,19 @@ public class USDSettingsComponent {
         ));
         usdresolvePathText.setToolTipText("<html>Path to <code>usdresolve</code> script. Usually resides in USD install bin directory.</html>");
 
+        usdcatPathText = new TextFieldWithBrowseButton();
+        usdcatPathText.addBrowseFolderListener(new TextBrowseFolderListener(
+                new FileChooserDescriptor(
+                        true,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false
+                )
+        ));
+        usdcatPathText.setToolTipText("<html>Path to <code>usdcat</code> script. Usually resides in USD install bin directory.</html>");
+
         DialogPanel buttonPanel = new DialogPanel(new FlowLayout(FlowLayout.LEFT));
 
         JButton usdToolsFindButton = new JButton("Autodetect Tool Paths");
@@ -55,11 +69,13 @@ public class USDSettingsComponent {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 String usdresolveInstallPath = installFinder.findUsdresolveInstallPath();
-                if (usdresolveInstallPath.equals("")) {
+                String usdcatInstallPath = installFinder.findUsdcatInstallPath();
+                if (usdresolveInstallPath.equals("") || usdcatInstallPath.equals("")) {
                     usdToolsFindButtonErrorLabel.setVisible(true);
                 }
                 else {
                     usdresolvePathText.setText(usdresolveInstallPath);
+                    usdcatPathText.setText(usdcatInstallPath);
                     usdToolsFindButtonErrorLabel.setVisible(false);
                 }
             }
@@ -72,6 +88,7 @@ public class USDSettingsComponent {
 
         mainPanel = FormBuilder.createFormBuilder()
                 .addLabeledComponent(new JBLabel("<html><code>usdresolve</code> path:</html>"), usdresolvePathText)
+                .addLabeledComponent(new JBLabel("<html><code>usdcat</code> path:</html>"), usdcatPathText)
                 .addComponent(buttonPanel)
                 .addComponent(usdToolsFindButtonErrorLabel)
                 .addComponentFillVertically(new JPanel(), 0)
@@ -95,9 +112,15 @@ public class USDSettingsComponent {
     public String getUsdresolvePathText() {
         return usdresolvePathText.getText();
     }
+    public String getUsdcatPathText() {
+        return usdcatPathText.getText();
+    }
 
     public void setUsdresolvePathText(@NotNull String newText) {
         usdresolvePathText.setText(newText);
+    }
+    public void setUsdcatPathText(@NotNull String newText) {
+        usdcatPathText.setText(newText);
     }
 
 }

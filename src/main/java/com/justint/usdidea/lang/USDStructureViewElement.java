@@ -8,6 +8,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.justint.usdidea.file.USDVirtualFile;
 import com.justint.usdidea.lang.psi.*;
 import com.justint.usdidea.lang.psi.impl.*;
 import org.jetbrains.annotations.NotNull;

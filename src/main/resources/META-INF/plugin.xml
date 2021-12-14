@@ -31,6 +31,9 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="USD" language="USD" extensions="usd;usda" implementationClass="com.justint.usdidea.file.USDFileType"/>
+        <fileEditorProvider implementation="com.justint.usdidea.file.USDFileEditorProvider"/>
+        <lang.fileViewProviderFactory language="USD" implementationClass="com.justint.usdidea.file.USDFileViewProviderFactory"/>
+        <virtualFileSystem implementationClass="com.justint.usdidea.file.USDVirtualFileSystem" key="usd" physical="false"/>
         <lang.parserDefinition language="USD" implementationClass="com.justint.usdidea.lang.parser.USDParserDefinition"/>
         <lang.syntaxHighlighterFactory language="USD" implementationClass="com.justint.usdidea.codeinsight.highlighting.USDSyntaxHighlighterFactory"/>
         <lang.psiStructureViewFactory language="USD" implementationClass="com.justint.usdidea.lang.USDStructureViewFactory"/>

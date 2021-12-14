@@ -49,7 +49,7 @@ public class USDReferenceReference extends PsiReferenceBase<PsiElement> {
 
         if (targetLayerPath == null) return null;
 
-        VirtualFile layerVf = VirtualFileManager.getInstance().findFileByUrl("file://" + targetLayerPath);
+        VirtualFile layerVf = VirtualFileManager.getInstance().findFileByUrl("usd://" + targetLayerPath);
         if (layerVf == null) return null;
 
         return PsiManager.getInstance(myElement.getProject()).findFile(layerVf);

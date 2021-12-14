@@ -17,6 +17,7 @@ import java.io.File;
 public class USDSettingsState implements PersistentStateComponent<USDSettingsState> {
 
     public String usdresolveInstallPath = "";
+    public String usdcatInstallPath = "";
 
     public static USDSettingsState getInstance() {
         return ServiceManager.getService(USDSettingsState.class);
@@ -40,7 +41,14 @@ public class USDSettingsState implements PersistentStateComponent<USDSettingsSta
         return (usdresolveFile.exists() && usdresolveFile.isFile() && usdresolveFile.canExecute());
     }
 
+    public boolean isUsdcatPathValid() {
+        if (usdcatInstallPath.equals("")) return false;
+
+        File usdcatFile = new File(usdcatInstallPath);
+        return (usdcatFile.exists() && usdcatFile.isFile() && usdcatFile.canExecute());
+    }
+
     public boolean isUSDToolPathsValid(){
-        return isUsdresolvePathValid();
+        return isUsdresolvePathValid() && isUsdcatPathValid();
     }
 }

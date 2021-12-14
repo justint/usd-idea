@@ -49,7 +49,7 @@ public class USDResolve extends USDBinScript {
      * @throws ExecutionException
      */
     public String resolvePath() throws ExecutionException, InterruptedException {
-        if (!isUSDInstallValid()) {
+        if (!USDSettingsState.getInstance().isUsdresolvePathValid()) {
             throw new ExecutionException("Invalid USD install path");
         }
         String[] usdresolveCmdArray = Arrays.append(getPythonBinScriptCmds(project), referencePath);
