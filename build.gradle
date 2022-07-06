@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.intellij' version '1.1.2'
+    id 'org.jetbrains.intellij' version '1.6.0'
 }
 
 repositories {
@@ -15,8 +15,9 @@ sourceSets.main.java.srcDirs = ['src/main/gen','src/main/java']
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = System.getenv().getOrDefault("IDEA_VERSION", "IC-202.8194.7")
+    version = System.getenv().getOrDefault("IDEA_VERSION", "IC-221.5921.22")
     //alternativeIdePath '/Applications/PyCharm.app'
+    updateSinceUntilBuild = false
 }
 
 // Simple function to load change-notes.html and description.html into valid text for plugin.xml
@@ -25,7 +26,6 @@ def htmlFixer = {htmlFile -> file(htmlFile).text.replace('<html>', '').replace('
 patchPluginXml {
     changeNotes = htmlFixer('src/main/resources/META-INF/change-notes.html')
     sinceBuild = '192'
-    untilBuild = '212.*'
 }
 
 runPluginVerifier {
