@@ -17,6 +17,7 @@ sourceSets.main.java.srcDirs = ['src/main/gen','src/main/java']
 intellij {
     version = System.getenv().getOrDefault("IDEA_VERSION", "IC-221.5921.22")
     //alternativeIdePath '/Applications/PyCharm.app'
+    updateSinceUntilBuild = false
 }
 
 // Simple function to load change-notes.html and description.html into valid text for plugin.xml
