@@ -1,4 +1,4 @@
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/justint/usd-idea/Build)](https://github.com/justint/usd-idea/actions/workflows/build.yml)
+[![Build](https://github.com/justint/usd-idea/actions/workflows/build.yml/badge.svg)](https://github.com/justint/usd-idea/actions/workflows/build.yml)
 [![JetBrains IntelliJ Plugins](https://img.shields.io/jetbrains/plugin/v/12407-usd.svg?style=popout)](https://plugins.jetbrains.com/plugin/12407-usd)
 [![JetBrains IntelliJ plugins](https://img.shields.io/jetbrains/plugin/d/12407-usd.svg?style=popout)](https://plugins.jetbrains.com/plugin/12407-usd)
 
@@ -8,7 +8,12 @@
 
 A plugin for JetBrains IDEs (PyCharm, IntelliJ, etc) that provides support for [Universal Scene Description (USD)](https://github.com/PixarAnimationStudios/USD), a framework for interchange of 3D computer graphics data, developed by Pixar Animation Studios.
 
-_NOTE_: This plugin is in active development and features are still being implemented. If you're interested in contributing to this project, check out the TODO features below or what's currently open in the [Issues](https://github.com/justint/usd-idea/issues).
+## Features
+
+- `.usd`/`.usda` filetype syntax highlighting & validation
+- Asset/prim reference navigation (with `usdresolve`)
+- Brace matching/folding
+- Structure view
 
 ## Installing
 
@@ -21,22 +26,6 @@ _NOTE_: This plugin is in active development and features are still being implem
     Download the [latest release](latest-release) and install it manually using <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Install Plugin from Disk...</kbd>
     
 `usdresolve` path can be configured in <kbd>Settings</kbd> > <kbd>Languages & Frameworks</kbd> > <kbd>USD</kbd>.
-
-## Features
-
-- `.usd`/`.usda` filetype syntax highlighting & validation
-- Asset/prim reference navigation (with `usdresolve`)
-- Brace matching/folding
-- Structure view
-    
-### TODO:
-
-- [Binary USD file support](https://github.com/justint/usd-idea/issues/7)
-- [Language tests](https://www.jetbrains.org/intellij/sdk/docs/tutorials/writing_tests_for_plugins.html)
-- Reference Contributor
-  - "Go to definition/symbol" feature implementation
-  - "Find Usages" provider
-- Line markers for overrides, inheritance, etc
 
 ## Building
 
